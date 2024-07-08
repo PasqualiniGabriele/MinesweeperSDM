@@ -13,6 +13,7 @@ class CommandParserTest {
         Command actual = CommandParser.parseCommand(input);
         assertEquals(expected, actual);
     }
+
     @Test
     public void testClickCommandActionParsing() {
         String input = "C 1 2";
@@ -20,4 +21,13 @@ class CommandParserTest {
         Command actual = CommandParser.parseCommand(input);
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void testInvalidCommandActionParsing() {
+        String input = "invalid_input 1 2";
+        assertThrows(IllegalArgumentException.class, () -> {
+            CommandParser.parseCommand(input);
+        });
+    }
+
 }
