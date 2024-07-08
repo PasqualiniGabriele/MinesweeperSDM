@@ -1,13 +1,47 @@
 package model;
 
-public class CellState {
+public interface CellState {
+    void reveal(Cell cell);
+
+    void toggleFlag(Cell cell);
+
 }
 
-class ClosedState {
+
+class OpenState implements CellState {
+    @Override
+    public void reveal(Cell cell) {
+
+    }
+
+    @Override
+    public void toggleFlag(Cell cell) {
+
+    }
 }
 
-class FlaggedState {
+
+class ClosedState implements CellState {
+    @Override
+    public void reveal(Cell cell) {
+
+    }
+
+    @Override
+    public void toggleFlag(Cell cell) {
+
+    }
 }
 
-class OpenState {
+class FlaggedState implements CellState {
+    @Override
+    public void reveal(Cell cell) {
+
+    }
+
+    @Override
+    public void toggleFlag(Cell cell) {
+
+    }
+
 }
