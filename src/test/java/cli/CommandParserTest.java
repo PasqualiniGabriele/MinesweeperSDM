@@ -13,4 +13,11 @@ class CommandParserTest {
         Command actual = CommandParser.parseCommand(input);
         assertEquals(expected, actual);
     }
+    @Test
+    public void testClickCommandActionParsing() {
+        String input = "C 1 2";
+        Command expected = new Command("C", new Coordinate(1, 2));
+        Command actual = CommandParser.parseCommand(input);
+        assertEquals(expected, actual);
+    }
 }
