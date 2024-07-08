@@ -1,4 +1,5 @@
 package model;
 
-public class Coordinate {
+public record Coordinate(int x, int y) {
 }
+
