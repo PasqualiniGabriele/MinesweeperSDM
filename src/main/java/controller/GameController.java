@@ -1,8 +1,12 @@
 package controller;
 
 import cli.Command;
-import model.Board;
-import model.Game;
+import model.*;
+
+import java.sql.Time;
+import java.time.LocalTime;
+
+import static java.time.LocalTime.now;
 
 public class GameController {
 
@@ -15,6 +19,22 @@ public class GameController {
     }
 
     public void createGame(String difficulty) {
+        game = new Game();
+        switch (difficulty) {
+            case "EASY":
+                game.setDifficulty(Difficulty.EASY);
+                break;
+            case "MEDIUM":
+                game.setDifficulty(Difficulty.MEDIUM);
+                break;
+            case "HARD":
+                game.setDifficulty(Difficulty.HARD);
+                break;
+            default:
+                throw new IllegalArgumentException("Difficulty not recognized");
+        }
+        Time now = Time.valueOf(now());
+        game.start(now, GameStatus.ONGOING);
     }
 
     public void endGame() {

@@ -18,18 +18,18 @@ class GameControllerTest {
     @Test
     void testCreateEasyGame() {
         controller.createGame("EASY");
-        assertEquals(controller.getGame().difficulty(), Difficulty.EASY);
+        assertEquals(controller.getGame().getDifficulty(), Difficulty.EASY);
     }
 
     @Test
     void testCreateMediumGame() {
         controller.createGame("MEDIUM");
-        assertEquals(controller.getGame().difficulty(), Difficulty.MEDIUM);
+        assertEquals(controller.getGame().getDifficulty(), Difficulty.MEDIUM);
     }
 
     @Test
     void testCreateHardGame() {
         controller.createGame("HARD");
-        assertEquals(controller.getGame().difficulty(), Difficulty.HARD);
+        assertEquals(controller.getGame().getDifficulty(), Difficulty.HARD);
     }
 }
