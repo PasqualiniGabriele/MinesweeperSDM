@@ -29,7 +29,7 @@ class ClosedState implements CellState {
 
     @Override
     public void toggleFlag(Cell cell) {
-
+        cell.setState(new FlaggedState());
     }
 }
 

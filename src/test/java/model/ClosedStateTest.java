@@ -20,4 +20,10 @@ class ClosedStateTest {
         cell.reveal();
         assertInstanceOf(OpenState.class, cell.getState());
     }
+
+    @Test
+    void testStateAfterToggleFlag(){
+        cell.toggleFlag();
+        assertInstanceOf(FlaggedState.class, cell.getState());
+    }
 }
