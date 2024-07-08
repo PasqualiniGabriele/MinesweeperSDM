@@ -1,4 +1,5 @@
 package model;
 
-public class Cell {
+public abstract class Cell {
+    public abstract boolean hasMine();
 }
