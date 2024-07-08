@@ -1,4 +1,6 @@
 package cli;
 
-public class Command {
+import model.Coordinate;
+
+public record Command(String action, Coordinate coordinate) {
 }
