@@ -24,7 +24,7 @@ class OpenState implements CellState {
 class ClosedState implements CellState {
     @Override
     public void reveal(Cell cell) {
-
+        cell.setState(new OpenState());
     }
 
     @Override
