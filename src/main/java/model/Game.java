@@ -1,8 +1,40 @@
 package model;
 
-public class Game {
+import java.sql.Time;
+
+public record Game (Time startTime, Time endTime, Status status, Difficulty difficulty) {
 }
 
-enum Difficulty {}
+enum Status {
+    WON,
+    LOST,
+    ONGOING
+}
 
-enum Status {}
+enum Difficulty {
+    EASY(10, 8, 8),
+    MEDIUM(40, 16, 16),
+    HARD(99, 30, 16);
+
+    private final int numOfBombs;
+    private final int width;
+    private final int height;
+
+    Difficulty(int numOfBombs, int width, int height) {
+        this.numOfBombs = numOfBombs;
+        this.width = width;
+        this.height = height;
+    }
+
+    public int getNumOfBombs() {
+        return numOfBombs;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public long getHeight() {
+        return height;
+    }
+}
