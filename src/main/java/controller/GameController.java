@@ -37,7 +37,17 @@ public class GameController {
         game.start(now, GameStatus.ONGOING);
     }
 
-    public void endGame() {
+    public void endGame(String endStatus) {
+        switch (endStatus) {
+            case "WON":
+                game.setStatus(GameStatus.WON);
+                break;
+            case "LOST":
+                game.setStatus(GameStatus.LOST);
+                break;
+            default:
+                throw new IllegalArgumentException("Status not recognized");
+        }
     }
 
     public void applyCommand(Command command) {

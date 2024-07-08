@@ -1,6 +1,7 @@
 package controller;
 
 import model.Difficulty;
+import model.GameStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,18 +19,32 @@ class GameControllerTest {
     @Test
     void testCreateEasyGame() {
         controller.createGame("EASY");
-        assertEquals(controller.getGame().getDifficulty(), Difficulty.EASY);
+        assertEquals(Difficulty.EASY, controller.getGame().getDifficulty());
     }
 
     @Test
     void testCreateMediumGame() {
         controller.createGame("MEDIUM");
-        assertEquals(controller.getGame().getDifficulty(), Difficulty.MEDIUM);
+        assertEquals(Difficulty.MEDIUM, controller.getGame().getDifficulty());
     }
 
     @Test
     void testCreateHardGame() {
         controller.createGame("HARD");
-        assertEquals(controller.getGame().getDifficulty(), Difficulty.HARD);
+        assertEquals(Difficulty.HARD, controller.getGame().getDifficulty());
+    }
+
+    @Test
+    void testEndGameWithStatusWon() {
+        controller.createGame("MEDIUM");
+        controller.endGame("WON");
+        assertEquals(GameStatus.WON, controller.getGame().getStatus());
+    }
+
+    @Test
+    void testEndGameWithStatusLost() {
+        controller.createGame("MEDIUM");
+        controller.endGame("LOST");
+        assertEquals(GameStatus.LOST, controller.getGame().getStatus());
     }
 }
