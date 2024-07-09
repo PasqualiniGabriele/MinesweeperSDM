@@ -24,7 +24,7 @@ public enum Difficulty {
         return width;
     }
 
-    public long getHeight() {
+    public int getHeight() {
         return height;
     }
 }

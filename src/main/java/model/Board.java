@@ -5,15 +5,16 @@ public class Board {
 
     public Board(int width, int height) {
         cells = new Cell[width][height];
-    }
-
-    public void initializeBoard() {
-        for (int i = 0; i < getWidth(); i++) {
-            for (int j = 0; j < getHeight(); j++) {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
                 cells[i][j] = new FreeCell(0);
             }
         }
     }
+
+    public void fillWithBombs(Coordinate firstCoordinate, int numOfBombs) {
+    }
+
 
     public Cell getCell(Coordinate coordinate) {
         return cells[coordinate.x()][coordinate.y()];
@@ -21,13 +22,5 @@ public class Board {
 
     public void setCell(Cell cell, Coordinate coordinate) {
         cells[coordinate.x()][coordinate.y()] = cell;
-    }
-
-    public int getWidth() {
-        return cells.length;
-    }
-
-    public int getHeight() {
-        return cells[0].length;
     }
 }
