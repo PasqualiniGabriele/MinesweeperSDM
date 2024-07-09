@@ -3,11 +3,6 @@ package controller;
 import cli.Command;
 import model.*;
 
-import java.sql.Time;
-import java.time.LocalTime;
-
-import static java.time.LocalTime.now;
-
 public class GameController {
 
     private Game game;
@@ -21,21 +16,11 @@ public class GameController {
     public void createGame(String difficulty) {
         game = new Game();
         game.setDifficulty(Difficulty.valueOf(difficulty));
-        Time now = Time.valueOf(now());
-        game.start(now);
+        game.start();
     }
 
     public void endGame(String endStatus) {
-        switch (endStatus) {
-            case "WON":
-                game.setStatus(GameStatus.WON);
-                break;
-            case "LOST":
-                game.setStatus(GameStatus.LOST);
-                break;
-            default:
-                throw new IllegalArgumentException("Status not recognized");
-        }
+        game.end(GameStatus.valueOf(endStatus));
     }
 
     public void applyCommand(Command command) {

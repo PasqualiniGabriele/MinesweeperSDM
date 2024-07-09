@@ -2,6 +2,8 @@ package model;
 
 import java.sql.Time;
 
+import static java.time.LocalTime.now;
+
 public class Game {
     private Time startTime;
     private Time endTime;
@@ -21,9 +23,14 @@ public class Game {
         this(startTime, null, difficulty, status);
     }
 
-    public void start(Time startTime) {
-        this.startTime = startTime;
+    public void start() {
+        startTime = Time.valueOf(now());
         status = GameStatus.ONGOING;
+    }
+
+    public void end(GameStatus gameStatus) {
+        endTime = Time.valueOf(now());
+        status = gameStatus;
     }
 
     public Time getStartTime() {
