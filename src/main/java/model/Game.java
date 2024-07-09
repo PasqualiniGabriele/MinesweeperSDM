@@ -21,9 +21,9 @@ public class Game {
         this(startTime, null, difficulty, status);
     }
 
-    public void start(Time startTime, GameStatus status) {
+    public void start(Time startTime) {
         this.startTime = startTime;
-        this.status = status;
+        status = GameStatus.ONGOING;
     }
 
     public Time getStartTime() {

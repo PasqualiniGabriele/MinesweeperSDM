@@ -22,7 +22,7 @@ public class GameController {
         game = new Game();
         game.setDifficulty(Difficulty.valueOf(difficulty));
         Time now = Time.valueOf(now());
-        game.start(now, GameStatus.ONGOING);
+        game.start(now);
     }
 
     public void endGame(String endStatus) {
