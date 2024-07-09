@@ -16,8 +16,6 @@ public abstract class Handler {
 
     protected abstract void newGame();
 
-    protected abstract void setDifficulty();
-
     protected abstract void gameRules();
 
     protected abstract void exit();

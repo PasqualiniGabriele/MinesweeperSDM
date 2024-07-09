@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class CLIHandler extends Handler {
     CommandParser commandParser;
     DisplayFormatter displayFormatter;
+    Scanner scanner;
 
     public CLIHandler() {
         super();
@@ -16,13 +17,13 @@ public class CLIHandler extends Handler {
         super(gameController);
         this.commandParser = commandParser;
         this.displayFormatter = displayFormatter;
+        scanner = new Scanner(System.in);
     }
 
     @Override
     public void launch() {
         System.out.println("Welcome to Minesweeper!");
         boolean running = true;
-        Scanner scanner = new Scanner(System.in);
 
         while (running) {
             System.out.println("""
@@ -44,21 +45,34 @@ public class CLIHandler extends Handler {
                     exit();
                     running = false;
                     break;
+                default:
+                    throw new IllegalArgumentException("Not a valid option");
             }
         }
     }
 
     @Override
     protected void newGame() {
+
         System.out.println("""
             Choose difficulty:
             1. Easy
             2. Medium
             3. Hard""");
-    }
-
-    @Override
-    protected void setDifficulty() {
+        String input = scanner.nextLine();
+        switch (input) {
+            case "1":
+                gameController.createGame("EASY");
+                break;
+            case "2":
+                gameController.createGame("MEDIUM");
+                break;
+            case "3":
+                gameController.createGame("HARD");
+                break;
+            default:
+                throw new IllegalArgumentException("Not a valid option");
+        }
     }
 
     @Override
@@ -70,4 +84,8 @@ public class CLIHandler extends Handler {
     protected void exit() {
     }
 
+    // for testing:
+    public void setScanner(Scanner scanner) {
+        this.scanner = scanner;
+    }
 }

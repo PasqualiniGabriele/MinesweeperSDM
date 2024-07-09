@@ -9,6 +9,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -66,7 +67,9 @@ class CLIHandlerTest {
     @Test
     public void testEasyNewGame() {
         String userInput = "1\n";
-        System.setIn(new ByteArrayInputStream(userInput.getBytes()));
+        ByteArrayInputStream testIn = new ByteArrayInputStream(userInput.getBytes());
+        System.setIn(testIn);
+        cliHandler.setScanner(new Scanner(testIn));
         cliHandler.newGame();
         verify(gameController).createGame("EASY");
     }
