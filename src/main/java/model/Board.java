@@ -16,9 +16,16 @@ public class Board {
 
     }
 
-    private void updateProximity(Coordinate bombCoordinate){
+    private void updateProximity(Coordinate bombCoordinate) {
     }
 
+    public int getWidth() {
+        return cells.length;
+    }
+
+    public int getHeight() {
+        return cells[0].length;
+    }
 
     public Cell getCell(Coordinate coordinate) {
         return cells[coordinate.x()][coordinate.y()];
