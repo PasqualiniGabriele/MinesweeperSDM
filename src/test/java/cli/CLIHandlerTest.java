@@ -12,6 +12,7 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 class CLIHandlerTest {
 
@@ -40,8 +41,6 @@ class CLIHandlerTest {
 
     @Test
     public void testLaunch() {
-        String userInput = "3\n";
-        System.setIn(new ByteArrayInputStream(userInput.getBytes()));
         cliHandler.launch();
         String expectedOutput = """
                 Welcome to Minesweeper!
@@ -62,6 +61,14 @@ class CLIHandlerTest {
                 2. Medium
                 3. Hard""";
         assertEquals(expectedOutput, outContent.toString().strip());
+    }
+
+    @Test
+    public void testEasyNewGame() {
+        String userInput = "1\n";
+        System.setIn(new ByteArrayInputStream(userInput.getBytes()));
+        cliHandler.newGame();
+        verify(gameController).createGame("EASY");
     }
 
     @AfterEach
