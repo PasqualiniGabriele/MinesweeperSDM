@@ -53,6 +53,17 @@ class CLIHandlerTest {
         assertEquals(expectedOutput, outContent.toString().strip());
     }
 
+    @Test
+    public void testNewGame() {
+        cliHandler.newGame();
+        String expectedOutput = """
+                Choose difficulty:
+                1. Easy
+                2. Medium
+                3. Hard""";
+        assertEquals(expectedOutput, outContent.toString().strip());
+    }
+
     @AfterEach
     public void restoreStreams() {
         System.setOut(originalOut);
