@@ -20,10 +20,6 @@ public class CLIHandler extends Handler {
 
     @Override
     public void launch() {
-    }
-
-    @Override
-    protected void newGame() {
         System.out.println("Welcome to Minesweeper!");
         boolean running = true;
         Scanner scanner = new Scanner(System.in);
@@ -50,6 +46,10 @@ public class CLIHandler extends Handler {
                     break;
             }
         }
+    }
+
+    @Override
+    protected void newGame() {
     }
 
     @Override
