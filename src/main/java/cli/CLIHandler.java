@@ -50,6 +50,11 @@ public class CLIHandler extends Handler {
 
     @Override
     protected void newGame() {
+        System.out.println("""
+            Choose difficulty:
+            1. Easy
+            2. Medium
+            3. Hard""");
     }
 
     @Override
