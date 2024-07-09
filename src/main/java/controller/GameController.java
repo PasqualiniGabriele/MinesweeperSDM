@@ -20,19 +20,7 @@ public class GameController {
 
     public void createGame(String difficulty) {
         game = new Game();
-        switch (difficulty) {
-            case "EASY":
-                game.setDifficulty(Difficulty.EASY);
-                break;
-            case "MEDIUM":
-                game.setDifficulty(Difficulty.MEDIUM);
-                break;
-            case "HARD":
-                game.setDifficulty(Difficulty.HARD);
-                break;
-            default:
-                throw new IllegalArgumentException("Difficulty not recognized");
-        }
+        game.setDifficulty(Difficulty.valueOf(difficulty));
         Time now = Time.valueOf(now());
         game.start(now, GameStatus.ONGOING);
     }
