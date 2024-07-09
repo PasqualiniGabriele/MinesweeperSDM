@@ -9,7 +9,7 @@ class FreeCellTest {
 
     @Test
     void testIfCellHasMine(){
-        cell = new FreeCell();
+        cell = new FreeCell(0);
         assertFalse(cell.hasMine());
     }
 }
