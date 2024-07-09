@@ -42,7 +42,13 @@ class CLIHandlerTest {
 
     @Test
     public void testLaunch() {
+        String userInput = "3";
+        ByteArrayInputStream testIn = new ByteArrayInputStream(userInput.getBytes());
+        System.setIn(testIn);
+        cliHandler.setScanner(new Scanner(testIn));
+
         cliHandler.launch();
+
         String expectedOutput = """
                 Welcome to Minesweeper!
                 Menu:
@@ -55,7 +61,13 @@ class CLIHandlerTest {
 
     @Test
     public void testNewGame() {
+        String userInput = "1";
+        ByteArrayInputStream testIn = new ByteArrayInputStream(userInput.getBytes());
+        System.setIn(testIn);
+        cliHandler.setScanner(new Scanner(testIn));
+
         cliHandler.newGame();
+
         String expectedOutput = """
                 Choose difficulty:
                 1. Easy
@@ -72,6 +84,26 @@ class CLIHandlerTest {
         cliHandler.setScanner(new Scanner(testIn));
         cliHandler.newGame();
         verify(gameController).createGame("EASY");
+    }
+
+    @Test
+    public void testMediumNewGame() {
+        String userInput = "2\n";
+        ByteArrayInputStream testIn = new ByteArrayInputStream(userInput.getBytes());
+        System.setIn(testIn);
+        cliHandler.setScanner(new Scanner(testIn));
+        cliHandler.newGame();
+        verify(gameController).createGame("MEDIUM");
+    }
+
+    @Test
+    public void testHardNewGame() {
+        String userInput = "3\n";
+        ByteArrayInputStream testIn = new ByteArrayInputStream(userInput.getBytes());
+        System.setIn(testIn);
+        cliHandler.setScanner(new Scanner(testIn));
+        cliHandler.newGame();
+        verify(gameController).createGame("HARD");
     }
 
     @AfterEach
