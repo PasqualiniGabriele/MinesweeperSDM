@@ -12,7 +12,11 @@ public class Board {
         }
     }
 
-    public void fillWithBombs(Coordinate firstCoordinate, int numOfBombs) {
+    public void fillWithBombs(Coordinate safeZoneCenter, int numOfBombs) {
+
+    }
+
+    private void updateProximity(Coordinate bombCoordinate){
     }
 
 
