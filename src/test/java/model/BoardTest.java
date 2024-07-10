@@ -17,15 +17,19 @@ class BoardTest {
     @Test
     void testUpdateProximity() {
         boolean wrongProximity = false;
-        board.setCell(new BombedCell(), new Coordinate(1, 1));
+        Coordinate bombCoordinate = new Coordinate(1, 1);
+        board.setCell(new BombedCell(), bombCoordinate);
+        board.updateProximity(bombCoordinate);
         for (int x = 0; x < 3; x++) {
             for (int y = 0; y < 3; y++) {
-                if (x == 1 && y == 1) continue;
-                FreeCell freeCell = (FreeCell) (board.getCell(new Coordinate(x, y)));
-                if (freeCell.getProximity() != 1) wrongProximity = true;
+                if (!(x == 1 && y == 1)) {
+                    Coordinate c = new Coordinate(x, y);
+                    if (((FreeCell) (board.getCell(c))).getProximity() != 1) {
+                        wrongProximity = true;
+                    }
+                }
             }
         }
         assertFalse(wrongProximity);
-
     }
 }

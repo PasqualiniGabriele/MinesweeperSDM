@@ -16,7 +16,15 @@ public class Board {
 
     }
 
-    private void updateProximity(Coordinate bombCoordinate) {
+    public void updateProximity(Coordinate bombCoordinate) {
+        for (int x = 0; x < 3; x++){
+            for (int y = 0; y < 3; y++){
+                if (!(x == 1 && y == 1)){
+                    FreeCell freeCell = (FreeCell)(cells[x][y]);
+                    (freeCell).setProximity(freeCell.getProximity()+1);
+                }
+            }
+        }
     }
 
     public int getWidth() {
