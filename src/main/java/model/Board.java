@@ -1,5 +1,9 @@
 package model;
 
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
+
 public class Board {
     private Cell[][] cells;
 
@@ -11,6 +15,19 @@ public class Board {
             }
         }
     }
+
+    public HashSet<Coordinate> generateRandomCoordinates(int n) {
+        HashSet<Coordinate> hashSet = new HashSet<>();
+        Random random = new Random();
+        for (int i = 0; i < n; i++) {
+            int x = random.nextInt(cells.length);
+            int y = random.nextInt(cells[0].length);
+            if (hashSet.contains(new Coordinate(x, y))) i--;
+            hashSet.add(new Coordinate(x, y));
+        }
+        return hashSet;
+    }
+
 
     public void fillWithBombs(Coordinate safeZoneCenter, int numOfBombs) {
 

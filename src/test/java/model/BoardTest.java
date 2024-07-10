@@ -3,6 +3,9 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
@@ -64,7 +67,6 @@ class BoardTest {
         verifyProximities(expectedProximities);
     }
 
-
     private void verifyProximities(int[][] expectedProximities) {
         for (int x = 0; x < expectedProximities.length; x++) {
             for (int y = 0; y < expectedProximities[x].length; y++) {
@@ -78,5 +80,18 @@ class BoardTest {
                 }
             }
         }
+    }
+
+    @Test
+    void testGenerateRandomCoordinates_RightNumber() {
+        Set<Coordinate> coordinates = board.generateRandomCoordinates(8);
+        assertEquals(8, coordinates.size());
+    }
+
+    @Test
+    void testGenerateRandomCoordinates_Randomness() {
+        Set<Coordinate> coordinates1 = board.generateRandomCoordinates(8);
+        Set<Coordinate> coordinates2 = board.generateRandomCoordinates(8);
+        assertNotEquals(coordinates1, coordinates2);
     }
 }
