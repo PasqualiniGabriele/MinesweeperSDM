@@ -16,20 +16,51 @@ class BoardTest {
 
     @Test
     void testUpdateProximity() {
-        boolean wrongProximity = false;
         Coordinate bombCoordinate = new Coordinate(1, 1);
         board.setCell(new BombedCell(), bombCoordinate);
         board.updateProximity(bombCoordinate);
-        for (int x = 0; x < 3; x++) {
-            for (int y = 0; y < 3; y++) {
-                if (!(x == 1 && y == 1)) {
-                    Coordinate c = new Coordinate(x, y);
-                    if (((FreeCell) (board.getCell(c))).getProximity() != 1) {
-                        wrongProximity = true;
-                    }
+
+        int[][] expectedProximities = {
+                {1, 1, 1, 0},
+                {1, 0, 1, 0},
+                {1, 1, 1, 0},
+                {0, 0, 0, 0}
+        };
+
+        verifyProximities(expectedProximities);
+    }
+
+    @Test
+    void testUpdateProximityTwice() {
+        Coordinate bomb1 = new Coordinate(1, 1);
+        Coordinate bomb2 = new Coordinate(2, 2);
+        board.setCell(new BombedCell(), bomb1);
+        board.setCell(new BombedCell(), bomb2);
+        board.updateProximity(bomb1);
+        board.updateProximity(bomb2);
+
+        int[][] expectedProximities = {
+                {1, 1, 1, 0},
+                {1, 0, 2, 1},
+                {1, 2, 0, 1},
+                {0, 1, 1, 1}
+        };
+
+        verifyProximities(expectedProximities);
+    }
+
+
+    private void verifyProximities(int[][] expectedProximities) {
+        for (int x = 0; x < expectedProximities.length; x++) {
+            for (int y = 0; y < expectedProximities[x].length; y++) {
+                Coordinate c = new Coordinate(x, y);
+                Cell cell = board.getCell(c);
+                if (cell instanceof FreeCell) {
+                    int actualProximity = ((FreeCell) cell).getProximity();
+                    assertEquals(expectedProximities[x][y], actualProximity,
+                            "Proximity at (" + x + ", " + y + ") should be " + expectedProximities[x][y]);
                 }
             }
         }
-        assertFalse(wrongProximity);
     }
 }

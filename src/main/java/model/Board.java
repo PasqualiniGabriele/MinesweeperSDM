@@ -17,11 +17,16 @@ public class Board {
     }
 
     public void updateProximity(Coordinate bombCoordinate) {
-        for (int x = 0; x < 3; x++){
-            for (int y = 0; y < 3; y++){
-                if (!(x == 1 && y == 1)){
-                    FreeCell freeCell = (FreeCell)(cells[x][y]);
-                    (freeCell).setProximity(freeCell.getProximity()+1);
+        int bombX = bombCoordinate.x();
+        int bombY = bombCoordinate.y();
+
+        for (int dx = -1; dx <= 1; dx++) {
+            for (int dy = -1; dy <= 1; dy++) {
+                if (dx == 0 && dy == 0) continue; // Skip the bomb cell itself
+                Cell cell = cells[bombX + dx][bombY + dy];
+                if (cell instanceof FreeCell) {
+                    FreeCell freeCell = (FreeCell) cell;
+                    freeCell.setProximity(freeCell.getProximity() + 1);
                 }
             }
         }
