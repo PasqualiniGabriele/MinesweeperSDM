@@ -15,6 +15,21 @@ class BoardTest {
     }
 
     @Test
+    void testUpdateProximityOnEdge() {
+        Coordinate bombCoordinate = new Coordinate(0, 3);
+        board.setCell(new BombedCell(), bombCoordinate);
+        board.updateProximity(bombCoordinate);
+
+        int[][] expectedProximities = {
+                {0, 0, 1, 9},
+                {0, 0, 1, 1},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0}
+        };
+        verifyProximities(expectedProximities);
+    }
+
+    @Test
     void testUpdateProximity() {
         Coordinate bombCoordinate = new Coordinate(1, 1);
         board.setCell(new BombedCell(), bombCoordinate);
@@ -22,7 +37,7 @@ class BoardTest {
 
         int[][] expectedProximities = {
                 {1, 1, 1, 0},
-                {1, 0, 1, 0},
+                {1, 9, 1, 0},
                 {1, 1, 1, 0},
                 {0, 0, 0, 0}
         };
@@ -41,8 +56,8 @@ class BoardTest {
 
         int[][] expectedProximities = {
                 {1, 1, 1, 0},
-                {1, 0, 2, 1},
-                {1, 2, 0, 1},
+                {1, 9, 2, 1},
+                {1, 2, 9, 1},
                 {0, 1, 1, 1}
         };
 
@@ -58,7 +73,8 @@ class BoardTest {
                 if (cell instanceof FreeCell) {
                     int actualProximity = ((FreeCell) cell).getProximity();
                     assertEquals(expectedProximities[x][y], actualProximity,
-                            "Proximity at (" + x + ", " + y + ") should be " + expectedProximities[x][y]);
+                            "Proximity at (" + x + ", " + y + ") " +
+                                    "should be " + expectedProximities[x][y]);
                 }
             }
         }
