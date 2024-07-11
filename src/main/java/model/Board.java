@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.Set;
 
 public class Board {
-    private Cell[][] cells;
+    private final Cell[][] cells;
 
     public Board(int width, int height) {
         cells = new Cell[width][height];
@@ -16,21 +16,37 @@ public class Board {
         }
     }
 
-    public Set<Coordinate> generateRandomCoordinates(int n) {
-        Set<Coordinate> coordinates = new HashSet<>();
+    public Set<Coordinate> generateSafeZoneCoordinates(Coordinate safeZoneCenter) {
+        Set<Coordinate> safeZone = new HashSet<>();
+        for (int dx = -1; dx <= 1; dx++) {
+            for (int dy = -1; dy <= 1; dy++) {
+                safeZone.add(new Coordinate(safeZoneCenter.x() + dx, safeZoneCenter.y() + dy));
+            }
+        }
+        return safeZone;
+    }
+
+    public Set<Coordinate> generateRandomCoordinates(int n, Set<Coordinate> safeZone) {
+        Set<Coordinate> randomCoordinates = new HashSet<>();
         Random random = new Random();
-        while (coordinates.size() < n) {
+        while (randomCoordinates.size() < n) {
             int x = random.nextInt(cells.length);
             int y = random.nextInt(cells[0].length);
-            coordinates.add(new Coordinate(x, y));
+            Coordinate coordinate = new Coordinate(x, y);
+            if (!safeZone.contains(coordinate)) {
+                randomCoordinates.add(coordinate);
+            }
         }
-        return coordinates;
+        return randomCoordinates;
     }
 
 
-    public void fillWithBombs(Coordinate safeZoneCenter, int numOfBombs) {
-
+    public void fillWithBombs(Set<Coordinate> bombCoordinates) {
+        for (Coordinate bombCoordinate : bombCoordinates) {
+            cells[bombCoordinate.x()][bombCoordinate.y()] = new BombedCell();
+        }
     }
+
 
     public void updateProximity(Coordinate bombCoordinate) {
         int bombX = bombCoordinate.x();
@@ -47,7 +63,6 @@ public class Board {
                     } catch (ArrayIndexOutOfBoundsException ignored) {
                     }
                 }
-
             }
         }
     }
