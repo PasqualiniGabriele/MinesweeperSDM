@@ -96,4 +96,18 @@ class BoardTest {
         assertNotEquals(coordinates1, coordinates2);
     }
 
+  @Test
+  void testSafeZone(){
+      Set<Coordinate> safeZone = board.generateSafeZoneCoordinates(new Coordinate(1,1));
+      Set<Coordinate> bombCoordinates = board.generateRandomCoordinates(3, safeZone);
+      board.fillWithBombs(bombCoordinates);
+      boolean check = true;
+      for(int x=0; x<=2; x++){
+          for(int y=0; y<=2; y++){
+              if(board.getCell(new Coordinate(x,y)) instanceof BombedCell) check = false;
+          }
+      }
+      assertTrue(check);
+  }
+
 }

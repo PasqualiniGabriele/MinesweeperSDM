@@ -16,6 +16,16 @@ public class Board {
         }
     }
 
+    public Set<Coordinate> generateSafeZoneCoordinates(Coordinate safeZoneCenter) {
+        Set<Coordinate> safeZone = new HashSet<>();
+        for (int dx = -1; dx <= 1; dx++) {
+            for (int dy = -1; dy <= 1; dy++) {
+                safeZone.add(new Coordinate(safeZoneCenter.x() + dx, safeZoneCenter.y() + dy));
+            }
+        }
+        return safeZone;
+    }
+
     public Set<Coordinate> generateRandomCoordinates(int n, Set<Coordinate> safeZone) {
         Set<Coordinate> randomCoordinates = new HashSet<>();
         Random random = new Random();
@@ -30,15 +40,6 @@ public class Board {
         return randomCoordinates;
     }
 
-    private Set<Coordinate> generateSafeZoneCoordinates(Coordinate safeZoneCenter) {
-        Set<Coordinate> safeZone = new HashSet<>();
-        for (int dx = -1; dx <= 1; dx++) {
-            for (int dy = -1; dy <= 1; dy++) {
-                safeZone.add(new Coordinate(safeZoneCenter.x() + dx, safeZoneCenter.y() + dy));
-            }
-        }
-        return safeZone;
-    }
 
     public void fillWithBombs(Set<Coordinate> bombCoordinates) {
         for (Coordinate bombCoordinate : bombCoordinates) {
