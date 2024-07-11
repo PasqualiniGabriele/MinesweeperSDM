@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.Set;
 
 public class Board {
-    private Cell[][] cells;
+    private final Cell[][] cells;
 
     public Board(int width, int height) {
         cells = new Cell[width][height];
@@ -16,7 +16,7 @@ public class Board {
         }
     }
 
-    public Set<Coordinate> generateRandomCoordinates(int n) {
+    public Set<Coordinate> generateRandomCoordinates(int n, Coordinate safeZoneCenter) {
         Set<Coordinate> coordinates = new HashSet<>();
         Random random = new Random();
         while (coordinates.size() < n) {
@@ -27,10 +27,10 @@ public class Board {
         return coordinates;
     }
 
-
-    public void fillWithBombs(Coordinate safeZoneCenter, int numOfBombs) {
+    public void fillWithBombs(Set<Coordinate> bombCoordinates) {
 
     }
+
 
     public void updateProximity(Coordinate bombCoordinate) {
         int bombX = bombCoordinate.x();
@@ -47,7 +47,6 @@ public class Board {
                     } catch (ArrayIndexOutOfBoundsException ignored) {
                     }
                 }
-
             }
         }
     }
