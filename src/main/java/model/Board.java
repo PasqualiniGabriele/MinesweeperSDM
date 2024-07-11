@@ -16,16 +16,15 @@ public class Board {
         }
     }
 
-    public HashSet<Coordinate> generateRandomCoordinates(int n) {
-        HashSet<Coordinate> hashSet = new HashSet<>();
+    public Set<Coordinate> generateRandomCoordinates(int n) {
+        Set<Coordinate> coordinates = new HashSet<>();
         Random random = new Random();
-        for (int i = 0; i < n; i++) {
+        while (coordinates.size() < n) {
             int x = random.nextInt(cells.length);
             int y = random.nextInt(cells[0].length);
-            if (hashSet.contains(new Coordinate(x, y))) i--;
-            hashSet.add(new Coordinate(x, y));
+            coordinates.add(new Coordinate(x, y));
         }
-        return hashSet;
+        return coordinates;
     }
 
 
