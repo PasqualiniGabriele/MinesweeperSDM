@@ -32,16 +32,18 @@ public class Board {
 
     private Set<Coordinate> generateSafeZoneCoordinates(Coordinate safeZoneCenter) {
         Set<Coordinate> safeZone = new HashSet<>();
-        for (int dx = -1; dx <= 1; dx++){
-            for (int dy = -1; dy <= 1; dy++){
-                safeZone.add(new Coordinate(safeZoneCenter.x()+dx, safeZoneCenter.y()+dy));
+        for (int dx = -1; dx <= 1; dx++) {
+            for (int dy = -1; dy <= 1; dy++) {
+                safeZone.add(new Coordinate(safeZoneCenter.x() + dx, safeZoneCenter.y() + dy));
             }
         }
         return safeZone;
     }
 
     public void fillWithBombs(Set<Coordinate> bombCoordinates) {
-
+        for (Coordinate bombCoordinate : bombCoordinates) {
+            cells[bombCoordinate.x()][bombCoordinate.y()] = new BombedCell();
+        }
     }
 
 
