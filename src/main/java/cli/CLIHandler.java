@@ -23,42 +23,41 @@ public class CLIHandler extends Handler {
     @Override
     public void launch() {
         System.out.println("Welcome to Minesweeper!");
-        boolean running = true;
+        System.out.println("""
+                Menu:
+                1. Start new game
+                2. See game rules
+                3. Exit game
+                Choose an option:
+                """);
+        String input = scanner.nextLine();
+        switch (input) {
+            case "1":
+                newGame();
+                break;
+            case "2":
+                gameRules();
+                break;
+            case "3":
+                exit();
+                break;
+            default:
+                throw new IllegalArgumentException("Not a valid option");
 
-        while (running) {
-            System.out.println("""
-                    Menu:
-                    1. Start new game
-                    2. See game rules
-                    3. Exit game
-                    Choose an option:
-                    """);
-            String input = scanner.nextLine();
-            switch (input) {
-                case "1":
-                    newGame();
-                    break;
-                case "2":
-                    gameRules();
-                    break;
-                case "3":
-                    exit();
-                    running = false;
-                    break;
-                default:
-                    throw new IllegalArgumentException("Not a valid option");
-            }
         }
     }
 
     @Override
     protected void newGame() {
+        setDifficulty();
+    }
 
+    private void setDifficulty() {
         System.out.println("""
-            Choose difficulty:
-            1. Easy
-            2. Medium
-            3. Hard""");
+                Choose difficulty:
+                1. Easy
+                2. Medium
+                3. Hard""");
         String input = scanner.nextLine();
         switch (input) {
             case "1":
