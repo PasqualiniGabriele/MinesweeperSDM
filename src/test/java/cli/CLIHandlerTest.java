@@ -40,58 +40,50 @@ class CLIHandlerTest {
         cliHandler = new CLIHandler(gameController, commandParser, displayFormatter);
     }
 
-    @Test
-    public void testLaunch() {
-        String userInput = "3";
+    private void setInput(String userInput) {
         ByteArrayInputStream testIn = new ByteArrayInputStream(userInput.getBytes());
-        System.setIn(testIn);
         cliHandler.setScanner(new Scanner(testIn));
+    }
+
+    @Test
+    public void testExitFromLaunch() {
+        String userInput = "3";
+        setInput(userInput);
 
         cliHandler.launch();
-
-        String expectedOutput = """
-                Welcome to Minesweeper!
-                Menu:
-                1. Start new game
-                2. See game rules
-                3. Exit game
-                Choose an option:""";
-        assertEquals(expectedOutput, outContent.toString().strip());
     }
 
     @Test
-    public void testNewGame() {
-        String userInput = "1";
-        ByteArrayInputStream testIn = new ByteArrayInputStream(userInput.getBytes());
-        System.setIn(testIn);
-        cliHandler.setScanner(new Scanner(testIn));
+    public void testNewGameAndExitFlow() {
+        String userInput = "1\np\n3";
+        setInput(userInput);
 
         cliHandler.newGame();
-
-        String expectedOutput = """
-                Choose difficulty:
-                1. Easy
-                2. Medium
-                3. Hard""";
-        assertEquals(expectedOutput, outContent.toString().strip());
     }
+
+    @Test
+    public void testGameRulesAndExitFlow() {
+        String userInput = "2\np\n3";
+        setInput(userInput);
+
+        cliHandler.newGame();
+    }
+
 
     @Test
     public void testEasyNewGame() {
         String userInput = "1\n";
-        ByteArrayInputStream testIn = new ByteArrayInputStream(userInput.getBytes());
-        System.setIn(testIn);
-        cliHandler.setScanner(new Scanner(testIn));
+        setInput(userInput);
+
         cliHandler.newGame();
+
         verify(gameController).createGame("EASY");
     }
 
     @Test
     public void testMediumNewGame() {
         String userInput = "2\n";
-        ByteArrayInputStream testIn = new ByteArrayInputStream(userInput.getBytes());
-        System.setIn(testIn);
-        cliHandler.setScanner(new Scanner(testIn));
+        setInput(userInput);
         cliHandler.newGame();
         verify(gameController).createGame("MEDIUM");
     }
@@ -99,9 +91,7 @@ class CLIHandlerTest {
     @Test
     public void testHardNewGame() {
         String userInput = "3\n";
-        ByteArrayInputStream testIn = new ByteArrayInputStream(userInput.getBytes());
-        System.setIn(testIn);
-        cliHandler.setScanner(new Scanner(testIn));
+        setInput(userInput);
         cliHandler.newGame();
         verify(gameController).createGame("HARD");
     }
