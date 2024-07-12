@@ -2,10 +2,9 @@ package cli;
 
 import model.Board;
 import org.junit.jupiter.api.BeforeEach;
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 class DisplayFormatterTest {
     private Board board;
