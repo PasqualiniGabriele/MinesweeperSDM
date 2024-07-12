@@ -2,19 +2,29 @@ package cli;
 
 import model.Board;
 import de.vandermeer.asciitable.AsciiTable;
+import model.Coordinate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DisplayFormatter {
-    private String flagSymbol = "🚩";
-    private String bombSymbol = "💣";
 
     protected String formatBoard(Board board) {
+        int width = board.getWidth();
+        int height = board.getHeight();
         AsciiTable at = new AsciiTable();
         at.addRule();
-        at.addRow(flagSymbol, "row 1 col 2");
-        at.addRule();
-        at.addRow("row 2 col 1", bombSymbol);
-        at.addRule();
+        for (int i = 0; i < width; i++) {
+            List<String> columns = new ArrayList<>();
+            for (int j = 0; j < height; j++) {
+                columns.add(board.getCell(new Coordinate(i, j)).toString());
+            }
+            at.addRow(columns);
+            at.addRule();
+        }
         return at.render();
     }
+
 }
+
 
