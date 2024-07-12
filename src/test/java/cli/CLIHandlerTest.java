@@ -11,7 +11,6 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -25,19 +24,14 @@ class CLIHandlerTest {
 
     private CLIHandler cliHandler;
     private GameController gameController;
-    private CommandParser commandParser;
-    private DisplayFormatter displayFormatter;
 
     @BeforeEach
     public void setUp() {
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
-
+        cliHandler = new CLIHandler();
         gameController = mock(GameController.class);
-        commandParser = mock(CommandParser.class);
-        displayFormatter = mock(DisplayFormatter.class);
-
-        cliHandler = new CLIHandler(gameController, commandParser, displayFormatter);
+        cliHandler.setGameController(gameController);
     }
 
     private void setInput(String userInput) {
@@ -47,52 +41,50 @@ class CLIHandlerTest {
 
     @Test
     public void testExitFromLaunch() {
-        String userInput = "3";
-        setInput(userInput);
+        setInput("3");
 
         cliHandler.launch();
     }
 
     @Test
     public void testNewGameAndExitFlow() {
-        String userInput = "1\np\n3";
-        setInput(userInput);
+        setInput("1\n1\nQ");
 
-        cliHandler.newGame();
+        cliHandler.launch();
     }
 
     @Test
     public void testGameRulesAndExitFlow() {
-        String userInput = "2\np\n3";
-        setInput(userInput);
+        setInput("2\np\n3");
 
-        cliHandler.newGame();
+        cliHandler.launch();
     }
 
 
     @Test
-    public void testEasyNewGame() {
-        String userInput = "1\n";
-        setInput(userInput);
+    public void testEasyDifficulty() {
+        setInput("1\nQ");
 
-        cliHandler.newGame();
+        cliHandler.setDifficulty();
 
         verify(gameController).createGame("EASY");
     }
 
     @Test
-    public void testMediumNewGame() {
-        String userInput = "2\n";
-        setInput(userInput);
-        cliHandler.newGame();
+    public void testMediumDifficulty() {
+        setInput("2\nQ");
+
+        cliHandler.setDifficulty();
+
         verify(gameController).createGame("MEDIUM");
     }
 
     @Test
-    public void testHardNewGame() {
-        String userInput = "3\n";
-        setInput(userInput);
-        cliHandler.newGame();
+    public void testHardDifficulty() {
+        setInput("3\nQ");
+
+        cliHandler.setDifficulty();
+
         verify(gameController).createGame("HARD");
     }
 

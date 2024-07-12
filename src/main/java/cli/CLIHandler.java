@@ -1,28 +1,19 @@
 package cli;
 
-import controller.GameController;
-
 import java.util.Scanner;
 
 public class CLIHandler extends Handler {
-    CommandParser commandParser;
-    DisplayFormatter displayFormatter;
     Scanner scanner;
+    private static final String QUIT_COMMAND = "Q";
 
     public CLIHandler() {
         super();
-    }
-
-    public CLIHandler(GameController gameController, CommandParser commandParser, DisplayFormatter displayFormatter) {
-        super(gameController);
-        this.commandParser = commandParser;
-        this.displayFormatter = displayFormatter;
         scanner = new Scanner(System.in);
     }
 
     @Override
     public void launch() {
-        displayWelcomeScreen();
+        DisplayFormatter.displayWelcomeScreen();
         try {
             menu();
         } catch (IllegalArgumentException e) {
@@ -31,44 +22,13 @@ public class CLIHandler extends Handler {
         }
     }
 
-    private static void displayWelcomeScreen() {
-        System.out.println("""
-                                 _
-                     ____ ___   (_)____   ___   _____ _      __ ___   ___   ____   ___   _____
-                    / __ `__ \\ / // __ \\ / _ \\ / ___/| | /| / // _ \\ / _ \\ / __ \\ / _ \\ / ___/
-                   / / / / / // // / / //  __/(__  ) | |/ |/ //  __//  __// /_/ //  __// /
-                  /_/ /_/ /_//_//_/ /_/ \\___/ \\___/  |__/|__/ \\___/ \\___// .___/ \\___//_/
-                                                                        /_/
-                """);
-        System.out.println("""
-                =======================================================================================
-                ||                                WELCOME TO MINESWEEPER!                            ||
-                ||               Uncover all the mines without triggering any explosions.            ||
-                ||                                                                                   ||
-                ||    Instructions:                                                                  ||
-                ||    - Use numbers to navigate the menu options.                                    ||
-                ||    - Confirm your choice by pressing 'Enter'.                                     ||
-                ||    - Review game rules to learn how to play effectively.                          ||
-                ||                                                                                   ||
-                ||                              Good luck, and have fun!                             ||
-                =======================================================================================
-                """);
-    }
-
     private void menu() {
-        System.out.println("""
-            ===========================================================================================
-            ||                                     MENU                                              ||
-            ===========================================================================================
-            ||  1. Start new game                                                                    ||
-            ||  2. See game rules                                                                    ||
-            ||  3. Exit game                                                                         ||
-            ===========================================================================================
-            """);
+        DisplayFormatter.displayMenu();
         String input = scanner.nextLine();
         switch (input) {
             case "1":
-                newGame();
+                setDifficulty();
+                startGame();
                 break;
             case "2":
                 gameRules();
@@ -81,82 +41,73 @@ public class CLIHandler extends Handler {
         }
     }
 
-    @Override
-    protected void newGame() {
-        setDifficulty();
-
-    }
-
-    private void setDifficulty() {
-        System.out.println("""
-            ===========================================================================================
-            ||                             CHOOSE DIFFICULTY LEVEL                                   ||
-            ===========================================================================================
-            ||  1. Easy                                                                              ||
-            ||  2. Medium                                                                            ||
-            ||  3. Hard                                                                              ||
-            ||                                                                                       ||
-            ||  Press any other key to return to the main menu.                                      ||
-            ===========================================================================================
-            """);
+    protected void setDifficulty() {
+        DisplayFormatter.displayDifficultyMenu();
 
         String input = scanner.nextLine();
         switch (input) {
             case "1":
-                gameController.createGame("EASY");
+                getGameController().createGame("EASY");
                 break;
             case "2":
-                gameController.createGame("MEDIUM");
+                getGameController().createGame("MEDIUM");
                 break;
             case "3":
-                gameController.createGame("HARD");
+                getGameController().createGame("HARD");
                 break;
-            default:
-                menu();
         }
     }
 
+    @Override
+    protected void startGame() {
+        while (true) {
+            DisplayFormatter.displayBoard(getGameController().getBoard());
+
+            System.out.println("Enter next command or Q to quit game:");
+            String input = scanner.nextLine();
+            if (isQuitCommand(input)) {
+                exit();
+                return;
+            } else {
+                processCommand(input);
+            }
+        }
+    }
+
+    private static boolean isQuitCommand(String input) {
+        return input.equalsIgnoreCase(QUIT_COMMAND);
+    }
+
+    private void processCommand(String input) {
+        try {
+            getGameController().applyCommand(CommandParser.parseCommand(input));
+        } catch (IllegalArgumentException e) {
+            System.out.println("""
+                    Not a valid command:
+                    Game Commands:
+                    - To uncover a cell: Type 'C x y'
+                    - To flag/unflag a cell: Type 'F x y'
+                    - where (x, y) are the coordinates of the cell.
+                    """);
+        }
+    }
 
     @Override
     protected void gameRules() {
-        System.out.println("""
-            ===========================================================================================
-            ||                                MINESWEEPER GAME RULES                                 ||
-            ===========================================================================================
-            ||  Objective:                                                                           ||
-            ||  - Uncover all cells without triggering any bombs.                                    ||
-            ||                                                                                       ||
-            ||  How to Play:                                                                         ||
-            ||  - The game board consists of cells. Each cell can either be uncovered or flagged.    ||
-            ||  - Uncover a cell ('C x y'): Reveals the content of the cell at coordinates (x, y).   ||
-            ||  - Flag or unflag a cell ('F x y'): Marks or unmarks a cell as a potential bomb.      ||
-            ||                                                                                       ||
-            ||  Game Commands:                                                                       ||
-            ||  - To uncover a cell: Type 'C x y', where (x, y) are the coordinates of the cell.     ||
-            ||  - To flag/unflag a cell: Type 'F x y', where (x, y) are the coordinates of the cell. ||
-            ||  - Coordinates are 1-based and should be within the dimensions of the game board.     ||
-            ||                                                                                       ||
-            ||  Game Over:                                                                           ||
-            ||  - The game ends if you uncover a cell containing a bomb.                             ||
-            ||                                                                                       ||
-            ||  Difficulty Levels:                                                                   ||
-            ||  - Easy: 9x9 board with 10 bombs.                                                     ||
-            ||  - Medium: 16x16 board with 40 bombs.                                                 ||
-            ||  - Hard: 16x30 board with 99 bombs.                                                   ||
-            ||                                                                                       ||
-            ||  Press any other key to return to the main menu.                                      ||
-            ===========================================================================================
-            """);
+        DisplayFormatter.displayGameRules();
+
         scanner.nextLine();
         menu();
     }
 
     @Override
     protected void exit() {
+        System.out.println("Thank you for playing!");
     }
 
     // for testing:
     public void setScanner(Scanner scanner) {
         this.scanner = scanner;
     }
+
 }

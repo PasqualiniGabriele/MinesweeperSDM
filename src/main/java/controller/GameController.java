@@ -13,10 +13,10 @@ public class GameController {
     public GameController() {
     }
 
-    public void createGame(String difficulty) {
-        game = new Game();
-        game.setDifficulty(Difficulty.valueOf(difficulty));
-        game.start();
+    public void createGame(String inputDifficulty) {
+        Difficulty difficulty = Difficulty.valueOf(inputDifficulty);
+        game = new Game(difficulty);
+        board = new Board(difficulty.getWidth(), difficulty.getHeight());
     }
 
     public void endGame(String endStatus) {
@@ -30,16 +30,8 @@ public class GameController {
         return game;
     }
 
-    public void setGame(Game game) {
-        this.game = game;
-    }
-
     public Board getBoard() {
         return board;
-    }
-
-    public void setBoard(Board board) {
-        this.board = board;
     }
 
     public boolean isFirstClick() {
