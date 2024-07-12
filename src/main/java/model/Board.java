@@ -16,7 +16,7 @@ public class Board {
         }
     }
 
-    public Set<Coordinate> generateSafeZone(Coordinate safeZoneCenter) {
+    private Set<Coordinate> generateSafeZone(Coordinate safeZoneCenter) {
         Set<Coordinate> safeZone = new HashSet<>();
         for (int dx = -1; dx <= 1; dx++) {
             for (int dy = -1; dy <= 1; dy++) {
@@ -26,7 +26,7 @@ public class Board {
         return safeZone;
     }
 
-    public Set<Coordinate> generateRandomCoordinates(int n, Set<Coordinate> safeZone) {
+    private Set<Coordinate> generateRandomCoordinates(int n, Set<Coordinate> safeZone) {
         Set<Coordinate> randomCoordinates = new HashSet<>();
         Random random = new Random();
         while (randomCoordinates.size() < n) {
@@ -51,7 +51,7 @@ public class Board {
     }
 
 
-    public void updateProximity(Coordinate bombCoordinate) {
+    private void updateProximity(Coordinate bombCoordinate) {
         int bombX = bombCoordinate.x();
         int bombY = bombCoordinate.y();
         Cell cell;
