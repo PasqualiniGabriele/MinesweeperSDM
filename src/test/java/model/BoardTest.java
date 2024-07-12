@@ -98,9 +98,10 @@ class BoardTest {
 
   @Test
   void testSafeZone(){
-      Set<Coordinate> safeZone = board.generateSafeZoneCoordinates(new Coordinate(1,1));
+        Coordinate safeZoneCenter = new Coordinate(1,1);
+      Set<Coordinate> safeZone = board.generateSafeZone(safeZoneCenter);
       Set<Coordinate> bombCoordinates = board.generateRandomCoordinates(3, safeZone);
-      board.fillWithBombs(bombCoordinates);
+      board.fillWithBombs(2, safeZoneCenter);
       boolean check = true;
       for(int x=0; x<=2; x++){
           for(int y=0; y<=2; y++){
