@@ -1,43 +1,43 @@
 package model;
 
-import java.sql.Time;
-
-import static java.time.LocalTime.now;
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 public class Game {
-    private Time startTime;
-    private Time endTime;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
     private Difficulty difficulty;
     private GameStatus status;
 
-    public Game() {}
+    public Game() {
+    }
 
-    public Game(Time startTime, Time endTime, Difficulty difficulty, GameStatus status) {
+    public Game(LocalDateTime startTime, LocalDateTime endTime, Difficulty difficulty, GameStatus status) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.difficulty = difficulty;
         this.status = status;
     }
 
-    public Game(Time startTime, Difficulty difficulty, GameStatus status) {
+    public Game(LocalDateTime startTime, Difficulty difficulty, GameStatus status) {
         this(startTime, null, difficulty, status);
     }
 
+    public Duration calculateGameTime() {
+        return Duration.between(startTime, endTime);
+    }
+
     public void start() {
-        startTime = Time.valueOf(now());
+        startTime = LocalDateTime.now();
         status = GameStatus.ONGOING;
     }
 
     public void end(GameStatus gameStatus) {
-        endTime = Time.valueOf(now());
+        endTime = LocalDateTime.now();
         status = gameStatus;
     }
 
-    public Time getStartTime() {
-        return startTime;
-    }
-
-    public Time getEndTime() {
+    public LocalDateTime getEndTime() {
         return endTime;
     }
 
@@ -49,11 +49,7 @@ public class Game {
         return status;
     }
 
-    public void setStartTime(Time startTime) {
-        this.startTime = startTime;
-    }
-
-    public void setEndTime(Time endTime) {
+    public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
 

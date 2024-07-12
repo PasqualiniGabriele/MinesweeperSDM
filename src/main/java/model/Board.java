@@ -1,4 +1,5 @@
 package model;
+
 import java.util.Set;
 
 import static model.BoardUtils.*;
@@ -15,7 +16,6 @@ public class Board {
         }
     }
 
-
     public void fillWithBombs(int numOfBombs, Coordinate safeZoneCenter) {
         Set<Coordinate> safeZone = generateSafeZone(safeZoneCenter);
         Set<Coordinate> randomGeneratedBombs = generateRandomCoordinates(numOfBombs, safeZone, this);
@@ -26,7 +26,6 @@ public class Board {
     }
 
     public void revealAdjacentArea(Coordinate coordinate) {
-
     }
 
     public int getWidth() {

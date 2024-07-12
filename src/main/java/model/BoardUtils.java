@@ -41,7 +41,7 @@ public class BoardUtils {
             for (int dy = -1; dy <= 1; dy++) {
                 if (!(dx == 0 && dy == 0)) {
                     try {
-                        cell = board.getCell(new Coordinate(bombX + dx,bombY + dy));
+                        cell = board.getCell(new Coordinate(bombX + dx, bombY + dy));
                         if (cell instanceof FreeCell freeCell) {
                             freeCell.setProximity(freeCell.getProximity() + 1);
                         }
