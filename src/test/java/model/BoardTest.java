@@ -3,9 +3,7 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,7 +13,7 @@ class BoardTest {
 
     @BeforeEach
     void setUp() {
-        board = new Board(4, 4);
+        board = new Board(4, 5);
     }
 
     @Test
@@ -53,6 +51,18 @@ class BoardTest {
             }
         }
         assertTrue(check);
+    }
+
+    @Test
+    void testRevealAdjacentArea(){
+        /*
+                {2, 9, 1, 0},
+                {9, 2, 1, 0},
+                {1, 1, 0, 0},
+                {0, 0, 1, 1},
+                {0, 0, 1, 9}
+         */
+
     }
 
 }
