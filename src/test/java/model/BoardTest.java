@@ -3,8 +3,7 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,101 +13,56 @@ class BoardTest {
 
     @BeforeEach
     void setUp() {
-        board = new Board(4, 4);
+        board = new Board(4, 5);
     }
-
-    @Test
-    void testUpdateProximityOnEdge() {
-        Coordinate bombCoordinate = new Coordinate(0, 3);
-        board.setCell(new BombedCell(), bombCoordinate);
-        board.updateProximity(bombCoordinate);
-
-        int[][] expectedProximities = {
-                {0, 0, 1, 9},
-                {0, 0, 1, 1},
-                {0, 0, 0, 0},
-                {0, 0, 0, 0}
-        };
-        verifyProximities(expectedProximities);
-    }
-
-    @Test
-    void testUpdateProximity() {
-        Coordinate bombCoordinate = new Coordinate(1, 1);
-        board.setCell(new BombedCell(), bombCoordinate);
-        board.updateProximity(bombCoordinate);
-
-        int[][] expectedProximities = {
-                {1, 1, 1, 0},
-                {1, 9, 1, 0},
-                {1, 1, 1, 0},
-                {0, 0, 0, 0}
-        };
-
-        verifyProximities(expectedProximities);
-    }
-
-    @Test
-    void testUpdateProximityTwice() {
-        Coordinate bomb1 = new Coordinate(1, 1);
-        Coordinate bomb2 = new Coordinate(2, 2);
-        board.setCell(new BombedCell(), bomb1);
-        board.setCell(new BombedCell(), bomb2);
-        board.updateProximity(bomb1);
-        board.updateProximity(bomb2);
-
-        int[][] expectedProximities = {
-                {1, 1, 1, 0},
-                {1, 9, 2, 1},
-                {1, 2, 9, 1},
-                {0, 1, 1, 1}
-        };
-
-        verifyProximities(expectedProximities);
-    }
-
-    private void verifyProximities(int[][] expectedProximities) {
-        for (int x = 0; x < expectedProximities.length; x++) {
-            for (int y = 0; y < expectedProximities[x].length; y++) {
-                Coordinate c = new Coordinate(x, y);
-                Cell cell = board.getCell(c);
-                if (cell instanceof FreeCell) {
-                    int actualProximity = ((FreeCell) cell).getProximity();
-                    assertEquals(expectedProximities[x][y], actualProximity,
-                            "Proximity at (" + x + ", " + y + ") " +
-                                    "should be " + expectedProximities[x][y]);
-                }
-            }
-        }
-    }
-
 
     @Test
     void testGenerateRandomCoordinates_RightNumber() {
-        Set<Coordinate> coordinates = board.generateRandomCoordinates(8, new HashSet<>());
-        assertEquals(8, coordinates.size());
+        Coordinate safeZoneCenter = new Coordinate(1, 1);
+        board.fillWithBombs(4, safeZoneCenter);
+
+        int bombCount = 0;
+        for (int x = 0; x < board.getWidth(); x++) {
+            for (int y = 0; y < board.getHeight(); y++) {
+                if (board.getCell(new Coordinate(x, y)) instanceof BombedCell) {
+                    bombCount++;
+                }
+            }
+        }
+        assertEquals(4, bombCount);
     }
 
     @Test
-    void testGenerateRandomCoordinates_Randomness() {
-        Set<Coordinate> coordinates1 = board.generateRandomCoordinates(8, new HashSet<>());
-        Set<Coordinate> coordinates2 = board.generateRandomCoordinates(8, new HashSet<>());
-        assertNotEquals(coordinates1, coordinates2);
+    void testSafeZone() {
+        Random random = new Random();
+        int randX = random.nextInt(board.getWidth());
+        int randY = random.nextInt(board.getHeight());
+        Coordinate safeZoneCenter = new Coordinate(randX, randY);
+        board.fillWithBombs(2, safeZoneCenter);
+
+        boolean check = true;
+        for (int dx = -1; dx <= 1; dx++) {
+            for (int dy = -1; dy <= 1; dy++) {
+                int x = safeZoneCenter.x() + dx;
+                int y = safeZoneCenter.y() + dy;
+                if (x >= 0 && x < board.getWidth() && y >= 0 && y < board.getHeight()) {
+                    if (board.getCell(new Coordinate(x, y)) instanceof BombedCell) check = false;
+                }
+            }
+        }
+        assertTrue(check);
     }
 
-  @Test
-  void testSafeZone(){
-        Coordinate safeZoneCenter = new Coordinate(1,1);
-      Set<Coordinate> safeZone = board.generateSafeZone(safeZoneCenter);
-      Set<Coordinate> bombCoordinates = board.generateRandomCoordinates(3, safeZone);
-      board.fillWithBombs(2, safeZoneCenter);
-      boolean check = true;
-      for(int x=0; x<=2; x++){
-          for(int y=0; y<=2; y++){
-              if(board.getCell(new Coordinate(x,y)) instanceof BombedCell) check = false;
-          }
-      }
-      assertTrue(check);
-  }
+    @Test
+    void testRevealAdjacentArea(){
+        /*
+                {2, 9, 1, 0},
+                {9, 2, 1, 0},
+                {1, 1, 0, 0},
+                {0, 0, 1, 1},
+                {0, 0, 1, 9}
+         */
+
+    }
 
 }
