@@ -2,7 +2,9 @@ package model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.internal.matchers.ArrayEquals;
 
+import java.util.Arrays;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,7 +15,7 @@ class BoardTest {
 
     @BeforeEach
     void setUp() {
-        board = new Board(4, 5);
+        board = new Board(5, 4);
     }
 
     @Test
@@ -55,13 +57,34 @@ class BoardTest {
 
     @Test
     void testRevealAdjacentArea() {
-        /*
-                {2, 9, 1, 0},
-                {9, 2, 1, 0},
-                {1, 1, 0, 0},
-                {0, 0, 1, 1},
-                {0, 0, 1, 9}
-         */
-    }
+        BombedCell bomb = new BombedCell();
+        board.setCell(bomb, new Coordinate(0, 1));
+        BoardUtils.updateProximity(new Coordinate(0, 1), board);
+        board.setCell(bomb, new Coordinate(1, 0));
+        BoardUtils.updateProximity(new Coordinate(1, 0), board);
+        board.setCell(bomb, new Coordinate(4, 3));
+        BoardUtils.updateProximity(new Coordinate(4, 3), board);
 
+        board.revealAdjacentArea(new Coordinate(3, 1));
+        int[][] expectedOpenCells =
+                        {{0, 0, 1, 1},
+                        {0, 1, 1, 1},
+                        {1, 1, 1, 1},
+                        {1, 1, 1, 1},
+                        {1, 1, 1, 0}};
+        int[][] actualOpenCells = new int[5][4];
+
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 4; j++) {
+
+                if (board.getCell(new Coordinate(i, j)).getState() instanceof OpenState) {
+                    actualOpenCells[i][j] = 1;
+                } else {
+                    actualOpenCells[i][j] = 0;
+                }
+            }
+        }
+        boolean areEqual = Arrays.deepEquals(actualOpenCells, expectedOpenCells);
+        assertTrue(areEqual);
+    }
 }
