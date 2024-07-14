@@ -25,22 +25,6 @@ public class Board {
         }
     }
 
-    public void revealAdjacentArea(Coordinate coordinate) {
-        int[][] expectedOpenCells =
-                {{0, 0, 1, 1},
-                        {0, 1, 1, 1},
-                        {1, 1, 1, 1},
-                        {1, 1, 1, 1},
-                        {1, 1, 1, 0}};
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 4; j++) {
-                if (expectedOpenCells[i][j] == 1) {
-                    cells[i][j].reveal();
-                }
-            }
-        }
-    }
-
     public int getWidth() {
         return cells.length;
     }

@@ -51,4 +51,29 @@ public class BoardUtils {
             }
         }
     }
+
+    public static void revealAdjacentArea(Coordinate coordinate, Board board) {
+
+        if (board.getCell(coordinate) instanceof FreeCell freeCell) {
+            if (freeCell.getProximity() != 0) {
+                freeCell.reveal();
+            } else {
+                if (freeCell.getState() instanceof ClosedState) {
+                    for (int dx = -1; dx <= 1; dx++) {
+                        for (int dy = -1; dy <= 1; dy++) {
+                            if (!(dx == 0 && dy == 0)) {
+                                try {
+                                    freeCell.reveal();
+                                    Coordinate nextCoordinate = new Coordinate(coordinate.x() + dx, coordinate.y() + dy);
+                                    revealAdjacentArea(nextCoordinate, board);
+                                } catch (ArrayIndexOutOfBoundsException ignored) {
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 }

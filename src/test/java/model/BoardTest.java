@@ -2,7 +2,6 @@ package model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.internal.matchers.ArrayEquals;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -62,21 +61,21 @@ class BoardTest {
         BoardUtils.updateProximity(new Coordinate(0, 1), board);
         board.setCell(bomb, new Coordinate(1, 0));
         BoardUtils.updateProximity(new Coordinate(1, 0), board);
-        board.setCell(bomb, new Coordinate(4, 3));
+        board.setCell(bomb, new Coordinate(4, 2));
         BoardUtils.updateProximity(new Coordinate(4, 3), board);
 
-        board.revealAdjacentArea(new Coordinate(3, 1));
+        BoardUtils.revealAdjacentArea(new Coordinate(1, 3), board);
         int[][] expectedOpenCells =
-                        {{0, 0, 1, 1},
-                        {0, 1, 1, 1},
-                        {1, 1, 1, 1},
-                        {1, 1, 1, 1},
-                        {1, 1, 1, 0}};
+        {{0, 0, 1, 1},
+         {0, 1, 1, 1},
+         {1, 1, 1, 1},
+         {1, 1, 1, 1},
+         {1, 1, 0, 0}};
+
         int[][] actualOpenCells = new int[5][4];
 
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 4; j++) {
-
                 if (board.getCell(new Coordinate(i, j)).getState() instanceof OpenState) {
                     actualOpenCells[i][j] = 1;
                 } else {
