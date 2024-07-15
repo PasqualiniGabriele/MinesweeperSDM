@@ -23,11 +23,30 @@ public class GameController {
         game.end(GameStatus.valueOf(endStatus));
     }
 
+
     public void applyCommand(Command command) {
+        Cell cell = board.getCell(command.coordinate());
+        switch (command.action()) {
+            case "F":
+                cell.toggleFlag();
+                break;
+            case "C":
+                if (isFirstClick()) {
+                    board.fillWithBombs(game.getDifficulty().getNumOfBombs(), command.coordinate());
+                    firstClick = false;
+                }
+                cell.reveal();
+                BoardUtils.revealAdjacentArea(command.coordinate(), board);
+                break;
+        }
     }
 
     public Game getGame() {
         return game;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
     }
 
     public Board getBoard() {
@@ -38,7 +57,4 @@ public class GameController {
         return firstClick;
     }
 
-    public void setFirstClick(boolean firstClick) {
-        this.firstClick = firstClick;
-    }
 }
