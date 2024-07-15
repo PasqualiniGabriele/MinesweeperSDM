@@ -8,7 +8,7 @@ public class GameController {
     private Game game;
     private Board board;
 
-    private boolean firstClick;
+    private boolean firstClick = true;
 
     public GameController() {
     }
@@ -31,7 +31,7 @@ public class GameController {
                 cell.toggleFlag();
                 break;
             case "C":
-                if (isFirstClick()) {
+                if (firstClick) {
                     board.fillWithBombs(game.getDifficulty().getNumOfBombs(), command.coordinate());
                     firstClick = false;
                 }
@@ -51,10 +51,6 @@ public class GameController {
 
     public Board getBoard() {
         return board;
-    }
-
-    public boolean isFirstClick() {
-        return firstClick;
     }
 
 }
