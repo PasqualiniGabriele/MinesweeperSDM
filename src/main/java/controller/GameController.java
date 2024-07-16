@@ -6,7 +6,7 @@ import model.*;
 public class GameController {
 
     private Game game;
-    private Board board;
+    private BoardManager boardManager;
 
     private boolean firstClick = true;
 
@@ -16,7 +16,7 @@ public class GameController {
     public void createGame(String inputDifficulty) {
         Difficulty difficulty = Difficulty.valueOf(inputDifficulty);
         game = new Game(difficulty);
-        board = new Board(difficulty.getWidth(), difficulty.getHeight());
+        boardManager = new BoardManager(difficulty);
     }
 
     public void endGame(String endStatus) {
@@ -25,17 +25,17 @@ public class GameController {
 
 
     public void applyCommand(Command command) {
-        Cell cell = board.getCell(command.coordinate());
+        Coordinate coordinate = command.coordinate();
         switch (command.action()) {
             case "F":
-                cell.toggleFlag();
+                boardManager.applyFlag(coordinate);
                 break;
             case "C":
                 if (firstClick) {
-                    board.fillWithBombs(game.getDifficulty().getNumOfBombs(), command.coordinate());
+                    boardManager.getBoard().fillWithBombs(game.getDifficulty().getNumOfBombs(), command.coordinate());
                     firstClick = false;
                 }
-                BoardManager.revealAdjacentArea(command.coordinate(), board);
+                boardManager.applyClick(coordinate);
                 break;
         }
     }
@@ -44,12 +44,8 @@ public class GameController {
         return game;
     }
 
-    public void setBoard(Board board) {
-        this.board = board;
-    }
-
     public Board getBoard() {
-        return board;
+        return boardManager.getBoard();
     }
 
 }

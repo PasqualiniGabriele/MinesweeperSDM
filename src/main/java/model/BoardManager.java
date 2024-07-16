@@ -82,4 +82,21 @@ public class BoardManager {
             }
         }
     }
+
+    public int getFreeCellsLeft() {
+        return freeCellsLeft;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public void applyFlag(Coordinate coordinate) {
+        Cell cell = board.getCell(coordinate);
+        cell.toggleFlag();
+    }
+
+    public void applyClick(Coordinate coordinate) {
+        revealAdjacentArea(coordinate, board);
+    }
 }
