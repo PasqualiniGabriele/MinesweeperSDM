@@ -22,7 +22,7 @@ class BoardTest {
     @Test
     void testGenerateRandomCoordinates_RightNumber() {
         Coordinate safeZoneCenter = new Coordinate(1, 1);
-        boardManager.fillWithBombs(4, safeZoneCenter);
+        boardManager.fillWithBombs(safeZoneCenter);
 
         int bombCount = 0;
         for (int x = 0; x < board.getWidth(); x++) {
@@ -32,7 +32,7 @@ class BoardTest {
                 }
             }
         }
-        assertEquals(4, bombCount);
+        assertEquals(Difficulty.EASY.getNumOfBombs(), bombCount);
     }
 
     @Test
@@ -41,7 +41,7 @@ class BoardTest {
         int randX = random.nextInt(board.getWidth());
         int randY = random.nextInt(board.getHeight());
         Coordinate safeZoneCenter = new Coordinate(randX, randY);
-        boardManager.fillWithBombs(2, safeZoneCenter);
+        boardManager.fillWithBombs(safeZoneCenter);
 
         boolean check = true;
         for (int dx = -1; dx <= 1; dx++) {

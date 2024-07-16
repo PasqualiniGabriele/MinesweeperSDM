@@ -32,7 +32,7 @@ public class GameController {
                 break;
             case "C":
                 if (firstClick) {
-                    boardManager.fillWithBombs(game.getDifficulty().getNumOfBombs(), command.coordinate());
+                    boardManager.fillWithBombs(command.coordinate());
                     firstClick = false;
                 }
                 boardManager.applyClick(coordinate);
