@@ -19,7 +19,7 @@ public class BoardManager {
         this.difficulty = difficulty;
     }
 
-    public void fillWithBombs(Coordinate safeZoneCenter) {
+    public void placeBombsAvoiding(Coordinate safeZoneCenter) {
         Set<Coordinate> safeZone = generateSafeZone(safeZoneCenter);
         Set<Coordinate> randomGeneratedBombs = generateRandomCoordinates(safeZone);
         for (Coordinate bombCoordinate : randomGeneratedBombs) {
