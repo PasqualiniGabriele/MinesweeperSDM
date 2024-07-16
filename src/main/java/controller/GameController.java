@@ -35,7 +35,6 @@ public class GameController {
                     board.fillWithBombs(game.getDifficulty().getNumOfBombs(), command.coordinate());
                     firstClick = false;
                 }
-                cell.reveal();
                 BoardUtils.revealAdjacentArea(command.coordinate(), board);
                 break;
         }
