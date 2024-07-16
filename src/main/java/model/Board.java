@@ -2,7 +2,7 @@ package model;
 
 import java.util.Set;
 
-import static model.BoardUtils.*;
+import static model.BoardManager.*;
 
 public class Board {
     private final Cell[][] cells;

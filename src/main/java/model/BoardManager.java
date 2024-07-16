@@ -4,9 +4,9 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-public class BoardUtils {
+public class BoardManager {
 
-    private BoardUtils() {
+    private BoardManager() {
     }
 
     public static Set<Coordinate> generateSafeZone(Coordinate safeZoneCenter) {

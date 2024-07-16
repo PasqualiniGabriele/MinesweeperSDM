@@ -58,13 +58,13 @@ class BoardTest {
     void testRevealAdjacentArea() {
         BombedCell bomb = new BombedCell();
         board.setCell(bomb, new Coordinate(0, 1));
-        BoardUtils.updateProximity(new Coordinate(0, 1), board);
+        BoardManager.updateProximity(new Coordinate(0, 1), board);
         board.setCell(bomb, new Coordinate(1, 0));
-        BoardUtils.updateProximity(new Coordinate(1, 0), board);
+        BoardManager.updateProximity(new Coordinate(1, 0), board);
         board.setCell(bomb, new Coordinate(4, 2));
-        BoardUtils.updateProximity(new Coordinate(4, 3), board);
+        BoardManager.updateProximity(new Coordinate(4, 3), board);
 
-        BoardUtils.revealAdjacentArea(new Coordinate(1, 3), board);
+        BoardManager.revealAdjacentArea(new Coordinate(1, 3), board);
         int[][] expectedOpenCells =
         {{0, 0, 1, 1},
          {0, 1, 1, 1},
