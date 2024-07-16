@@ -6,7 +6,15 @@ import java.util.Set;
 
 public class BoardManager {
 
-    private BoardManager() {
+    private Board board;
+    private int freeCellsLeft;
+
+    public BoardManager() {
+    }
+
+    public BoardManager(Difficulty difficulty) {
+        board = new Board(difficulty.getWidth(), difficulty.getHeight());
+        freeCellsLeft = difficulty.getWidth() * difficulty.getHeight() - difficulty.getNumOfBombs();
     }
 
     public static Set<Coordinate> generateSafeZone(Coordinate safeZoneCenter) {
@@ -53,7 +61,6 @@ public class BoardManager {
     }
 
     public static void revealAdjacentArea(Coordinate coordinate, Board board) {
-
         if (board.getCell(coordinate) instanceof FreeCell freeCell) {
             if (freeCell.getProximity() != 0) {
                 freeCell.reveal();
