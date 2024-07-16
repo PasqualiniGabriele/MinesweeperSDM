@@ -16,15 +16,6 @@ public class Board {
         }
     }
 
-    public void fillWithBombs(int numOfBombs, Coordinate safeZoneCenter) {
-        Set<Coordinate> safeZone = generateSafeZone(safeZoneCenter);
-        Set<Coordinate> randomGeneratedBombs = generateRandomCoordinates(numOfBombs, safeZone, this);
-        for (Coordinate bombCoordinate : randomGeneratedBombs) {
-            cells[bombCoordinate.x()][bombCoordinate.y()] = new BombedCell();
-            updateProximity(bombCoordinate, this);
-        }
-    }
-
     public int getWidth() {
         return cells.length;
     }

@@ -17,6 +17,15 @@ public class BoardManager {
         freeCellsLeft = difficulty.getWidth() * difficulty.getHeight() - difficulty.getNumOfBombs();
     }
 
+    public void fillWithBombs(int numOfBombs, Coordinate safeZoneCenter) {
+        Set<Coordinate> safeZone = generateSafeZone(safeZoneCenter);
+        Set<Coordinate> randomGeneratedBombs = generateRandomCoordinates(numOfBombs, safeZone, board);
+        for (Coordinate bombCoordinate : randomGeneratedBombs) {
+            board.setCell(new BombedCell(), bombCoordinate);
+            updateProximity(bombCoordinate, board);
+        }
+    }
+
     public static Set<Coordinate> generateSafeZone(Coordinate safeZoneCenter) {
         Set<Coordinate> safeZone = new HashSet<>();
         for (int dx = -1; dx <= 1; dx++) {
