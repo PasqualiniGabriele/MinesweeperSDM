@@ -9,13 +9,13 @@ class CommandParserTest {
 
     @Test
     public void testParseCommandWithValidInputs() {
-        assertValidCommand("F 10 20", new Command("F", new Coordinate(10, 20)));
-        assertValidCommand("C 1 2", new Command("C", new Coordinate(1, 2)));
+        assertValidCommand("F 10 20", new Command("F", new Coordinate(9, 19)));
+        assertValidCommand("C 1 2", new Command("C", new Coordinate(0, 1)));
     }
 
     @Test
     void testParseCommandWithInvalidInputs() {
-        assertInvalidCommand("A 2 2");
+        assertInvalidCommand("A 0 2");
         assertInvalidCommand("F -3 -4");
         assertInvalidCommand("C 1");
         assertInvalidCommand("C 1 2 3");

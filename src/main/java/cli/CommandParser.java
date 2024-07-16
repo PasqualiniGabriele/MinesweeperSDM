@@ -15,8 +15,8 @@ public class CommandParser {
         }
 
         String action = commandArray[0];
-        int x = Integer.parseInt(commandArray[1]);
-        int y = Integer.parseInt(commandArray[2]);
+        int x = Integer.parseInt(commandArray[1])-1;
+        int y = Integer.parseInt(commandArray[2])-1;
         return new Command(action, new Coordinate(x, y));
     }
 
