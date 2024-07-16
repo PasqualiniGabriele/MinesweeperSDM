@@ -19,10 +19,10 @@ public class BoardManager {
 
     public void fillWithBombs(int numOfBombs, Coordinate safeZoneCenter) {
         Set<Coordinate> safeZone = generateSafeZone(safeZoneCenter);
-        Set<Coordinate> randomGeneratedBombs = generateRandomCoordinates(numOfBombs, safeZone, board);
+        Set<Coordinate> randomGeneratedBombs = generateRandomCoordinates(numOfBombs, safeZone);
         for (Coordinate bombCoordinate : randomGeneratedBombs) {
             board.setCell(new BombedCell(), bombCoordinate);
-            updateProximity(bombCoordinate, board);
+            updateProximity(bombCoordinate);
         }
     }
 
@@ -36,7 +36,7 @@ public class BoardManager {
         return safeZone;
     }
 
-    public static Set<Coordinate> generateRandomCoordinates(int n, Set<Coordinate> safeZone, Board board) {
+    public Set<Coordinate> generateRandomCoordinates(int n, Set<Coordinate> safeZone) {
         Set<Coordinate> randomCoordinates = new HashSet<>();
         Random random = new Random();
         while (randomCoordinates.size() < n) {
@@ -50,7 +50,7 @@ public class BoardManager {
         return randomCoordinates;
     }
 
-    public static void updateProximity(Coordinate bombCoordinate, Board board) {
+    public void updateProximity(Coordinate bombCoordinate) {
         int bombX = bombCoordinate.x();
         int bombY = bombCoordinate.y();
         Cell cell;
@@ -69,7 +69,7 @@ public class BoardManager {
         }
     }
 
-    public static void revealAdjacentArea(Coordinate coordinate, Board board) {
+    public void revealAdjacentArea(Coordinate coordinate) {
         if (board.getCell(coordinate) instanceof FreeCell freeCell) {
             if (freeCell.getProximity() != 0) {
                 freeCell.reveal();
@@ -81,7 +81,7 @@ public class BoardManager {
                                 try {
                                     freeCell.reveal();
                                     Coordinate nextCoordinate = new Coordinate(coordinate.x() + dx, coordinate.y() + dy);
-                                    revealAdjacentArea(nextCoordinate, board);
+                                    revealAdjacentArea(nextCoordinate);
                                 } catch (ArrayIndexOutOfBoundsException ignored) {
                                 }
                             }
@@ -106,6 +106,12 @@ public class BoardManager {
     }
 
     public void applyClick(Coordinate coordinate) {
-        revealAdjacentArea(coordinate, board);
+        Cell cell = board.getCell(coordinate);
+        if (cell instanceof FreeCell freeCell && (freeCell.getProximity() == 0)) {
+            revealAdjacentArea(coordinate);
+        } else {
+            cell.reveal();
+        }
+
     }
 }
