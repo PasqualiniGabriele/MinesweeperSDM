@@ -15,23 +15,20 @@ class BombedCellTest {
     }
     @Test
     void testFlaggedBombedCell(){
-        CellState mockFlaggedState = mock(FlaggedState.class);
         Cell flaggedCell = new BombedCell();
-        flaggedCell.setState(mockFlaggedState);
-        assertEquals("🚩", flaggedCell.toString());
+        flaggedCell.setState(new FlaggedState());
+        assertEquals("⚑", flaggedCell.toString());
     }
     @Test
     void testClosedBombedCell(){
-        CellState mockClosedState = mock(ClosedState.class);
         Cell closedCell = new BombedCell();
-        closedCell.setState(mockClosedState);
+        closedCell.setState(new ClosedState());
         assertEquals(" ", closedCell.toString());
     }
     @Test
     void testOpenBombedCell(){
-        CellState mockOpenState = mock(OpenState.class);
         Cell OpenCell = new BombedCell();
-        OpenCell.setState(mockOpenState);
-        assertEquals("💣", OpenCell.toString());
+        OpenCell.setState(new OpenState());
+        assertEquals("✷", OpenCell.toString());
     }
 }

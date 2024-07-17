@@ -33,7 +33,7 @@ class DisplayFormatterTest {
         testAsciiTable.addRule();
         testAsciiTable.addRow(" ", "1");
         testAsciiTable.addRule();
-        testAsciiTable.addRow("🚩", "💣");
+        testAsciiTable.addRow("⚑", "✷");
         testAsciiTable.addRule();
         assertEquals(testAsciiTable.render(), displayFormatter.formatBoard(board));
     }

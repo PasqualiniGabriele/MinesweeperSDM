@@ -19,15 +19,8 @@ public class FreeCell extends Cell{
         this.proximity = proximity;
     }
 
-    public String toString(){
-        String s = "";
-        if (getState() instanceof ClosedState){
-            s = " ";
-        } else if (getState() instanceof FlaggedState) {
-            s = "🚩";
-        } else if (getState() instanceof OpenState) {
-            s = String.valueOf(proximity);
-        }
-        return s;
+    @Override
+    public String getIcon() {
+        return String.valueOf(proximity);
     }
 }

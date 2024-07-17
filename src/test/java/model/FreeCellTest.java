@@ -15,23 +15,20 @@ class FreeCellTest {
     }
     @Test
     void testFlaggedFreeCell(){
-        CellState mockFlaggedState = mock(FlaggedState.class);
         Cell flaggedCell = new FreeCell(1);
-        flaggedCell.setState(mockFlaggedState);
-        assertEquals("🚩", flaggedCell.toString());
+        flaggedCell.setState(new FlaggedState());
+        assertEquals("⚑", flaggedCell.toString());
     }
     @Test
     void testClosedFreeCell(){
-        CellState mockClosedState = mock(ClosedState.class);
         Cell closedCell = new FreeCell(1);
-        closedCell.setState(mockClosedState);
+        closedCell.setState(new ClosedState());
         assertEquals(" ", closedCell.toString());
     }
     @Test
     void testOpenFreeCell(){
-        CellState mockOpenState = mock(OpenState.class);
         Cell OpenCell = new FreeCell(1);
-        OpenCell.setState(mockOpenState);
+        OpenCell.setState(new OpenState());
         assertEquals("1", OpenCell.toString());
     }
 }

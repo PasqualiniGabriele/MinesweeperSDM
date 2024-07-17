@@ -2,6 +2,7 @@ package model;
 
 public abstract class Cell {
     private CellState state;
+    private String icon;
 
 
     public Cell() {
@@ -22,8 +23,20 @@ public abstract class Cell {
 
     public abstract boolean hasMine();
 
-
     public void toggleFlag() {
         state.toggleFlag(this);
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    @Override
+    public String toString() {
+        return state.toString(this);
     }
 }
