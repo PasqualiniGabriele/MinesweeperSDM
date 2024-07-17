@@ -1,4 +1,4 @@
-package controller;
+package handler;
 
 import cli.Command;
 import model.*;
@@ -18,7 +18,6 @@ public class GameController {
         game = new Game(difficulty);
         boardManager = new BoardManager(difficulty);
     }
-
     public void endGame(String endStatus) {
         game.end(GameStatus.valueOf(endStatus));
     }

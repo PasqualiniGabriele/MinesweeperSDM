@@ -1,11 +1,11 @@
 package main;
 import cli.CLIHandler;
-import cli.Handler;
+import handler.UserHandler;
 
 
 public class Minesweeper {
     public static void main(String[] args) {
-        Handler handler = new CLIHandler();
+        UserHandler handler = new CLIHandler();
         handler.launch();
     }
 }

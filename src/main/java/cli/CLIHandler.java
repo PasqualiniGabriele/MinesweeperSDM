@@ -1,8 +1,10 @@
 package cli;
 
+import handler.UserHandler;
+
 import java.util.Scanner;
 
-public class CLIHandler extends Handler {
+public class CLIHandler extends UserHandler {
     Scanner scanner;
     private static final String QUIT_COMMAND = "Q";
 

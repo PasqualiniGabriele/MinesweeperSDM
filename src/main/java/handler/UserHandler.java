@@ -1,11 +1,9 @@
-package cli;
+package handler;
 
-import controller.GameController;
-
-public abstract class Handler {
+public abstract class UserHandler {
     private GameController gameController;
 
-    public Handler() {
+    public UserHandler() {
         gameController = new GameController();
     }
 
