@@ -8,6 +8,7 @@ public class BoardManager {
 
     private Board board;
     private int freeCellsLeft;
+    private Difficulty difficulty;
 
     public BoardManager() {
     }
@@ -15,11 +16,12 @@ public class BoardManager {
     public BoardManager(Difficulty difficulty) {
         board = new Board(difficulty.getWidth(), difficulty.getHeight());
         freeCellsLeft = difficulty.getWidth() * difficulty.getHeight() - difficulty.getNumOfBombs();
+        this.difficulty = difficulty;
     }
 
-    public void fillWithBombs(int numOfBombs, Coordinate safeZoneCenter) {
+    public void placeBombsAvoiding(Coordinate safeZoneCenter) {
         Set<Coordinate> safeZone = generateSafeZone(safeZoneCenter);
-        Set<Coordinate> randomGeneratedBombs = generateRandomCoordinates(numOfBombs, safeZone);
+        Set<Coordinate> randomGeneratedBombs = generateRandomCoordinates(safeZone);
         for (Coordinate bombCoordinate : randomGeneratedBombs) {
             board.setCell(new BombedCell(), bombCoordinate);
             updateProximity(bombCoordinate);
@@ -36,10 +38,10 @@ public class BoardManager {
         return safeZone;
     }
 
-    public Set<Coordinate> generateRandomCoordinates(int n, Set<Coordinate> safeZone) {
+    public Set<Coordinate> generateRandomCoordinates(Set<Coordinate> safeZone) {
         Set<Coordinate> randomCoordinates = new HashSet<>();
         Random random = new Random();
-        while (randomCoordinates.size() < n) {
+        while (randomCoordinates.size() < difficulty.getNumOfBombs()) {
             int x = random.nextInt(board.getWidth());
             int y = random.nextInt(board.getHeight());
             Coordinate coordinate = new Coordinate(x, y);
