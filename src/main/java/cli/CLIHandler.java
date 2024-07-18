@@ -2,7 +2,7 @@ package cli;
 
 import handler.UIHandler;
 import model.Board;
-import model.Difficulty;
+import model.Configuration;
 
 import java.util.Scanner;
 
@@ -30,14 +30,14 @@ public class CLIHandler extends UIHandler {
     }
 
     @Override
-    public Difficulty askForDifficulty() {
+    public Configuration askForDifficulty() {
         DisplayFormatter.displayDifficultyMenu();
         String input = scanner.nextLine();
         return switch (input) {
-            case "1" -> Difficulty.EASY;
-            case "2" -> Difficulty.MEDIUM;
-            case "3" -> Difficulty.HARD;
-            default -> Difficulty.MEDIUM;
+            case "1" -> Configuration.EASY;
+            case "2" -> Configuration.MEDIUM;
+            case "3" -> Configuration.HARD;
+            default -> Configuration.MEDIUM;
         };
     }
 
