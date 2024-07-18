@@ -1,4 +1,6 @@
-package model;
+package handler;
+
+import model.*;
 
 import java.util.HashSet;
 import java.util.Random;
@@ -8,15 +10,15 @@ public class BoardManager {
 
     private Board board;
     private int freeCellsLeft;
-    private Difficulty difficulty;
+    private Configuration configuration;
 
     public BoardManager() {
     }
 
-    public BoardManager(Difficulty difficulty) {
-        board = new Board(difficulty.getWidth(), difficulty.getHeight());
-        freeCellsLeft = difficulty.getWidth() * difficulty.getHeight() - difficulty.getNumOfBombs();
-        this.difficulty = difficulty;
+    public BoardManager(Configuration configuration) {
+        board = new Board(configuration.getWidth(), configuration.getHeight());
+        freeCellsLeft = configuration.getWidth() * configuration.getHeight() - configuration.getNumOfBombs();
+        this.configuration = configuration;
     }
 
     public void placeBombsAvoiding(Coordinate safeZoneCenter) {
@@ -41,7 +43,7 @@ public class BoardManager {
     public Set<Coordinate> generateRandomCoordinates(Set<Coordinate> safeZone) {
         Set<Coordinate> randomCoordinates = new HashSet<>();
         Random random = new Random();
-        while (randomCoordinates.size() < difficulty.getNumOfBombs()) {
+        while (randomCoordinates.size() < configuration.getNumOfBombs()) {
             int x = random.nextInt(board.getWidth());
             int y = random.nextInt(board.getHeight());
             Coordinate coordinate = new Coordinate(x, y);

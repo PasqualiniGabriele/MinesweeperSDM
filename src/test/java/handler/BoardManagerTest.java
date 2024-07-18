@@ -1,5 +1,6 @@
-package model;
+package handler;
 
+import model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -8,14 +9,14 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BoardTest {
+class BoardManagerTest {
 
     private Board board;
     private BoardManager boardManager;
 
     @BeforeEach
     void setUp() {
-        boardManager = new BoardManager(Difficulty.EASY);
+        boardManager = new BoardManager(Configuration.EASY);
         board = boardManager.getBoard();
     }
 
@@ -32,7 +33,7 @@ class BoardTest {
                 }
             }
         }
-        assertEquals(Difficulty.EASY.getNumOfBombs(), bombCount);
+        assertEquals(Configuration.EASY.getNumOfBombs(), bombCount);
     }
 
     @Test
@@ -72,13 +73,14 @@ class BoardTest {
          {0, 1, 1, 1},
          {1, 1, 1, 1},
          {1, 1, 1, 1},
-         {1, 1, 0, 1}};
+         {1, 1, 1, 1}};
 
         int[][] actualOpenCells = new int[5][4];
 
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 4; j++) {
-                if (board.getCell(new Coordinate(i, j)).getState() instanceof OpenState) {
+                Cell cell = board.getCell(new Coordinate(j, i));
+                if (cell.isOpenCell()) {
                     actualOpenCells[i][j] = 1;
                 } else {
                     actualOpenCells[i][j] = 0;

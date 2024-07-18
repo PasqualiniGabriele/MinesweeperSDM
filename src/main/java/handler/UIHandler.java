@@ -2,7 +2,7 @@ package handler;
 
 import cli.Command;
 import model.Board;
-import model.Difficulty;
+import model.Configuration;
 
 public abstract class UIHandler {
 
@@ -13,7 +13,7 @@ public abstract class UIHandler {
 
     protected abstract void exit();
 
-    public abstract Difficulty askForDifficulty();
+    public abstract Configuration askForDifficulty();
 
     public abstract void welcome();
 
