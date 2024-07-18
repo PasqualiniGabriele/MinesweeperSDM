@@ -55,16 +55,13 @@ public class BoardManager {
     public void updateProximity(Coordinate bombCoordinate) {
         int bombX = bombCoordinate.x();
         int bombY = bombCoordinate.y();
-        Cell cell;
         for (int dx = -1; dx <= 1; dx++) {
             for (int dy = -1; dy <= 1; dy++) {
-                if (!(dx == 0 && dy == 0)) {
-                    try {
-                        cell = board.getCell(new Coordinate(bombX + dx, bombY + dy));
-                        if (cell instanceof FreeCell freeCell) {
-                            freeCell.setProximity(freeCell.getProximity() + 1);
-                        }
-                    } catch (ArrayIndexOutOfBoundsException ignored) {
+                Coordinate nextCoordinate = new Coordinate(bombX + dx, bombY + dy);
+                if (isValidCoordinate(nextCoordinate)) {
+                    Cell cell = board.getCell(nextCoordinate);
+                    if (cell instanceof FreeCell freeCell) {
+                        freeCell.setProximity(freeCell.getProximity() + 1);
                     }
                 }
             }
@@ -72,23 +69,17 @@ public class BoardManager {
     }
 
     public void revealAdjacentArea(Coordinate coordinate) {
-        if (board.getCell(coordinate) instanceof FreeCell freeCell) {
-            if (freeCell.getProximity() != 0) {
-                freeCell.reveal();
-            } else {
-                if (freeCell.getState() instanceof ClosedState) {
-                    for (int dx = -1; dx <= 1; dx++) {
-                        for (int dy = -1; dy <= 1; dy++) {
-                            if (!(dx == 0 && dy == 0)) {
-                                try {
-                                    freeCell.reveal();
-                                    Coordinate nextCoordinate = new Coordinate(coordinate.x() + dx, coordinate.y() + dy);
-                                    revealAdjacentArea(nextCoordinate);
-                                } catch (ArrayIndexOutOfBoundsException ignored) {
-                                }
-                            }
-                        }
-                    }
+        if (!isValidCoordinate(coordinate) || !isClosedCell(coordinate)) {
+            return;
+        }
+        FreeCell freeCell = (FreeCell) board.getCell(coordinate);
+        freeCell.reveal();
+        freeCellsLeft--;
+        if (isZeroProximity(freeCell)) {
+            for (int dx = -1; dx <= 1; dx++) {
+                for (int dy = -1; dy <= 1; dy++) {
+                    Coordinate nextCoordinate = new Coordinate(coordinate.x() + dx, coordinate.y() + dy);
+                    revealAdjacentArea(nextCoordinate);
                 }
             }
         }
@@ -114,6 +105,18 @@ public class BoardManager {
         } else {
             cell.reveal();
         }
-
     }
+
+    private boolean isValidCoordinate(Coordinate c) {
+        return (c.x() >= 0 && c.y() >= 0 && c.x() < board.getWidth() && c.y() < board.getHeight());
+    }
+
+    private boolean isClosedCell(Coordinate coordinate) {
+        return board.getCell(coordinate).getState() instanceof ClosedState;
+    }
+
+    private boolean isZeroProximity(FreeCell freeCell) {
+        return freeCell.getProximity() == 0;
+    }
+
 }

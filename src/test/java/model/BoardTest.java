@@ -64,15 +64,15 @@ class BoardTest {
         board.setCell(bomb, new Coordinate(1, 0));
         boardManager.updateProximity(new Coordinate(1, 0));
         board.setCell(bomb, new Coordinate(4, 2));
-        boardManager.updateProximity(new Coordinate(4, 3));
+        boardManager.updateProximity(new Coordinate(4, 2));
 
-        boardManager.revealAdjacentArea(new Coordinate(1, 3));
+        boardManager.revealAdjacentArea(new Coordinate(2, 2));
         int[][] expectedOpenCells =
         {{0, 0, 1, 1},
          {0, 1, 1, 1},
          {1, 1, 1, 1},
          {1, 1, 1, 1},
-         {1, 1, 0, 0}};
+         {1, 1, 0, 1}};
 
         int[][] actualOpenCells = new int[5][4];
 
