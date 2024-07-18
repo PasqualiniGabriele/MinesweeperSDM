@@ -23,7 +23,7 @@ class BombedCellTest {
     void testClosedBombedCell(){
         Cell closedCell = new BombedCell();
         closedCell.setState(new ClosedState());
-        assertEquals(" ", closedCell.toString());
+        assertEquals("■", closedCell.toString());
     }
     @Test
     void testOpenBombedCell(){

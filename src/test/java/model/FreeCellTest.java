@@ -23,7 +23,7 @@ class FreeCellTest {
     void testClosedFreeCell(){
         Cell closedCell = new FreeCell(1);
         closedCell.setState(new ClosedState());
-        assertEquals(" ", closedCell.toString());
+        assertEquals("■", closedCell.toString());
     }
     @Test
     void testOpenFreeCell(){
