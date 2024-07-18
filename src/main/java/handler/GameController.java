@@ -3,19 +3,27 @@ package handler;
 import cli.Command;
 import model.*;
 
+import java.util.logging.Handler;
 public class GameController {
 
     private Game game;
     private BoardManager boardManager;
-
+    private final UIHandler handler;
     private boolean firstClick = true;
 
-    public GameController() {
+    public GameController(UIHandler handler) {
+        this.handler = handler;
     }
 
-    public void createGame(String inputDifficulty) {
-        Difficulty difficulty = Difficulty.valueOf(inputDifficulty);
-        game = new Game(difficulty);
+    public void launch() {
+        handler.welcome();
+        Difficulty difficulty = handler.askForDifficulty();
+        createGame(difficulty);
+        handler.exit();
+    }
+
+    public void createGame(Difficulty difficulty) {
+        game = new Game();
         boardManager = new BoardManager(difficulty);
     }
     public void endGame(String endStatus) {

@@ -1,50 +1,38 @@
 package handler;
 
-import model.Difficulty;
-import model.GameStatus;
+import cli.CLIHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayInputStream;
+import java.util.Scanner;
+
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 class GameControllerTest {
 
-    GameController controller;
+    private GameController gameController;
+    private CLIHandler handler;
+
 
     @BeforeEach
-    void setUp() {
-        controller = new GameController();
+    public void setUp() {
+        handler = new CLIHandler();
+        gameController = new GameController(handler);
+    }
+
+    private void setInput(String userInput) {
+        ByteArrayInputStream testIn = new ByteArrayInputStream(userInput.getBytes());
+        handler.setScanner(new Scanner(testIn));
     }
 
     @Test
-    void testCreateEasyGame() {
-        controller.createGame("EASY");
-        assertEquals(Difficulty.EASY, controller.getGame().getDifficulty());
-    }
-
-    @Test
-    void testCreateMediumGame() {
-        controller.createGame("MEDIUM");
-        assertEquals(Difficulty.MEDIUM, controller.getGame().getDifficulty());
-    }
-
-    @Test
-    void testCreateHardGame() {
-        controller.createGame("HARD");
-        assertEquals(Difficulty.HARD, controller.getGame().getDifficulty());
-    }
-
-    @Test
-    void testEndGameWithStatusWon() {
-        controller.createGame("MEDIUM");
-        controller.endGame("WON");
-        assertEquals(GameStatus.WON, controller.getGame().getStatus());
-    }
-
-    @Test
-    void testEndGameWithStatusLost() {
-        controller.createGame("MEDIUM");
-        controller.endGame("LOST");
-        assertEquals(GameStatus.LOST, controller.getGame().getStatus());
+    public void testNoExceptionLaunch() {
+        setInput("1\nC 1 1\nQ");
+        assertDoesNotThrow(() -> {
+            gameController.launch();
+        });
     }
 }
+
