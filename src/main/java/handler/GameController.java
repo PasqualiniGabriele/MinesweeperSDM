@@ -9,7 +9,6 @@ public class GameController {
     private Game game;
     private BoardManager boardManager;
     private final UIHandler handler;
-    private boolean firstClick = true;
 
     public GameController(UIHandler handler) {
         this.handler = handler;
@@ -26,8 +25,34 @@ public class GameController {
         game = new Game();
         boardManager = new BoardManager(difficulty);
     }
+
     public void endGame(String endStatus) {
         game.end(GameStatus.valueOf(endStatus));
+    }
+
+    public void gameLoop(){
+        handler.show(boardManager.getBoard());
+        Command firstCommand = handler.hasNextCommand();
+        applyFirstClick(firstCommand);
+
+        while (game.getStatus() == GameStatus.ONGOING){
+            handler.show(boardManager.getBoard());
+            Command command = handler.hasNextCommand();
+            if (command == null) {
+                break;
+            }
+            applyCommand(command);
+        }
+    }
+
+    void applyFirstClick(Command firstCommand) {
+        boardManager.placeBombsAvoiding(firstCommand.coordinate());
+        applyCommand(firstCommand);
+    }
+
+
+    public void endGame(GameStatus endStatus) {
+        game.end(endStatus);
     }
 
 
@@ -38,10 +63,6 @@ public class GameController {
                 boardManager.applyFlag(coordinate);
                 break;
             case "C":
-                if (firstClick) {
-                    boardManager.placeBombsAvoiding(command.coordinate());
-                    firstClick = false;
-                }
                 boardManager.applyClick(coordinate);
                 break;
         }

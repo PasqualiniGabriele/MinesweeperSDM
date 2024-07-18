@@ -1,6 +1,8 @@
 package handler;
 
 import cli.CLIHandler;
+import cli.Command;
+import model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,12 +16,14 @@ class GameControllerTest {
 
     private GameController gameController;
     private CLIHandler handler;
+    private BoardManager mockBoardManager;
 
 
     @BeforeEach
     public void setUp() {
         handler = new CLIHandler();
         gameController = new GameController(handler);
+        mockBoardManager = mock(BoardManager.class);
     }
 
     private void setInput(String userInput) {
@@ -40,6 +44,37 @@ class GameControllerTest {
         gameController.launch();
         assertNotNull(gameController.getGame());
         assertNotNull(gameController.getBoardManager());
+    }
+
+    @Test
+    public void testApplyFirstClick() {
+        gameController.setBoardManager(mockBoardManager);
+        Coordinate testCoordinate = new Coordinate(1, 1);
+        gameController.applyFirstClick(new Command("C", testCoordinate));
+        verify(mockBoardManager).placeBombsAvoiding(testCoordinate);
+        verify(mockBoardManager).applyClick(testCoordinate);
+    }
+
+    @Test
+    public void testApplyCommandFlag() {
+        gameController.setBoardManager(mockBoardManager);
+        Coordinate testCoordinate = new Coordinate(1, 1);
+        Command testCommand = new Command("F", testCoordinate);
+
+        gameController.applyCommand(testCommand);
+
+        verify(mockBoardManager).applyFlag(testCoordinate);
+    }
+
+    @Test
+    public void testApplyCommandClick() {
+        gameController.setBoardManager(mockBoardManager);
+        Coordinate testCoordinate = new Coordinate(1, 1);
+        Command testCommand = new Command("C", testCoordinate);
+
+        gameController.applyCommand(testCommand);
+
+        verify(mockBoardManager).applyClick(testCoordinate);
     }
 }
 
