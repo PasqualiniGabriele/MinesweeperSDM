@@ -36,7 +36,7 @@ class ClosedState implements CellState {
 
     @Override
     public String toString(Cell cell) {
-        return " ";
+        return "■";
     }
 }
 

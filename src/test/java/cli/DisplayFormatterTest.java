@@ -3,8 +3,13 @@ package cli;
 import de.vandermeer.asciitable.AsciiTable;
 import model.*;
 import org.junit.jupiter.api.BeforeEach;
+
 import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 
 class DisplayFormatterTest {
@@ -27,15 +32,25 @@ class DisplayFormatterTest {
         displayFormatter = new DisplayFormatter();
     }
 
+
     @Test
     void testFormatBoard() {
-        AsciiTable testAsciiTable = new AsciiTable();
-        testAsciiTable.addRule();
-        testAsciiTable.addRow(" ", "1");
-        testAsciiTable.addRule();
-        testAsciiTable.addRow("⚑", "✷");
-        testAsciiTable.addRule();
-        assertEquals(testAsciiTable.render(), displayFormatter.formatBoard(board));
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        displayFormatter.displayBoard(board);
+
+        String expectedOutput =
+                """
+                
+                
+                ■  ⚑   |1
+                1  ✷   |2
+                _  _ \s
+                1  2 \s
+                
+                """;
+
+        assertEquals(expectedOutput, outContent.toString());
     }
 
 }

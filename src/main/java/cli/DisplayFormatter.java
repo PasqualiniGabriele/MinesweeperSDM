@@ -7,7 +7,13 @@ import model.Coordinate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment.CENTER;
+
 public class DisplayFormatter {
+
+    public static final String RESET = "\u001B[0m";
+    public static final String IDK = "\u001B[33m";
+    public static final String GREY = "\u001B[90m";
 
     protected static void displayWelcomeScreen() {
         System.out.println("""
@@ -88,24 +94,31 @@ public class DisplayFormatter {
                 """);
     }
 
-    protected static void displayBoard(Board board) {
-        System.out.println(formatBoard(board));
-    }
-
-    public static String formatBoard(Board board) {
+    public static void displayBoard(Board board) {
         int width = board.getWidth();
         int height = board.getHeight();
-        AsciiTable at = new AsciiTable();
-        at.addRule();
-        for (int i = 0; i < width; i++) {
-            List<String> columns = new ArrayList<>();
-            for (int j = 0; j < height; j++) {
-                columns.add(board.getCell(new Coordinate(i, j)).toString());
+
+        System.out.println("\n");
+
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                System.out.print( board.getCell(new Coordinate(x, y)) + "  ");
             }
-            at.addRow(columns);
-            at.addRule();
+            System.out.println(" |" + (y + 1));
         }
-        return at.render();
+        for (int x = 0; x < width; x++) {
+            System.out.print("_  ");
+        }
+
+        System.out.println();
+
+        for (int x = 0; x < width; x++) {
+            System.out.print((x + 1) + " ");
+            if (x + 1 < 10)
+                System.out.print(" ");
+        }
+
+        System.out.println("\n");
     }
 }
 
