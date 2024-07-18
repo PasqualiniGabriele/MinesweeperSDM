@@ -3,7 +3,6 @@ package handler;
 import cli.Command;
 import model.*;
 
-import java.util.logging.Handler;
 public class GameController {
 
     private Game game;
@@ -18,6 +17,7 @@ public class GameController {
         handler.welcome();
         Difficulty difficulty = handler.askForDifficulty();
         createGame(difficulty);
+        gameLoop();
         handler.exit();
     }
 
@@ -26,15 +26,10 @@ public class GameController {
         boardManager = new BoardManager(difficulty);
     }
 
-    public void endGame(String endStatus) {
-        game.end(GameStatus.valueOf(endStatus));
-    }
-
     public void gameLoop(){
         handler.show(boardManager.getBoard());
         Command firstCommand = handler.hasNextCommand();
         applyFirstClick(firstCommand);
-
         while (game.getStatus() == GameStatus.ONGOING){
             handler.show(boardManager.getBoard());
             Command command = handler.hasNextCommand();

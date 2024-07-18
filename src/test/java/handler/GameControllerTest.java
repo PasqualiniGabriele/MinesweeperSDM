@@ -38,6 +38,7 @@ class GameControllerTest {
             gameController.launch();
         });
     }
+
     @Test
     public void testCreateGameCall() {
         setInput("1\nC 1 1\nQ");
@@ -60,9 +61,7 @@ class GameControllerTest {
         gameController.setBoardManager(mockBoardManager);
         Coordinate testCoordinate = new Coordinate(1, 1);
         Command testCommand = new Command("F", testCoordinate);
-
         gameController.applyCommand(testCommand);
-
         verify(mockBoardManager).applyFlag(testCoordinate);
     }
 
@@ -71,9 +70,7 @@ class GameControllerTest {
         gameController.setBoardManager(mockBoardManager);
         Coordinate testCoordinate = new Coordinate(1, 1);
         Command testCommand = new Command("C", testCoordinate);
-
         gameController.applyCommand(testCommand);
-
         verify(mockBoardManager).applyClick(testCoordinate);
     }
 }
