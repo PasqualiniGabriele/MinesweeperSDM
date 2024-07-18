@@ -6,6 +6,8 @@ public interface CellState {
     String toString(Cell cell);
 
     boolean isClosedState();
+
+    boolean isOpenState();
 }
 
 
@@ -26,6 +28,11 @@ class OpenState implements CellState {
     @Override
     public boolean isClosedState() {
         return false;
+    }
+
+    @Override
+    public boolean isOpenState() {
+        return true;
     }
 }
 
@@ -50,6 +57,11 @@ class ClosedState implements CellState {
     public boolean isClosedState() {
         return true;
     }
+
+    @Override
+    public boolean isOpenState() {
+        return false;
+    }
 }
 
 class FlaggedState implements CellState {
@@ -72,6 +84,11 @@ class FlaggedState implements CellState {
 
     @Override
     public boolean isClosedState() {
+        return false;
+    }
+
+    @Override
+    public boolean isOpenState() {
         return false;
     }
 }

@@ -43,4 +43,8 @@ public abstract class Cell {
     public boolean isClosedCell() {
         return state.isClosedState();
     }
+
+    public boolean isOpenCell(){
+        return state.isOpenState();
+    };
 }
