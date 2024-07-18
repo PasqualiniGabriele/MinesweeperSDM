@@ -51,8 +51,12 @@ public class GameController {
         return game;
     }
 
-    public Board getBoard() {
-        return boardManager.getBoard();
+    public BoardManager getBoardManager() {
+        return boardManager;
+    }
+
+    public void setBoardManager(BoardManager boardManager) {
+        this.boardManager = boardManager;
     }
 
 }

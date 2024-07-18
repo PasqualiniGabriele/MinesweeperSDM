@@ -34,5 +34,12 @@ class GameControllerTest {
             gameController.launch();
         });
     }
+    @Test
+    public void testCreateGameCall() {
+        setInput("1\nC 1 1\nQ");
+        gameController.launch();
+        assertNotNull(gameController.getGame());
+        assertNotNull(gameController.getBoardManager());
+    }
 }
 
