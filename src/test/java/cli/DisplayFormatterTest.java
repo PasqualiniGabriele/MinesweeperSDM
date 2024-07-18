@@ -1,6 +1,5 @@
 package cli;
 
-import de.vandermeer.asciitable.AsciiTable;
 import model.*;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -14,7 +13,6 @@ import java.io.PrintStream;
 
 class DisplayFormatterTest {
     private Board board;
-    private DisplayFormatter displayFormatter;
 
     @BeforeEach
     void setUp() {
@@ -29,7 +27,6 @@ class DisplayFormatterTest {
         board.setCell(freeCellToReveal, new Coordinate(0, 1));
         board.setCell(cellToFlag, new Coordinate(1, 0));
         board.setCell(bombedCellToReveal, new Coordinate(1, 1));
-        displayFormatter = new DisplayFormatter();
     }
 
 
@@ -37,7 +34,7 @@ class DisplayFormatterTest {
     void testFormatBoard() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        displayFormatter.displayBoard(board);
+        DisplayFormatter.displayBoard(board);
 
         String expectedOutput =
                 """

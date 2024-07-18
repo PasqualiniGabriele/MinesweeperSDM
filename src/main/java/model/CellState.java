@@ -3,7 +3,7 @@ package model;
 public interface CellState {
     void reveal(Cell cell);
     void toggleFlag(Cell cell);
-    public String toString(Cell cell);
+    String toString(Cell cell);
 }
 
 

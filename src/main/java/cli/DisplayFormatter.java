@@ -1,19 +1,9 @@
 package cli;
 
 import model.Board;
-import de.vandermeer.asciitable.AsciiTable;
 import model.Coordinate;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment.CENTER;
-
 public class DisplayFormatter {
-
-    public static final String RESET = "\u001B[0m";
-    public static final String IDK = "\u001B[33m";
-    public static final String GREY = "\u001B[90m";
 
     protected static void displayWelcomeScreen() {
         System.out.println("""
