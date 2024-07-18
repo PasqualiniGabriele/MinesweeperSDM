@@ -23,4 +23,8 @@ public class FreeCell extends Cell{
     public String getIcon() {
         return String.valueOf(proximity);
     }
+
+    public boolean isZeroProximity() {
+        return proximity == 0;
+    }
 }

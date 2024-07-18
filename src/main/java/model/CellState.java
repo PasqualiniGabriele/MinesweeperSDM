@@ -4,6 +4,8 @@ public interface CellState {
     void reveal(Cell cell);
     void toggleFlag(Cell cell);
     String toString(Cell cell);
+
+    boolean isClosedState();
 }
 
 
@@ -19,6 +21,11 @@ class OpenState implements CellState {
     @Override
     public String toString(Cell cell) {
         return cell.getIcon();
+    }
+
+    @Override
+    public boolean isClosedState() {
+        return false;
     }
 }
 
@@ -37,6 +44,11 @@ class ClosedState implements CellState {
     @Override
     public String toString(Cell cell) {
         return "■";
+    }
+
+    @Override
+    public boolean isClosedState() {
+        return true;
     }
 }
 
@@ -58,5 +70,8 @@ class FlaggedState implements CellState {
         return FLAG;
     }
 
-
+    @Override
+    public boolean isClosedState() {
+        return false;
+    }
 }
