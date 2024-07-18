@@ -1,5 +1,7 @@
 package model;
 
+import static cli.DisplayFormatter.*;
+
 public interface CellState {
     void reveal(Cell cell);
     void toggleFlag(Cell cell);
@@ -50,7 +52,7 @@ class ClosedState implements CellState {
 
     @Override
     public String toString(Cell cell) {
-        return "■";
+        return GREY + "■" + RESET;
     }
 
     @Override
@@ -79,7 +81,7 @@ class FlaggedState implements CellState {
 
     @Override
     public String toString(Cell cell) {
-        return FLAG;
+        return RED + FLAG + RESET;
     }
 
     @Override

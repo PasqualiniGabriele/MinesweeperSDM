@@ -5,6 +5,19 @@ import model.Coordinate;
 
 public class DisplayFormatter {
 
+    public final static String RESET = "\u001B[0m";
+    public final static String GREY = "\u001B[37m";
+    public final static String DARK_GREY = "\u001B[90m";
+    public final static String BLUE = "\u001B[34m";
+    public final static String GREEN = "\u001B[32m";
+    public final static String GOLD = "\u001B[33m";
+    public final static String RED = "\u001B[31m";
+    public final static String PURPLE = "\u001B[35m";
+    public final static String CYAN = "\u001B[36m";
+    public final static String YELLOW = "\u001B[93m";
+    public final static String LIGHT_GREEN = "\u001B[92m";
+
+
     protected static void displayWelcomeScreen() {
         System.out.println("""
                                  _
@@ -92,12 +105,12 @@ public class DisplayFormatter {
 
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                System.out.print( board.getCell(new Coordinate(x, y)) + "  ");
+                System.out.print(board.getCell(new Coordinate(x, y)) + "  ");
             }
-            System.out.println(" |" + (y + 1));
+            System.out.println(GREY + " |" + (y + 1) + RESET);
         }
         for (int x = 0; x < width; x++) {
-            System.out.print("_  ");
+            System.out.print(GREY + "_  ");
         }
 
         System.out.println();
@@ -108,7 +121,7 @@ public class DisplayFormatter {
                 System.out.print(" ");
         }
 
-        System.out.println("\n");
+        System.out.println("\n" + RESET);
     }
 }
 
