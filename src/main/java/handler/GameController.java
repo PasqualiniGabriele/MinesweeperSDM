@@ -15,15 +15,15 @@ public class GameController {
 
     public void launch() {
         handler.welcome();
-        Difficulty difficulty = handler.askForDifficulty();
-        createGame(difficulty);
+        Configuration configuration = handler.askForDifficulty();
+        createGame(configuration);
         gameLoop();
         handler.exit();
     }
 
-    public void createGame(Difficulty difficulty) {
+    public void createGame(Configuration configuration) {
         game = new Game();
-        boardManager = new BoardManager(difficulty);
+        boardManager = new BoardManager(configuration);
     }
 
     public void gameLoop(){
