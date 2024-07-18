@@ -14,7 +14,7 @@ public class CommandParser {
             throw new IllegalArgumentException("Invalid command format");
         }
 
-        String action = commandArray[0];
+        String action = commandArray[0].toUpperCase();
         int x = Integer.parseInt(commandArray[1])-1;
         int y = Integer.parseInt(commandArray[2])-1;
         return new Command(action, new Coordinate(x, y));
