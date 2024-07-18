@@ -39,4 +39,8 @@ public abstract class Cell {
     public String toString() {
         return state.toString(this);
     }
+
+    public boolean isClosedCell() {
+        return state.isClosedState();
+    }
 }

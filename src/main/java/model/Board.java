@@ -24,6 +24,10 @@ public class Board {
         return cells[coordinate.x()][coordinate.y()];
     }
 
+    public boolean isValidCoordinate(Coordinate c) {
+        return (c.x() >= 0 && c.y() >= 0 && c.x() < getWidth() && c.y() < getHeight());
+    }
+
     public void setCell(Cell cell, Coordinate coordinate) {
         cells[coordinate.x()][coordinate.y()] = cell;
     }
