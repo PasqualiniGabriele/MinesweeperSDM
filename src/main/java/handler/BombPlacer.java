@@ -33,6 +33,7 @@ public class BombPlacer {
         }
         return safeZone;
     }
+
     public Set<Coordinate> generateRandomCoordinates(Set<Coordinate> safeZone) {
         Set<Coordinate> randomCoordinates = new HashSet<>();
         Random random = new Random();
@@ -46,6 +47,7 @@ public class BombPlacer {
         }
         return randomCoordinates;
     }
+
     public void updateProximity(Coordinate bombCoordinate) {
         int bombX = bombCoordinate.x();
         int bombY = bombCoordinate.y();
@@ -53,8 +55,7 @@ public class BombPlacer {
             for (int dy = -1; dy <= 1; dy++) {
                 Coordinate nextCoordinate = new Coordinate(bombX + dx, bombY + dy);
                 if (board.isValidCoordinate(nextCoordinate)) {
-                    Cell cell = board.getCell(nextCoordinate);
-                    if (cell instanceof FreeCell freeCell) {
+                    if (board.getCell(nextCoordinate) instanceof FreeCell freeCell) {
                         freeCell.setProximity(freeCell.getProximity() + 1);
                     }
                 }
