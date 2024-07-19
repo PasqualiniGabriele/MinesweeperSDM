@@ -26,7 +26,12 @@ public class CLIHandler extends UIHandler {
         if (isQuitCommand(input)) {
             return null;
         }
-        return CommandParser.parseCommand(input);
+        try {
+            return CommandParser.parseCommand(input);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Not a valid command\nValid format: C x y or F x y");
+            return hasNextCommand();
+        }
     }
 
     @Override
@@ -43,7 +48,9 @@ public class CLIHandler extends UIHandler {
 
     @Override
     public void show(String[] gameStats, Board board) {
+        DisplayFormatter.displayTopMenu();
         DisplayFormatter.displayBoard(board);
+        DisplayFormatter.displayBottomMenu();
     }
 
     @Override

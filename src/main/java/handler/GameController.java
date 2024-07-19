@@ -33,7 +33,6 @@ public class GameController implements GameEventListener {
         handler.show(getGameStats(), boardManager.getBoard());
         Command firstCommand = handler.hasNextCommand();
         boardManager.applyFirstClick(firstCommand);
-        applyCommand(firstCommand);
         while (game.getStatus() == GameStatus.ONGOING){
             handler.show(getGameStats(), boardManager.getBoard());
             Command command = handler.hasNextCommand();
@@ -41,7 +40,11 @@ public class GameController implements GameEventListener {
                 break;
             }
             applyCommand(command);
+            if(boardManager.getFreeCellsLeft()==0){
+                endGame(GameStatus.WON);
+            }
         }
+        handler.show(boardManager.getBoard());
     }
 
 
