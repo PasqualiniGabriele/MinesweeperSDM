@@ -1,5 +1,6 @@
 package cli;
 
+import handler.Command;
 import handler.UIHandler;
 import model.Board;
 import model.Configuration;

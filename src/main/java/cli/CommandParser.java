@@ -1,5 +1,6 @@
 package cli;
 
+import handler.Command;
 import model.Coordinate;
 
 import java.util.Set;

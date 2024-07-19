@@ -1,6 +1,5 @@
     package handler;
 
-    import cli.Command;
     import model.*;
 
     public class BoardManager {
