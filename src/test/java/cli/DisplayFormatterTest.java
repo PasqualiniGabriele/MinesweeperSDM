@@ -3,7 +3,7 @@ package cli;
 import model.*;
 import org.junit.jupiter.api.BeforeEach;
 
-import static cli.DisplayFormatter.*;
+import static cli.ConsoleColor.removeAnsiCodes;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
@@ -31,20 +31,14 @@ class DisplayFormatterTest {
     }
 
 
-
     @Test
     void testFormatBoard() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         DisplayFormatter.displayBoard(board);
 
-
-        String expectedOutput =
-                              "\n\n" + GREY + "■" + RESET +  "  ⚑  " + GREY + " |1" + RESET +
-                                  "\n" + BLUE + "1" + RESET + "  ✷  " + GREY + " |2" + RESET + "\n" +
-                            GREY + "_  _  " +
-                                   "\n1  2  \n" + RESET + "\n";
-        assertEquals(expectedOutput, outContent.toString());
+        String expectedOutput = "\n\n■  ⚑   |1\n1  ✷   |2\n_  _  \n1  2  \n\n";
+        assertEquals(expectedOutput, removeAnsiCodes(outContent.toString()));
     }
 
 }

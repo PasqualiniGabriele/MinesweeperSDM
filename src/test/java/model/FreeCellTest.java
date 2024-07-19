@@ -2,8 +2,8 @@ package model;
 
 import org.junit.jupiter.api.Test;
 
+import static cli.ConsoleColor.removeAnsiCodes;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
 
 class FreeCellTest {
     Cell cell;
@@ -17,18 +17,18 @@ class FreeCellTest {
     void testFlaggedFreeCell(){
         Cell flaggedCell = new FreeCell(1);
         flaggedCell.setState(new FlaggedState());
-        assertEquals("⚑", flaggedCell.toString());
+        assertEquals("⚑", removeAnsiCodes(flaggedCell.toString()));
     }
     @Test
     void testClosedFreeCell(){
         Cell closedCell = new FreeCell(1);
         closedCell.setState(new ClosedState());
-        assertEquals("■", closedCell.toString());
+        assertEquals("■", removeAnsiCodes(closedCell.toString()));
     }
     @Test
     void testOpenFreeCell(){
         Cell OpenCell = new FreeCell(1);
         OpenCell.setState(new OpenState());
-        assertEquals("1", OpenCell.toString());
+        assertEquals("1", removeAnsiCodes(OpenCell.toString()));
     }
 }
