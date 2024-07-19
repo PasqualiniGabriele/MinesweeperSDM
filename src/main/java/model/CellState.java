@@ -1,10 +1,12 @@
 package model;
 
-import static cli.DisplayFormatter.*;
+import static cli.ConsoleColor.*;
 
 public interface CellState {
     void reveal(Cell cell);
+
     void toggleFlag(Cell cell);
+
     String toString(Cell cell);
 
     boolean isClosedState();
