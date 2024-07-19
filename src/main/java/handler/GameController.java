@@ -32,7 +32,6 @@ public class GameController implements GameEventListener {
         handler.show(boardManager.getBoard());
         Command firstCommand = handler.hasNextCommand();
         boardManager.applyFirstClick(firstCommand);
-        applyCommand(firstCommand);
         while (game.getStatus() == GameStatus.ONGOING){
             handler.show(boardManager.getBoard());
             Command command = handler.hasNextCommand();
