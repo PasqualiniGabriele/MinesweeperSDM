@@ -39,7 +39,11 @@ public class GameController implements GameEventListener {
                 break;
             }
             applyCommand(command);
+            if(boardManager.getFreeCellsLeft()==0){
+                endGame(GameStatus.WON);
+            }
         }
+        handler.show(boardManager.getBoard());
     }
 
 
