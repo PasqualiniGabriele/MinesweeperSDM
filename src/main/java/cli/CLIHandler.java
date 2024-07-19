@@ -22,6 +22,7 @@ public class CLIHandler extends UIHandler {
 
     @Override
     public Command hasNextCommand() {
+        DisplayFormatter.displayBottomMenu();
         String input = scanner.nextLine();
         if (isQuitCommand(input)) {
             return null;
@@ -50,7 +51,6 @@ public class CLIHandler extends UIHandler {
     public void show(String[] gameStats, Board board) {
         DisplayFormatter.displayTopMenu();
         DisplayFormatter.displayBoard(board);
-        DisplayFormatter.displayBottomMenu();
     }
 
     @Override
