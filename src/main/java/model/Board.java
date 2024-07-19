@@ -1,38 +1,35 @@
 package model;
 
 public class Board {
-    private final Cell[][] cells;
-    private final Configuration configuration;
+    private Cell[][] cells;
+    private Configuration configuration;
 
     public Board(Configuration configuration) {
         this.configuration = configuration;
         int width = configuration.getWidth();
         int height = configuration.getHeight();
-        cells = getCells(width, height);
+        initializeCells(width, height);
     }
 
     public Board(int width, int height) {
-        cells = getCells(width, height);
-        this.configuration = Configuration.MEDIUM;
+        initializeCells(width, height);
     }
 
-    private Cell[][] getCells(int width, int height) {
-        final Cell[][] cells;
+    private void initializeCells(int width, int height) {
         cells = new Cell[width][height];
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 cells[i][j] = new FreeCell(0);
             }
         }
-        return cells;
     }
 
     public int getWidth() {
-        return configuration.getWidth();
+        return cells.length;
     }
 
     public int getHeight() {
-        return configuration.getHeight();
+        return cells[0].length;
     }
 
     public Cell getCell(Coordinate coordinate) {
