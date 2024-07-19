@@ -44,7 +44,7 @@ public class GameController implements GameEventListener {
                 endGame(GameStatus.WON);
             }
         }
-        handler.show(boardManager.getBoard());
+        handler.show(getGameStats(), boardManager.getBoard());
     }
 
 
