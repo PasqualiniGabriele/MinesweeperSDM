@@ -1,9 +1,19 @@
 package model;
 
+import handler.GameEventManager;
+
 public abstract class Cell {
     private CellState state;
     private String icon;
+    static GameEventManager eventManager;
 
+    public static void setEventManager(GameEventManager eventManager) {
+        Cell.eventManager = eventManager;
+    }
+
+    public static GameEventManager getEventManager() {
+        return eventManager;
+    }
 
     public Cell() {
         this.state = new ClosedState();
