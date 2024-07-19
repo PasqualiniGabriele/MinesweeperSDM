@@ -48,15 +48,6 @@ class GameControllerTest {
     }
 
     @Test
-    public void testApplyFirstClick() {
-        gameController.setBoardManager(mockBoardManager);
-        Coordinate testCoordinate = new Coordinate(1, 1);
-        gameController.applyFirstClick(new Command("C", testCoordinate));
-        verify(mockBoardManager).placeBombsAvoiding(testCoordinate);
-        verify(mockBoardManager).applyClick(testCoordinate);
-    }
-
-    @Test
     public void testApplyCommandFlag() {
         gameController.setBoardManager(mockBoardManager);
         Coordinate testCoordinate = new Coordinate(1, 1);

@@ -1,5 +1,6 @@
 package handler;
 
+import cli.Command;
 import model.*;
 
 import java.util.HashSet;
@@ -12,13 +13,15 @@ public class BoardManager {
     private int freeCellsLeft;
     private Configuration configuration;
 
-    public BoardManager() {
-    }
 
     public BoardManager(Configuration configuration) {
         board = new Board(configuration.getWidth(), configuration.getHeight());
         freeCellsLeft = configuration.getWidth() * configuration.getHeight() - configuration.getNumOfBombs();
         this.configuration = configuration;
+    }
+
+    void applyFirstClick(Command firstCommand) {
+        placeBombsAvoiding(firstCommand.coordinate());
     }
 
     public void placeBombsAvoiding(Coordinate safeZoneCenter) {
