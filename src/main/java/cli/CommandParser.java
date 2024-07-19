@@ -25,7 +25,7 @@ public class CommandParser {
             return false;
         }
 
-        String action = commandArray[0];
+        String action = commandArray[0].toUpperCase();
         if (!VALID_ACTIONS.contains(action)) {
             return false;
         }
