@@ -14,7 +14,7 @@ public class Game {
     }
 
     public Duration calculateGameTime() {
-        return Duration.between(startTime, endTime);
+        return Duration.between(startTime, LocalDateTime.now());
     }
 
     public void end(GameStatus gameStatus) {
