@@ -3,7 +3,7 @@ package handler;
 import cli.Command;
 import model.*;
 
-public class GameController {
+public class GameController implements GameEventListener {
 
     private Game game;
     private BoardManager boardManager;
@@ -11,6 +11,7 @@ public class GameController {
 
     public GameController(UIHandler handler) {
         this.handler = handler;
+        BombedCell.setEventManager(GameEventManager.getInstance());
     }
 
     public void launch() {
@@ -24,6 +25,7 @@ public class GameController {
     public void createGame(Configuration configuration) {
         game = new Game();
         boardManager = new BoardManager(configuration);
+        GameEventManager.getInstance().subscribe(this);
     }
 
     public void gameLoop(){
@@ -75,4 +77,8 @@ public class GameController {
         this.boardManager = boardManager;
     }
 
+    @Override
+    public void onBombReveal() {
+        endGame(GameStatus.LOST);
+    }
 }
