@@ -14,7 +14,6 @@ public interface CellState {
     boolean isOpenState();
 }
 
-
 class OpenState implements CellState {
     @Override
     public void reveal(Cell cell) {
@@ -73,7 +72,7 @@ class FlaggedState implements CellState {
 
     @Override
     public void reveal(Cell cell) {
-
+        Cell.getEventManager().onFlagReveal();
     }
 
     @Override

@@ -26,4 +26,10 @@ public class GameEventManager {
             listener.onBombReveal();
         }
     }
+
+    public void onFlagReveal() {
+        for (GameEventListener listener : listeners) {
+            listener.onFlagReveal();
+        }
+    }
 }

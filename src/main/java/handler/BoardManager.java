@@ -7,11 +7,13 @@
 
         private final Board board;
         private int freeCellsLeft;
+        private int flagsLeft;
         private final BombPlacer bombPlacer;
 
         public BoardManager(Configuration configuration) {
-            board = new Board(configuration.getWidth(), configuration.getHeight());
+            board = new Board(configuration);
             freeCellsLeft = configuration.getWidth() * configuration.getHeight() - configuration.getNumOfBombs();
+            flagsLeft = configuration.getNumOfBombs();
             bombPlacer = new BombPlacer(configuration, board);
         }
 
@@ -36,10 +38,6 @@
             }
         }
 
-        public int getFreeCellsLeft() {
-            return freeCellsLeft;
-        }
-
         public Board getBoard() {
             return board;
         }
@@ -57,5 +55,21 @@
                 cell.reveal();
                 freeCellsLeft--;
             }
+        }
+
+        public int getFreeCellsLeft() {
+            return freeCellsLeft;
+        }
+
+        public void decrementFlagCounter() {
+            flagsLeft--;
+        }
+
+        public int getFlagsLeft() {
+            return flagsLeft;
+        }
+
+        public Configuration getConfiguration() {
+            return board.getConfiguration();
         }
     }
