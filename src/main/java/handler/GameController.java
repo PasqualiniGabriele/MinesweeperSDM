@@ -31,7 +31,8 @@ public class GameController implements GameEventListener {
     public void gameLoop(){
         handler.show(boardManager.getBoard());
         Command firstCommand = handler.hasNextCommand();
-        applyFirstClick(firstCommand);
+        boardManager.applyFirstClick(firstCommand);
+        applyCommand(firstCommand);
         while (game.getStatus() == GameStatus.ONGOING){
             handler.show(boardManager.getBoard());
             Command command = handler.hasNextCommand();
@@ -40,11 +41,6 @@ public class GameController implements GameEventListener {
             }
             applyCommand(command);
         }
-    }
-
-    void applyFirstClick(Command firstCommand) {
-        boardManager.placeBombsAvoiding(firstCommand.coordinate());
-        applyCommand(firstCommand);
     }
 
 
