@@ -1,7 +1,5 @@
 package model;
 
-import handler.GameEventManager;
-
 public class BombedCell extends Cell {
     public final String BOMB = "✷";
 
@@ -17,9 +15,9 @@ public class BombedCell extends Cell {
 
     @Override
     public void reveal() {
-        super.reveal();
         if (isClosedCell()) {
             eventManager.onBombReveal();
         }
+        super.reveal();
     }
 }
