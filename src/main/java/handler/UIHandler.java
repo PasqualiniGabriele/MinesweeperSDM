@@ -19,6 +19,6 @@ public abstract class UIHandler {
 
     public abstract Command hasNextCommand();
 
-    public void show(Board board) {
+    public void show(String[] gameStats, Board board) {
     }
 }

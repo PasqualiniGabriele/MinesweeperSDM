@@ -9,6 +9,7 @@ public class GameController implements GameEventListener {
     private BoardManager boardManager;
     private final UIHandler handler;
 
+
     public GameController(UIHandler handler) {
         this.handler = handler;
         BombedCell.setEventManager(GameEventManager.getInstance());
@@ -29,12 +30,12 @@ public class GameController implements GameEventListener {
     }
 
     public void gameLoop(){
-        handler.show(boardManager.getBoard());
+        handler.show(getGameStats(), boardManager.getBoard());
         Command firstCommand = handler.hasNextCommand();
         boardManager.applyFirstClick(firstCommand);
         applyCommand(firstCommand);
         while (game.getStatus() == GameStatus.ONGOING){
-            handler.show(boardManager.getBoard());
+            handler.show(getGameStats(), boardManager.getBoard());
             Command command = handler.hasNextCommand();
             if (command == null) {
                 break;
@@ -65,6 +66,14 @@ public class GameController implements GameEventListener {
         return game;
     }
 
+    public String[] getGameStats() {
+        String[] stats = new String[3];
+        stats[0] = String.valueOf(boardManager.getConfiguration());
+        stats[1] = String.valueOf(boardManager.getFlagsLeft());
+        stats[2] = String.valueOf(game.calculateGameTime());
+        return stats;
+    }
+
     public BoardManager getBoardManager() {
         return boardManager;
     }
@@ -76,5 +85,10 @@ public class GameController implements GameEventListener {
     @Override
     public void onBombReveal() {
         endGame(GameStatus.LOST);
+    }
+
+    @Override
+    public void onFlagReveal() {
+        boardManager.decrementFlagCounter();
     }
 }

@@ -2,22 +2,37 @@ package model;
 
 public class Board {
     private final Cell[][] cells;
+    private final Configuration configuration;
+
+    public Board(Configuration configuration) {
+        this.configuration = configuration;
+        int width = configuration.getWidth();
+        int height = configuration.getHeight();
+        cells = getCells(width, height);
+    }
 
     public Board(int width, int height) {
+        cells = getCells(width, height);
+        this.configuration = Configuration.MEDIUM;
+    }
+
+    private Cell[][] getCells(int width, int height) {
+        final Cell[][] cells;
         cells = new Cell[width][height];
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 cells[i][j] = new FreeCell(0);
             }
         }
+        return cells;
     }
 
     public int getWidth() {
-        return cells.length;
+        return configuration.getWidth();
     }
 
     public int getHeight() {
-        return cells[0].length;
+        return configuration.getHeight();
     }
 
     public Cell getCell(Coordinate coordinate) {
@@ -30,5 +45,9 @@ public class Board {
 
     public void setCell(Cell cell, Coordinate coordinate) {
         cells[coordinate.x()][coordinate.y()] = cell;
+    }
+
+    public Configuration getConfiguration() {
+        return configuration;
     }
 }

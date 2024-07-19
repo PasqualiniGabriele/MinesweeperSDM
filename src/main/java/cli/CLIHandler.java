@@ -42,7 +42,7 @@ public class CLIHandler extends UIHandler {
     }
 
     @Override
-    public void show(Board board) {
+    public void show(String[] gameStats, Board board) {
         DisplayFormatter.displayBoard(board);
     }
 
