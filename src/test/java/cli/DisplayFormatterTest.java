@@ -37,7 +37,7 @@ class DisplayFormatterTest {
         System.setOut(new PrintStream(outContent));
         DisplayFormatter.displayBoard(board);
 
-        String expectedOutput = "\n\n■  ⚑   |1\n1  ✷   |2\n_  _  \n1  2  \n\n";
+        String expectedOutput = "■  ⚑   |1\n1  ✷   |2\n_  _  \n1  2  \n";
         assertEquals(expectedOutput, removeAnsiCodes(outContent.toString()));
     }
 

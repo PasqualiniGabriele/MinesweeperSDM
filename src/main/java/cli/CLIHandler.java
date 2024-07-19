@@ -48,7 +48,9 @@ public class CLIHandler extends UIHandler {
 
     @Override
     public void show(Board board) {
+        DisplayFormatter.displayTopMenu();
         DisplayFormatter.displayBoard(board);
+        DisplayFormatter.displayBottomMenu();
     }
 
     @Override

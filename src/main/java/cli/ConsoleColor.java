@@ -11,7 +11,8 @@ public enum ConsoleColor {
     PURPLE("\u001B[35m"),
     CYAN("\u001B[36m"),
     YELLOW("\u001B[93m"),
-    LIGHT_GREEN("\u001B[92m");
+    LIGHT_GREEN("\u001B[92m"),
+    WHITE_BG("\u001B[47m\u001B[30m");
 
     private final String code;
 
