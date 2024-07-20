@@ -72,4 +72,12 @@
         public Configuration getConfiguration() {
             return board.getConfiguration();
         }
+
+        public void openAllCells() {
+            for(int i = 0; i<board.getWidth(); i++){
+                for(int j = 0; j< board.getHeight(); j++){
+                    board.getCell(new Coordinate(i,j)).open();
+                }
+            }
+        }
     }
