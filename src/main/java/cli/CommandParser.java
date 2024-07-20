@@ -8,25 +8,36 @@ import java.util.Set;
 
 public class CommandParser {
 
-    private static final Set<String> VALID_GAME_ACTIONS = Set.of("F", "C");
     private static final Set<String> VALID_MENU_ACTIONS = Set.of("I", "Q", "R");
+    private static final Set<String> VALID_GAME_ACTIONS = Set.of("F", "C");
 
     public static Command parseCommand(String userInput) throws IllegalArgumentException {
         String[] commandArray = userInput.split(" ");
-        if (!isValidCommand(commandArray)) {
-            throw new IllegalArgumentException("Invalid command format");
-        }
-
         String action = commandArray[0].toUpperCase();
-        int x = Integer.parseInt(commandArray[1])-1;
-        int y = Integer.parseInt(commandArray[2])-1;
-        return new GameCommand(action, new Coordinate(x, y));
+        if((commandArray.length == 1) && (isValidMenuAction(action))) {
+            return new Command(action);
+        } else if ((commandArray.length == 3) && (isValidGameCommand(action, commandArray))) {
+            Coordinate coordinate = parseCoordinate(commandArray);
+            return new GameCommand(action, coordinate);
+        } else throw new IllegalArgumentException("Invalid command format");
     }
 
-    private static boolean isValidCommand(String[] commandArray) {
-        String action = commandArray[0].toUpperCase();
-        if (!isValidAction(action)) return false;
-        return (isValidNumber(commandArray) && isValidLength(commandArray));
+    private static boolean isValidMenuAction(String action) {
+        return VALID_MENU_ACTIONS.contains(action);
+    }
+
+    private static boolean isValidGameCommand(String action, String[] commandArray) {
+        return (isValidGameAction(action) && isValidNumber(commandArray));
+    }
+
+    private static boolean isValidGameAction(String action) {
+        return VALID_GAME_ACTIONS.contains(action);
+    }
+
+    public static Coordinate parseCoordinate (String[] commandArray){
+        int x = Integer.parseInt(commandArray[1])-1;
+        int y = Integer.parseInt(commandArray[2])-1;
+        return new Coordinate(x, y);
     }
 
     private static boolean isValidNumber(String[] commandArray) {
@@ -41,13 +52,5 @@ public class CommandParser {
         } catch (Exception e) {
             return false;
         }
-    }
-
-    private static boolean isValidLength(String[] commandArray) {
-        return (commandArray.length == 3);
-    }
-
-    private static boolean isValidAction(String action) {
-        return VALID_GAME_ACTIONS.contains(action);
     }
 }
