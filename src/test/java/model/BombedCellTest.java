@@ -29,6 +29,6 @@ class BombedCellTest {
     void testOpenBombedCell(){
         Cell OpenCell = new BombedCell();
         OpenCell.setState(new OpenState());
-        assertEquals("✷", removeAnsiCodes(OpenCell.toString()));
+        assertEquals("●", removeAnsiCodes(OpenCell.toString()));
     }
 }

@@ -53,7 +53,7 @@ class DisplayFormatterTest {
         DisplayFormatter.displayBoard(board);
 
         String expectedOutput = """
-                ■  ■  ■  ✷  ■  ■  ✷  ■   |1
+                ■  ■  ■  ●  ■  ■  ●  ■   |1
                 ■  ⚑  ■  ■  ■  ■  ■  ■   |2
                 ■  2  1  1  ■  ■  ■  ■   |3
                 ■  1  -  1  1  ■  ■  ■   |4

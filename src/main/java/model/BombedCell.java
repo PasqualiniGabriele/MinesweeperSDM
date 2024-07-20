@@ -1,7 +1,9 @@
 package model;
 
+import static cli.ConsoleColor.*;
+
 public class BombedCell extends Cell {
-    public final String BOMB = "✷";
+    public final String BOMB = RED + "●" + RESET;
 
     public BombedCell() {
         super();
