@@ -4,7 +4,6 @@ import handler.Command;
 import handler.GameCommand;
 import model.Coordinate;
 
-import model.Game;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
