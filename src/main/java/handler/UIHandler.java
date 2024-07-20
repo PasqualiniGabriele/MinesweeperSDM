@@ -2,6 +2,7 @@ package handler;
 
 import model.Board;
 import model.Configuration;
+import model.GameStatus;
 
 public abstract class UIHandler {
 
@@ -10,7 +11,7 @@ public abstract class UIHandler {
 
     protected abstract void gameRules();
 
-    protected abstract void exit();
+    protected abstract void exit(GameStatus gameStatus);
 
     public abstract Configuration askForDifficulty();
 

@@ -4,8 +4,11 @@ import handler.Command;
 import handler.UIHandler;
 import model.Board;
 import model.Configuration;
+import model.GameStatus;
 
 import java.util.Scanner;
+
+import static cli.DisplayFormatter.*;
 
 public class CLIHandler extends UIHandler {
     Scanner scanner;
@@ -65,8 +68,9 @@ public class CLIHandler extends UIHandler {
     }
 
     @Override
-    public void exit() {
-        System.out.println("Thank you for playing!");
+    protected void exit(GameStatus gameStatus) {
+        if (gameStatus == GameStatus.WON) displayWinMessage();
+        else displayLostMessage();
     }
 
 

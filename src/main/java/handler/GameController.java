@@ -19,7 +19,7 @@ public class GameController implements GameEventListener {
         Configuration configuration = handler.askForDifficulty();
         createGame(configuration);
         gameLoop();
-        handler.exit();
+        handler.exit(game.getStatus());
     }
 
     public void createGame(Configuration configuration) {
