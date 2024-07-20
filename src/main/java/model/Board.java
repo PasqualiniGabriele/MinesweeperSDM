@@ -2,16 +2,12 @@ package model;
 
 public class Board {
     private Cell[][] cells;
-    private Configuration configuration;
+    private final Configuration configuration;
 
     public Board(Configuration configuration) {
         this.configuration = configuration;
         int width = configuration.getWidth();
         int height = configuration.getHeight();
-        initializeCells(width, height);
-    }
-
-    public Board(int width, int height) {
         initializeCells(width, height);
     }
 
@@ -25,11 +21,11 @@ public class Board {
     }
 
     public int getWidth() {
-        return cells.length;
+        return configuration.getWidth();
     }
 
     public int getHeight() {
-        return cells[0].length;
+        return configuration.getHeight();
     }
 
     public Cell getCell(Coordinate coordinate) {
