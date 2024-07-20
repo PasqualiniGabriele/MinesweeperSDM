@@ -48,6 +48,7 @@ public class GameController implements GameEventListener {
 
 
     public void endGame(GameStatus endStatus) {
+        boardManager.openAllCells();
         game.end(endStatus);
     }
 
