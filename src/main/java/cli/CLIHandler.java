@@ -39,12 +39,16 @@ public class CLIHandler extends UIHandler {
     @Override
     public Configuration askForDifficulty() {
         DisplayFormatter.displayDifficultyMenu();
-        String input = scanner.nextLine();
+        String input = scanner.nextLine().trim();
         return switch (input) {
             case "1" -> Configuration.EASY;
             case "2" -> Configuration.MEDIUM;
             case "3" -> Configuration.HARD;
-            default -> Configuration.MEDIUM;
+            default -> {
+                System.out.println("\nUnknown command, try again.\n\n");
+                askForDifficulty();
+                yield null;
+            }
         };
     }
 
@@ -65,7 +69,7 @@ public class CLIHandler extends UIHandler {
         System.out.println("Thank you for playing!");
     }
 
-    // for testing:
+
     public void setScanner(Scanner scanner) {
         this.scanner = scanner;
     }
