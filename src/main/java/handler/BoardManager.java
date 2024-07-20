@@ -17,8 +17,8 @@
         }
 
         void applyFirstClick(Command firstCommand) {
-            bombPlacer.placeBombsAvoiding(firstCommand.coordinate());
-            applyClick(firstCommand.coordinate());
+            bombPlacer.placeBombsAvoiding(firstCommand.getCoordinate());
+            applyClick(firstCommand.getCoordinate());
         }
 
         public void revealAdjacentArea(Coordinate coordinate) {

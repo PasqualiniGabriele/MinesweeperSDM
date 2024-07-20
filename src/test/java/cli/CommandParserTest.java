@@ -25,7 +25,8 @@ class CommandParserTest {
 
     private void assertValidCommand(String input, Command expected) {
         Command actual = CommandParser.parseCommand(input);
-        assertEquals(expected, actual);
+        assertEquals(actual.getAction(), expected.getAction());
+        assertEquals(actual.getCoordinate(), expected.getCoordinate());
     }
 
     private void assertInvalidCommand(String input) {
