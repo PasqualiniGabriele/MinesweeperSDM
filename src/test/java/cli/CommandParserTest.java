@@ -1,6 +1,7 @@
 package cli;
 
 import handler.Command;
+import handler.GameCommand;
 import model.Coordinate;
 
 import org.junit.jupiter.api.Test;
@@ -10,8 +11,8 @@ class CommandParserTest {
 
     @Test
     public void testParseCommandWithValidInputs() {
-        assertValidCommand("F 10 20", new Command("F", new Coordinate(9, 19)));
-        assertValidCommand("C 1 2", new Command("C", new Coordinate(0, 1)));
+        assertValidCommand("F 10 20", new GameCommand("F", new Coordinate(9, 19)));
+        assertValidCommand("C 1 2", new GameCommand("C", new Coordinate(0, 1)));
     }
 
     @Test
@@ -23,8 +24,8 @@ class CommandParserTest {
         assertInvalidCommand("F ten twenty");
     }
 
-    private void assertValidCommand(String input, Command expected) {
-        Command actual = CommandParser.parseCommand(input);
+    private void assertValidCommand(String input, GameCommand expected) {
+        GameCommand actual = (GameCommand) CommandParser.parseCommand(input);
         assertEquals(actual.getAction(), expected.getAction());
         assertEquals(actual.getCoordinate(), expected.getCoordinate());
     }

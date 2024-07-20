@@ -16,7 +16,7 @@ public class GameController implements GameEventListener {
 
     public void launch() {
         handler.welcome();
-        Configuration configuration = handler.askForConfiguration(); //ask for configuration
+        Configuration configuration = handler.askForConfiguration();
         createGame(configuration);
         gameLoop();
         handler.exit(game.getStatus());
@@ -30,11 +30,11 @@ public class GameController implements GameEventListener {
 
     public void gameLoop(){
         handler.show(null, boardManager.getBoard());
-        Command firstCommand = handler.hasNextCommand();
+        GameCommand firstCommand = (GameCommand) handler.hasNextCommand();
         boardManager.applyFirstClick(firstCommand);
         while (game.getStatus() == GameStatus.ONGOING){
             handler.show(getGameStats(), boardManager.getBoard());
-            Command command = handler.hasNextCommand();
+            GameCommand command = (GameCommand)handler.hasNextCommand();
             if (command == null) {
                 break;
             }
@@ -53,7 +53,7 @@ public class GameController implements GameEventListener {
     }
 
 
-    public void applyCommand(Command command) {
+    public void applyCommand(GameCommand command) {
         Coordinate coordinate = command.getCoordinate();
         switch (command.getAction()) {
             case "F":

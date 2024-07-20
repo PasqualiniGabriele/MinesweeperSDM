@@ -1,6 +1,7 @@
 package cli;
 
 import handler.Command;
+import handler.GameCommand;
 import model.Coordinate;
 
 import java.util.Set;
@@ -18,7 +19,7 @@ public class CommandParser {
         String action = commandArray[0].toUpperCase();
         int x = Integer.parseInt(commandArray[1])-1;
         int y = Integer.parseInt(commandArray[2])-1;
-        return new Command(action, new Coordinate(x, y));
+        return new GameCommand(action, new Coordinate(x, y));
     }
 
     private static boolean isValidCommand(String[] commandArray) {

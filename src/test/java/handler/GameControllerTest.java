@@ -50,7 +50,7 @@ class GameControllerTest {
     public void testApplyCommandFlag() {
         gameController.setBoardManager(mockBoardManager);
         Coordinate testCoordinate = new Coordinate(1, 1);
-        Command testCommand = new Command("F", testCoordinate);
+        GameCommand testCommand = new GameCommand("F", testCoordinate);
         gameController.applyCommand(testCommand);
         verify(mockBoardManager).applyFlag(testCoordinate);
     }
@@ -59,7 +59,7 @@ class GameControllerTest {
     public void testApplyCommandClick() {
         gameController.setBoardManager(mockBoardManager);
         Coordinate testCoordinate = new Coordinate(1, 1);
-        Command testCommand = new Command("C", testCoordinate);
+        GameCommand testCommand = new GameCommand("C", testCoordinate);
         gameController.applyCommand(testCommand);
         verify(mockBoardManager).applyClick(testCoordinate);
     }

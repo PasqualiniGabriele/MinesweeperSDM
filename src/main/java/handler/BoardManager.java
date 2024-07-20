@@ -16,7 +16,7 @@
             bombPlacer = new BombPlacer(configuration, board);
         }
 
-        void applyFirstClick(Command firstCommand) {
+        void applyFirstClick(GameCommand firstCommand) {
             bombPlacer.placeBombsAvoiding(firstCommand.getCoordinate());
             applyClick(firstCommand.getCoordinate());
         }
