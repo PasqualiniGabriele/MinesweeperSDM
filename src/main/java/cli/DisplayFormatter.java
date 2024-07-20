@@ -3,6 +3,8 @@ package cli;
 import model.Board;
 import model.Coordinate;
 
+import java.util.Arrays;
+
 import static cli.ConsoleColor.*;
 
 public class DisplayFormatter {
@@ -44,7 +46,8 @@ public class DisplayFormatter {
 
     protected static void displayTopMenu(String[] gameStats) {
         System.out.println("\n_____________________________________ MINESWEEPER______________________________________\n");
-        System.out.println("Level: " + GREY + gameStats[0] + RESET + "\t Flags: " + RED + gameStats[1] + RESET + "\n");
+        System.out.println("sono display formatter" + Arrays.toString(gameStats));
+        System.out.println("Level: " + GREY + gameStats[0] + RESET + "\t Flags: " + RED + gameStats[1] + RESET + "\t Time: " + GREY + gameStats[2] + RESET + "\n");
     }
 
     protected static void displayBottomMenu() {

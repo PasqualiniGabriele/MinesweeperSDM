@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayInputStream;
 import java.util.Scanner;
 
+import static java.lang.Thread.sleep;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -63,11 +64,22 @@ class GameControllerTest {
     }
 
     @Test
-    public void testGameStats() {
+    public void testGameStats_Easy_BeginGame() {
         gameController.createGame(Configuration.EASY);
         String[] gameStats = gameController.getGameStats();
         assertEquals("EASY", gameStats[0]);
         assertEquals("10", gameStats[1]);
+        assertEquals("0", gameStats[2]);
+    }
+
+    @Test
+    public void testGameStats_Medium_AfterSeconds() throws InterruptedException {
+        gameController.createGame(Configuration.MEDIUM);
+        sleep(3000);
+        String[] gameStats = gameController.getGameStats();
+        assertEquals("MEDIUM", gameStats[0]);
+        assertEquals("40", gameStats[1]);
+        assertEquals("3", gameStats[2]);
     }
 }
 

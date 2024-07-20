@@ -4,7 +4,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class Game {
-    private final LocalDateTime startTime;
+    private LocalDateTime startTime;
     private LocalDateTime endTime;
     private GameStatus status;
 
@@ -13,8 +13,12 @@ public class Game {
         status = GameStatus.ONGOING;
     }
 
-    public Duration calculateGameTime() {
-        return Duration.between(startTime, LocalDateTime.now());
+    public long calculateGameTime() {
+        if (startTime == null)
+            startTime = LocalDateTime.now();
+        if (endTime == null)
+            return Duration.between(startTime, LocalDateTime.now()).getSeconds();
+        return Duration.between(startTime, endTime).getSeconds();
     }
 
     public void end(GameStatus gameStatus) {

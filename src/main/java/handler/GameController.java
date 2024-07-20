@@ -70,9 +70,10 @@ public class GameController implements GameEventListener {
     }
 
     public String[] getGameStats() {
-        String[] stats = new String[2];
+        String[] stats = new String[3];
         stats[0] = String.valueOf(boardManager.getConfiguration());
         stats[1] = String.valueOf(boardManager.getFlagsLeft());
+        stats[2] = String.valueOf(game.calculateGameTime());
         return stats;
     }
 
