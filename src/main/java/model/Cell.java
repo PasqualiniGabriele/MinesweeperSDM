@@ -45,6 +45,10 @@ public abstract class Cell {
         this.icon = icon;
     }
 
+    public void open(){
+        state = new OpenState();
+    }
+
     @Override
     public String toString() {
         return state.toString(this);
