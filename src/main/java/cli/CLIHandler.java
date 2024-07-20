@@ -40,7 +40,7 @@ public class CLIHandler extends UIHandler {
     }
 
     @Override
-    public Configuration askForDifficulty() {
+    public Configuration askForConfiguration() {
         DisplayFormatter.displayDifficultyMenu();
         String input = scanner.nextLine().trim();
         return switch (input) {
@@ -49,7 +49,7 @@ public class CLIHandler extends UIHandler {
             case "3" -> Configuration.HARD;
             default -> {
                 System.out.println("\nUnknown command, try again.\n\n");
-                askForDifficulty();
+                askForConfiguration();
                 yield null;
             }
         };

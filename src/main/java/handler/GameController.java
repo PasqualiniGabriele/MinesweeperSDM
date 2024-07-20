@@ -16,7 +16,7 @@ public class GameController implements GameEventListener {
 
     public void launch() {
         handler.welcome();
-        Configuration configuration = handler.askForDifficulty();
+        Configuration configuration = handler.askForConfiguration(); //ask for configuration
         createGame(configuration);
         gameLoop();
         handler.exit(game.getStatus());
@@ -54,8 +54,8 @@ public class GameController implements GameEventListener {
 
 
     public void applyCommand(Command command) {
-        Coordinate coordinate = command.coordinate();
-        switch (command.action()) {
+        Coordinate coordinate = command.getCoordinate();
+        switch (command.getAction()) {
             case "F":
                 boardManager.applyFlag(coordinate);
                 break;
