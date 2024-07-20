@@ -2,6 +2,6 @@ package handler;
 
 public interface GameEventListener {
     void onBombReveal();
-
-    void onFlagReveal();
+    void onUnflag();
+    void onFlag();
 }

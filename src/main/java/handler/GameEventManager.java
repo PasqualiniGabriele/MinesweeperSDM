@@ -27,9 +27,15 @@ public class GameEventManager {
         }
     }
 
-    public void onFlagReveal() {
+    public void onUnflag() {
         for (GameEventListener listener : listeners) {
-            listener.onFlagReveal();
+            listener.onUnflag();
+        }
+    }
+
+    public void onFlag() {
+        for (GameEventListener listener : listeners) {
+            listener.onFlag();
         }
     }
 }

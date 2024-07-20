@@ -33,9 +33,7 @@ class GameControllerTest {
     @Test
     public void testNoExceptionLaunch() {
         setInput("1\nC 1 1\nQ");
-        assertDoesNotThrow(() -> {
-            gameController.launch();
-        });
+        assertDoesNotThrow(() -> gameController.launch());
     }
 
     @Test
@@ -62,6 +60,14 @@ class GameControllerTest {
         Command testCommand = new Command("C", testCoordinate);
         gameController.applyCommand(testCommand);
         verify(mockBoardManager).applyClick(testCoordinate);
+    }
+
+    @Test
+    public void testGameStats() {
+        gameController.createGame(Configuration.EASY);
+        String[] gameStats = gameController.getGameStats();
+        assertEquals("EASY", gameStats[0]);
+        assertEquals("10", gameStats[1]);
     }
 }
 

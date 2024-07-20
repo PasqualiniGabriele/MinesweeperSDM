@@ -48,6 +48,8 @@ class ClosedState implements CellState {
 
     @Override
     public void toggleFlag(Cell cell) {
+        if (Cell.getEventManager() != null)
+            Cell.getEventManager().onFlag();
         cell.setState(new FlaggedState());
     }
 
@@ -72,11 +74,13 @@ class FlaggedState implements CellState {
 
     @Override
     public void reveal(Cell cell) {
-        Cell.getEventManager().onFlagReveal();
+
     }
 
     @Override
     public void toggleFlag(Cell cell) {
+        if (Cell.getEventManager() != null)
+            Cell.getEventManager().onUnflag();
         cell.setState(new ClosedState());
     }
 

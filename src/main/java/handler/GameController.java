@@ -28,18 +28,18 @@ public class GameController implements GameEventListener {
         GameEventManager.getInstance().subscribe(this);
     }
 
-    public void gameLoop(){
-        handler.show(null, boardManager.getBoard());
+    public void gameLoop() {
+        handler.show(getGameStats(), boardManager.getBoard());
         Command firstCommand = handler.hasNextCommand();
         boardManager.applyFirstClick(firstCommand);
-        while (game.getStatus() == GameStatus.ONGOING){
+        while (game.getStatus() == GameStatus.ONGOING) {
             handler.show(getGameStats(), boardManager.getBoard());
             Command command = handler.hasNextCommand();
             if (command == null) {
                 break;
             }
             applyCommand(command);
-            if(boardManager.getFreeCellsLeft()==0){
+            if (boardManager.getFreeCellsLeft() == 0) {
                 endGame(GameStatus.WON);
             }
         }
@@ -90,7 +90,12 @@ public class GameController implements GameEventListener {
     }
 
     @Override
-    public void onFlagReveal() {
+    public void onUnflag() {
+        boardManager.incrementFlagCounter();
+    }
+
+    @Override
+    public void onFlag() {
         boardManager.decrementFlagCounter();
     }
 }
