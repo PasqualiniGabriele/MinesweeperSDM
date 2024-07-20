@@ -29,7 +29,7 @@ public class GameController implements GameEventListener {
     }
 
     public void gameLoop(){
-        handler.show(null, boardManager.getBoard());
+        handler.show(getGameStats(), boardManager.getBoard());
         GameCommand firstCommand = (GameCommand) handler.hasNextCommand();
         boardManager.applyFirstClick(firstCommand);
         while (game.getStatus() == GameStatus.ONGOING){
@@ -70,9 +70,10 @@ public class GameController implements GameEventListener {
     }
 
     public String[] getGameStats() {
-        String[] stats = new String[2];
+        String[] stats = new String[3];
         stats[0] = String.valueOf(boardManager.getConfiguration());
         stats[1] = String.valueOf(boardManager.getFlagsLeft());
+        stats[2] = String.valueOf(game.calculateGameTime());
         return stats;
     }
 
@@ -90,7 +91,12 @@ public class GameController implements GameEventListener {
     }
 
     @Override
-    public void onFlagReveal() {
+    public void onUnflag() {
+        boardManager.incrementFlagCounter();
+    }
+
+    @Override
+    public void onFlag() {
         boardManager.decrementFlagCounter();
     }
 }

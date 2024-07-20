@@ -17,9 +17,8 @@ public class BombedCell extends Cell {
 
     @Override
     public void reveal() {
-        if (isClosedCell() && eventManager != null) {
+        if (isClosedCell() && eventManager != null)
             eventManager.onBombReveal();
-        }
         super.reveal();
     }
 }

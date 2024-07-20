@@ -57,7 +57,7 @@ public class CLIHandler extends UIHandler {
 
     @Override
     public void show(String[] gameStats, Board board) {
-        DisplayFormatter.displayTopMenu();
+        DisplayFormatter.displayTopMenu(gameStats);
         DisplayFormatter.displayBoard(board);
     }
 
