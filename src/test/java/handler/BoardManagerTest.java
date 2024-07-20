@@ -21,15 +21,9 @@ class BoardManagerTest {
 
     @Test
     void testRevealAdjacentArea() {
-        BombedCell bombedCell = new BombedCell();
-        board.setCell(bombedCell, new Coordinate(0, 3));
-        bombPlacer.updateProximity(new Coordinate(0, 3));
-        board.setCell(bombedCell, new Coordinate(3, 0));
-        bombPlacer.updateProximity(new Coordinate(3, 0));
-        board.setCell(bombedCell, new Coordinate(6, 0));
-        bombPlacer.updateProximity(new Coordinate(6, 0));
-        board.setCell(bombedCell, new Coordinate(7, 2));
-        bombPlacer.updateProximity(new Coordinate(7, 2));
+        setBombs(new Coordinate(0, 3), new Coordinate(3, 0),
+                new Coordinate(6, 0), new Coordinate(7, 2));
+
         boardManager.revealAdjacentArea(new Coordinate(5, 5));
         int[][] expectedOpenCells = {
                 {1, 1, 1, 0, 0, 0, 0, 0},
@@ -53,6 +47,14 @@ class BoardManagerTest {
                 }
             }
         }
-        assertArrayEquals(expectedOpenCells,actualOpenCells);
+        assertArrayEquals(expectedOpenCells, actualOpenCells);
+    }
+
+    void setBombs(Coordinate... coordinates) {
+        for (Coordinate coordinate : coordinates) {
+            BombedCell bombedCell = new BombedCell();
+            board.setCell(bombedCell, coordinate);
+            bombPlacer.updateProximity(coordinate);
+        }
     }
 }
