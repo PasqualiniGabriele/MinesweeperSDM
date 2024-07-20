@@ -50,6 +50,9 @@ public class CLIHandler extends UIHandler {
     public Command hasNextCommand() {
         DisplayFormatter.displayBottomMenu();
         String input = scanner.nextLine();
+        if (isQuitCommand(input)) {
+            return null;
+        }
         try {
             return CommandParser.parseCommand(input);
         } catch (IllegalArgumentException e) {
