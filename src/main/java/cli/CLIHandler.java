@@ -25,21 +25,6 @@ public class CLIHandler extends UIHandler {
     }
 
     @Override
-    public Command hasNextCommand() {
-        DisplayFormatter.displayBottomMenu();
-        String input = scanner.nextLine();
-        if (isQuitCommand(input)) {
-            return null;
-        }
-        try {
-            return CommandParser.parseCommand(input);
-        } catch (IllegalArgumentException e) {
-            System.out.println("Not a valid command\nValid format: C x y or F x y");
-            return hasNextCommand();
-        }
-    }
-
-    @Override
     public Configuration askForConfiguration() {
         DisplayFormatter.displayDifficultyMenu();
         String input = scanner.nextLine().trim();
@@ -60,6 +45,19 @@ public class CLIHandler extends UIHandler {
         DisplayFormatter.displayTopMenu(gameStats);
         DisplayFormatter.displayBoard(board);
     }
+
+    @Override
+    public Command hasNextCommand() {
+        DisplayFormatter.displayBottomMenu();
+        String input = scanner.nextLine();
+        try {
+            return CommandParser.parseCommand(input);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Not a valid command\nValid format: C x y or F x y");
+            return hasNextCommand();
+        }
+    }
+
 
     @Override
     protected void gameRules() {
