@@ -8,7 +8,8 @@ import java.util.Set;
 
 public class CommandParser {
 
-    private static final Set<String> VALID_ACTIONS = Set.of("F", "C");
+    private static final Set<String> VALID_GAME_ACTIONS = Set.of("F", "C");
+    private static final Set<String> VALID_MENU_ACTIONS = Set.of("I", "Q", "R");
 
     public static Command parseCommand(String userInput) throws IllegalArgumentException {
         String[] commandArray = userInput.split(" ");
@@ -47,6 +48,6 @@ public class CommandParser {
     }
 
     private static boolean isValidAction(String action) {
-        return VALID_ACTIONS.contains(action);
+        return VALID_GAME_ACTIONS.contains(action);
     }
 }
