@@ -23,15 +23,12 @@ public class CommandParser {
     }
 
     private static boolean isValidCommand(String[] commandArray) {
-        if (commandArray.length != 3) {
-            return false;
-        }
-
         String action = commandArray[0].toUpperCase();
-        if (!VALID_ACTIONS.contains(action)) {
-            return false;
-        }
+        if (!isValidAction(action)) return false;
+        return (isValidNumber(commandArray) && isValidLength(commandArray));
+    }
 
+    private static boolean isValidNumber(String[] commandArray) {
         try {
             int x = Integer.parseInt(commandArray[1]);
             int y = Integer.parseInt(commandArray[2]);
@@ -43,5 +40,13 @@ public class CommandParser {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    private static boolean isValidLength(String[] commandArray) {
+        return (commandArray.length == 3);
+    }
+
+    private static boolean isValidAction(String action) {
+        return VALID_ACTIONS.contains(action);
     }
 }
