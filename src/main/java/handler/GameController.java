@@ -117,6 +117,5 @@ public class GameController implements GameEventListener {
         if (boardManager.getFreeCellsLeft() == 0) {
             endGame(WON);
         }
-        System.out.println(boardManager.getFreeCellsLeft());
     }
 }
