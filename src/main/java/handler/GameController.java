@@ -34,7 +34,7 @@ public class GameController implements GameEventListener {
         boardManager.applyFirstClick(firstCommand);
         while (game.getStatus() == GameStatus.ONGOING){
             handler.show(getGameStats(), boardManager.getBoard());
-            GameCommand command = (GameCommand)handler.hasNextCommand();
+            Command command = handler.hasNextCommand();
             if (command == null) {
                 break;
             }
@@ -52,15 +52,35 @@ public class GameController implements GameEventListener {
         game.end(endStatus);
     }
 
+    public void applyCommand(Command command) {
+        if (command instanceof GameCommand gameCommand) {
+            applyGameCommand(gameCommand.getAction(), gameCommand.getCoordinate());
+        } else {
+            applyMenuCommand(command.getAction());
+        }
+    }
 
-    public void applyCommand(GameCommand command) {
-        Coordinate coordinate = command.getCoordinate();
-        switch (command.getAction()) {
+    private void applyGameCommand(String action, Coordinate coordinate) {
+        switch (action) {
             case "F":
                 boardManager.applyFlag(coordinate);
                 break;
             case "C":
                 boardManager.applyClick(coordinate);
+                break;
+        }
+    }
+
+    private void applyMenuCommand(String action) {
+        switch (action) {
+            case "Q":
+                // implement quit logic
+                break;
+            case "R":
+                // implement restart logic
+                break;
+            case "I":
+                handler.gameRules();
                 break;
         }
     }
