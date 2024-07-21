@@ -2,6 +2,8 @@ package handler;
 
 import model.*;
 
+import static model.GameStatus.*;
+
 public class GameController implements GameEventListener {
 
     private Game game;
@@ -28,20 +30,17 @@ public class GameController implements GameEventListener {
     }
 
     public void gameLoop(){
-        while (game.getStatus() == GameStatus.ONGOING){
+        while (game.getStatus() == ONGOING){
             handler.show(getGameStats(), boardManager.getBoard());
             Command command = handler.hasNextCommand();
-            if (command == null) {
-                break;
-            }
             applyCommand(command);
         }
-        handler.show(getGameStats(), boardManager.getBoard());
     }
 
 
     public void endGame(GameStatus endStatus) {
         boardManager.openAllCells();
+        handler.show(getGameStats(), boardManager.getBoard());
         game.end(endStatus);
     }
 
@@ -67,10 +66,7 @@ public class GameController implements GameEventListener {
     private void applyMenuCommand(String action) {
         switch (action) {
             case "Q":
-                // implement quit logic
-                break;
-            case "R":
-                // implement restart logic
+                game.end(QUIT);
                 break;
             case "I":
                 handler.gameRules();
@@ -100,7 +96,7 @@ public class GameController implements GameEventListener {
 
     @Override
     public void onBombReveal() {
-        endGame(GameStatus.LOST);
+        endGame(LOST);
     }
 
     @Override
@@ -116,7 +112,7 @@ public class GameController implements GameEventListener {
     @Override
     public void onFreeCellReveal() {
         if(boardManager.getFreeCellsLeft() == 0){
-            endGame(GameStatus.WON);
+            endGame(WON);
         }
     }
 }

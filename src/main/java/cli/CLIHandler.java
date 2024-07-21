@@ -12,7 +12,6 @@ import static cli.DisplayFormatter.*;
 
 public class CLIHandler extends UIHandler {
     Scanner scanner;
-    private static final String QUIT_COMMAND = "Q";
 
     public CLIHandler() {
         super();
@@ -34,8 +33,7 @@ public class CLIHandler extends UIHandler {
             case "3" -> Configuration.HARD;
             default -> {
                 System.out.println("\nUnknown command, try again.\n\n");
-                askForConfiguration();
-                yield null;
+                yield askForConfiguration();
             }
         };
     }
@@ -50,9 +48,6 @@ public class CLIHandler extends UIHandler {
     public Command hasNextCommand() {
         DisplayFormatter.displayBottomMenu();
         String input = scanner.nextLine();
-        if (isQuitCommand(input)) {
-            return null;
-        }
         try {
             return CommandParser.parseCommand(input);
         } catch (IllegalArgumentException e) {
@@ -60,7 +55,6 @@ public class CLIHandler extends UIHandler {
             return hasNextCommand();
         }
     }
-
 
     @Override
     protected void gameRules() {
@@ -74,13 +68,7 @@ public class CLIHandler extends UIHandler {
         else if (gameStatus == GameStatus.LOST) displayLostMessage();
     }
 
-
     public void setScanner(Scanner scanner) {
         this.scanner = scanner;
     }
-
-    private static boolean isQuitCommand(String input) {
-        return input.equalsIgnoreCase(QUIT_COMMAND);
-    }
-
 }
