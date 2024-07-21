@@ -36,6 +36,7 @@ public class GameController implements GameEventListener {
             Command command = handler.hasNextCommand();
             applyCommand(command);
         }
+        GameEventManager.getInstance().unsubscribe(this);
         handler.exit(game.getStatus());
     }
 
@@ -112,8 +113,10 @@ public class GameController implements GameEventListener {
 
     @Override
     public void onFreeCellReveal() {
+        boardManager.decrementFreeCellsLeft();
         if (boardManager.getFreeCellsLeft() == 0) {
             endGame(WON);
         }
+        System.out.println(boardManager.getFreeCellsLeft());
     }
 }

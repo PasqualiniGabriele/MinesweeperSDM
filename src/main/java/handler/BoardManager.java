@@ -24,7 +24,7 @@ public class BoardManager {
         }
         FreeCell freeCell = (FreeCell) board.getCell(coordinate);
         freeCell.reveal();
-        freeCellsLeft--;
+
         if (freeCell.isZeroProximity()) {
             for (int dx = -1; dx <= 1; dx++) {
                 for (int dy = -1; dy <= 1; dy++) {
@@ -54,7 +54,6 @@ public class BoardManager {
             revealAdjacentArea(coordinate);
         } else {
             cell.reveal();
-            freeCellsLeft--;
         }
     }
 
@@ -70,13 +69,16 @@ public class BoardManager {
         return freeCellsLeft;
     }
 
+    public void decrementFreeCellsLeft() {
+        freeCellsLeft--;
+    }
+
     public void incrementFlagCounter() {
         flagsLeft++;
     }
 
     public void decrementFlagCounter() {
         flagsLeft--;
-        System.out.println(flagsLeft);
     }
 
     public int getFlagsLeft() {
