@@ -19,6 +19,7 @@ public abstract class UIHandler {
 
     public abstract Command hasNextCommand();
 
-    public void show(String[] gameStats, Board board) {
-    }
+    public abstract void show(String[] gameStats, Board board);
+
+    public abstract boolean isNewGameRequested();
 }

@@ -17,10 +17,11 @@ public class GameController implements GameEventListener {
 
     public void launch() {
         handler.welcome();
-        Configuration configuration = handler.askForConfiguration();
-        createGame(configuration);
-        gameLoop();
-        handler.exit(game.getStatus());
+        do {
+            Configuration configuration = handler.askForConfiguration();
+            createGame(configuration);
+            gameLoop();
+        } while (handler.isNewGameRequested());
     }
 
     public void createGame(Configuration configuration) {
@@ -29,14 +30,14 @@ public class GameController implements GameEventListener {
         GameEventManager.getInstance().subscribe(this);
     }
 
-    public void gameLoop(){
-        while (game.getStatus() == ONGOING){
+    public void gameLoop() {
+        while (game.getStatus() == ONGOING) {
             handler.show(getGameStats(), boardManager.getBoard());
             Command command = handler.hasNextCommand();
             applyCommand(command);
         }
+        handler.exit(game.getStatus());
     }
-
 
     public void endGame(GameStatus endStatus) {
         boardManager.openAllCells();
@@ -111,7 +112,7 @@ public class GameController implements GameEventListener {
 
     @Override
     public void onFreeCellReveal() {
-        if(boardManager.getFreeCellsLeft() == 0){
+        if (boardManager.getFreeCellsLeft() == 0) {
             endGame(WON);
         }
     }

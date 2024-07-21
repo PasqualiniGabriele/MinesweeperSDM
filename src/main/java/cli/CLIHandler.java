@@ -68,6 +68,13 @@ public class CLIHandler extends UIHandler {
         else if (gameStatus == GameStatus.LOST) displayLostMessage();
     }
 
+    @Override
+    public boolean isNewGameRequested() {
+        System.out.println("\nWant to play again? (y/n)");
+        String input = scanner.nextLine().trim().toUpperCase();
+        return input.equals("Y");
+    }
+
     public void setScanner(Scanner scanner) {
         this.scanner = scanner;
     }

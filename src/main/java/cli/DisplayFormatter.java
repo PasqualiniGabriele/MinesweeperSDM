@@ -48,7 +48,7 @@ public class DisplayFormatter {
     }
 
     protected static void displayBottomMenu() {
-        System.out.println("\n" + WHITE_BG + " I " + RESET + " Game Rules   " + WHITE_BG + " Q " + RESET + " Exit   " + WHITE_BG + " R " + RESET + " Restart Game");
+        System.out.println("\n" + WHITE_BG + " I " + RESET + " Game Rules   " + WHITE_BG + " Q " + RESET + " Exit   ");
         System.out.print("\nCommand:  ");
     }
 
