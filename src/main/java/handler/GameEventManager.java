@@ -38,4 +38,10 @@ public class GameEventManager {
             listener.onFlag();
         }
     }
+
+    public void onFreeCellReveal() {
+        for (GameEventListener listener : listeners) {
+            listener.onFreeCellReveal();
+        }
+    }
 }

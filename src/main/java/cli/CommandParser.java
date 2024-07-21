@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class CommandParser {
 
-    private static final Set<String> VALID_MENU_ACTIONS = Set.of("I", "Q", "R");
+    private static final Set<String> VALID_MENU_ACTIONS = Set.of("I", "Q");
     private static final Set<String> VALID_GAME_ACTIONS = Set.of("F", "C");
 
     public static Command parseCommand(String userInput) throws IllegalArgumentException {

@@ -24,6 +24,13 @@ public class FreeCell extends Cell {
     }
 
     @Override
+    public void reveal() {
+        super.reveal();
+        if (eventManager != null)
+            eventManager.onFreeCellReveal();
+    }
+
+    @Override
     public String getIcon() {
         String proximity = String.valueOf(this.proximity);
         return switch (proximity) {

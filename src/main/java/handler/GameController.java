@@ -28,9 +28,6 @@ public class GameController implements GameEventListener {
     }
 
     public void gameLoop(){
-        handler.show(getGameStats(), boardManager.getBoard());
-        GameCommand firstCommand = (GameCommand) handler.hasNextCommand();
-        boardManager.applyFirstClick(firstCommand);
         while (game.getStatus() == GameStatus.ONGOING){
             handler.show(getGameStats(), boardManager.getBoard());
             Command command = handler.hasNextCommand();
@@ -38,9 +35,6 @@ public class GameController implements GameEventListener {
                 break;
             }
             applyCommand(command);
-            if(boardManager.getFreeCellsLeft()==0){
-                endGame(GameStatus.WON);
-            }
         }
         handler.show(getGameStats(), boardManager.getBoard());
     }
@@ -117,5 +111,12 @@ public class GameController implements GameEventListener {
     @Override
     public void onFlag() {
         boardManager.decrementFlagCounter();
+    }
+
+    @Override
+    public void onFreeCellReveal() {
+        if(boardManager.getFreeCellsLeft() == 0){
+            endGame(GameStatus.WON);
+        }
     }
 }

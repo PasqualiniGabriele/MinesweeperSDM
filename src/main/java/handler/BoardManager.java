@@ -7,6 +7,7 @@ public class BoardManager {
     private final Board board;
     private int freeCellsLeft;
     private int flagsLeft;
+    private boolean firstClick = true;
     private final BombPlacer bombPlacer;
 
     public BoardManager(Configuration configuration) {
@@ -16,11 +17,6 @@ public class BoardManager {
         bombPlacer = new BombPlacer(configuration, board);
         Cell.setEventManager(GameEventManager.getInstance());
     }
-
-        void applyFirstClick(GameCommand firstCommand) {
-            bombPlacer.placeBombsAvoiding(firstCommand.getCoordinate());
-            applyClick(firstCommand.getCoordinate());
-        }
 
     public void revealAdjacentArea(Coordinate coordinate) {
         if (!board.isValidCoordinate(coordinate) || !board.getCell(coordinate).isClosedCell()) {
@@ -43,20 +39,24 @@ public class BoardManager {
         return board;
     }
 
-        public void applyFlag(Coordinate coordinate) {
-            Cell cell = board.getCell(coordinate);
-            cell.toggleFlag();
-        }
+    public void applyFlag(Coordinate coordinate) {
+        Cell cell = board.getCell(coordinate);
+        cell.toggleFlag();
+    }
 
-        public void applyClick(Coordinate coordinate) {
-            Cell cell = board.getCell(coordinate);
-            if (cell instanceof FreeCell freeCell && (freeCell.getProximity() == 0)) {
-                revealAdjacentArea(coordinate);
-            } else {
-                cell.reveal();
-                freeCellsLeft--;
-            }
+    public void applyClick(Coordinate coordinate) {
+        if (firstClick) {
+            bombPlacer.placeBombsAvoiding(coordinate);
+            firstClick = false;
         }
+        Cell cell = board.getCell(coordinate);
+        if (cell instanceof FreeCell freeCell && freeCell.isZeroProximity()) {
+            revealAdjacentArea(coordinate);
+        } else {
+            cell.reveal();
+            freeCellsLeft--;
+        }
+    }
 
     public void openAllCells() {
         for (int i = 0; i < board.getWidth(); i++) {
@@ -85,5 +85,9 @@ public class BoardManager {
 
     public Configuration getConfiguration() {
         return board.getConfiguration();
+    }
+
+    public void setFirstClick(boolean firstClick) {
+        this.firstClick = firstClick;
     }
 }

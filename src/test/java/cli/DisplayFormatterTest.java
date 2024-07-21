@@ -21,6 +21,8 @@ class DisplayFormatterTest {
     @BeforeEach
     void setUp() {
         BoardManager boardManager = new BoardManager(Configuration.EASY);
+        // to make sure the board is not random:
+        boardManager.setFirstClick(false);
         board = boardManager.getBoard();
         bombPlacer = new BombPlacer(Configuration.EASY, board);
 
@@ -50,6 +52,7 @@ class DisplayFormatterTest {
     void testFormatBoard() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
+
         DisplayFormatter.displayBoard(board);
 
         String expectedOutput = """
