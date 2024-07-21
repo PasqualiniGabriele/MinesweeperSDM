@@ -11,7 +11,6 @@ public class GameController implements GameEventListener {
 
     public GameController(UIHandler handler) {
         this.handler = handler;
-        BombedCell.setEventManager(GameEventManager.getInstance());
     }
 
     public void launch() {

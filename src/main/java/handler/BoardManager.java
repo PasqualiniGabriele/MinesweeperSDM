@@ -14,6 +14,7 @@ public class BoardManager {
         freeCellsLeft = configuration.getWidth() * configuration.getHeight() - configuration.getNumOfBombs();
         flagsLeft = configuration.getNumOfBombs();
         bombPlacer = new BombPlacer(configuration, board);
+        Cell.setEventManager(GameEventManager.getInstance());
     }
 
         void applyFirstClick(GameCommand firstCommand) {
