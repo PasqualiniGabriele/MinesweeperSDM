@@ -21,8 +21,10 @@ class DisplayFormatterTest {
     @BeforeEach
     void setUp() {
         BoardManager boardManager = new BoardManager(Configuration.EASY);
+
         // to make sure the board is not random:
-        boardManager.setFirstClick(false);
+        boardManager.setFirstClickMade(true);
+
         board = boardManager.getBoard();
         bombPlacer = new BombPlacer(Configuration.EASY, board);
 

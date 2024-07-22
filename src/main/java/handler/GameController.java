@@ -78,11 +78,15 @@ public class GameController implements GameEventListener {
                 handler.gameRules();
                 break;
             case "SALAMUCCIO":
-                applyGameCommand("C", new Coordinate(1,1));
-                boardManager.openAllCells();
-                endGame(WON);
+                easterEgg();
                 break;
         }
+    }
+
+    private void easterEgg() {
+        if (!boardManager.isFirstClickMade())
+            applyGameCommand("C", new Coordinate(1,1));
+        endGame(WON);
     }
 
     public Game getGame() {

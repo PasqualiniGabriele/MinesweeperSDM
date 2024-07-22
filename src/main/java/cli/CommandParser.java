@@ -44,12 +44,8 @@ public class CommandParser {
         try {
             int x = Integer.parseInt(commandArray[1]);
             int y = Integer.parseInt(commandArray[2]);
-
-            if (x <= 0 || y <= 0) {
-                throw new IllegalArgumentException("Coordinates must be positive");
-            }
-            return true;
-        } catch (Exception e) {
+            return x > 0 && y > 0;
+        } catch (NumberFormatException e) {
             return false;
         }
     }

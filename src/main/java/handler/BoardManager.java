@@ -7,7 +7,7 @@ public class BoardManager {
     private final Board board;
     private int freeCellsLeft;
     private int flagsLeft;
-    private boolean firstClick = true;
+    private boolean firstClickMade = false;
     private final BombPlacer bombPlacer;
 
     public BoardManager(Configuration configuration) {
@@ -45,9 +45,9 @@ public class BoardManager {
     }
 
     public void applyClick(Coordinate coordinate) {
-        if (firstClick) {
+        if (!firstClickMade) {
             bombPlacer.placeBombsAvoiding(coordinate);
-            firstClick = false;
+            firstClickMade = true;
         }
         Cell cell = board.getCell(coordinate);
         if (cell instanceof FreeCell freeCell && freeCell.isZeroProximity()) {
@@ -89,7 +89,11 @@ public class BoardManager {
         return board.getConfiguration();
     }
 
-    public void setFirstClick(boolean firstClick) {
-        this.firstClick = firstClick;
+    public boolean isFirstClickMade() {
+        return firstClickMade;
+    }
+
+    public void setFirstClickMade(boolean firstClickMade) {
+        this.firstClickMade = firstClickMade;
     }
 }
