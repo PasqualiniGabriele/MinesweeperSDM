@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
+import java.util.Random;
 import java.util.Scanner;
 
 import static java.lang.Thread.sleep;
@@ -80,6 +81,26 @@ class GameControllerTest {
         assertEquals("MEDIUM", gameStats[0]);
         assertEquals("40", gameStats[1]);
         assertEquals("3", gameStats[2]);
+    }
+
+    @Test
+    public void testWinGame() {
+        gameController.createGame(Configuration.EASY);
+        gameController.applyCommand(new GameCommand("C", new Coordinate(5, 5)));
+        Board board = gameController.getBoardManager().getBoard();
+        winGame(board);
+        assertEquals(0, gameController.getBoardManager().getFreeCellsLeft());
+    }
+
+    private void winGame(Board board) {
+        while (gameController.getGame().getStatus() != GameStatus.WON) {
+            Random random = new Random();
+            int x = random.nextInt(board.getWidth());
+            int y = random.nextInt(board.getHeight());
+            Coordinate coordinate = new Coordinate(x, y);
+            if (board.getCell(coordinate) instanceof FreeCell)
+                gameController.applyCommand(new GameCommand("C", coordinate));
+        }
     }
 }
 
