@@ -76,16 +76,6 @@ public class GameController implements GameEventListener {
     }
 
     @Override
-    public void onUnflag() {
-        boardManager.incrementFlagCounter();
-    }
-
-    @Override
-    public void onFlag() {
-        boardManager.decrementFlagCounter();
-    }
-
-    @Override
     public void onFreeCellReveal() {
         boardManager.decrementFreeCellsLeft();
         if (boardManager.getFreeCellsLeft() == 0) {

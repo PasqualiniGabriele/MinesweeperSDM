@@ -1,11 +1,15 @@
 package handler;
 
 public interface GameEventListener {
-    void onBombReveal();
+    default void onBombReveal(){
+    };
 
-    void onUnflag();
+    default void onUnflag(){
+    };
 
-    void onFlag();
+    default void onFlag(){
+    };
 
-    void onFreeCellReveal();
+    default void onFreeCellReveal(){
+    };
 }

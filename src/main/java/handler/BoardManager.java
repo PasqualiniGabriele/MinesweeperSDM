@@ -2,7 +2,7 @@ package handler;
 
 import model.*;
 
-public class BoardManager {
+public class BoardManager implements GameEventListener {
 
     private final Board board;
     private int freeCellsLeft;
@@ -73,14 +73,6 @@ public class BoardManager {
         freeCellsLeft--;
     }
 
-    public void incrementFlagCounter() {
-        flagsLeft++;
-    }
-
-    public void decrementFlagCounter() {
-        flagsLeft--;
-    }
-
     public int getFlagsLeft() {
         return flagsLeft;
     }
@@ -95,5 +87,15 @@ public class BoardManager {
 
     public void setFirstClickMade(boolean firstClickMade) {
         this.firstClickMade = firstClickMade;
+    }
+
+    @Override
+    public void onUnflag() {
+        flagsLeft++;
+    }
+
+    @Override
+    public void onFlag() {
+        flagsLeft--;
     }
 }
