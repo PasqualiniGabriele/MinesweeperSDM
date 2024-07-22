@@ -62,5 +62,4 @@ public abstract class Cell {
         return state.isOpenState();
     }
 
-    ;
 }
