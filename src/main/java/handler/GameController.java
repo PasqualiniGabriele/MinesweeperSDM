@@ -55,13 +55,17 @@ public class GameController implements GameEventListener {
     }
 
     private void applyGameCommand(String action, Coordinate coordinate) {
-        switch (action) {
-            case "F":
-                boardManager.applyFlag(coordinate);
-                break;
-            case "C":
-                boardManager.applyClick(coordinate);
-                break;
+        try {
+            switch (action) {
+                case "F":
+                    boardManager.applyFlag(coordinate);
+                    break;
+                case "C":
+                    boardManager.applyClick(coordinate);
+                    break;
+            }
+        } catch (Exception e) {
+            handler.printWrongCoordinateError();
         }
     }
 
