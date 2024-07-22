@@ -29,10 +29,10 @@ class DisplayFormatterTest {
         bombPlacer = new BombPlacer(Configuration.EASY, board);
 
         setBombs(new Coordinate(0, 3), new Coordinate(4, 2),
-                 new Coordinate(3, 0), new Coordinate(3, 6),
-                 new Coordinate(6, 0), new Coordinate(1, 1),
-                 new Coordinate(7, 2), new Coordinate(6, 4),
-                 new Coordinate(5, 5), new Coordinate(5, 1));
+                new Coordinate(3, 0), new Coordinate(3, 6),
+                new Coordinate(6, 0), new Coordinate(1, 1),
+                new Coordinate(7, 2), new Coordinate(6, 4),
+                new Coordinate(5, 5), new Coordinate(5, 1));
 
         boardManager.applyClick(new Coordinate(3, 0));
         boardManager.applyClick(new Coordinate(6, 0));

@@ -85,7 +85,7 @@ public class GameController implements GameEventListener {
 
     private void easterEgg() {
         if (!boardManager.isFirstClickMade())
-            applyGameCommand("C", new Coordinate(1,1));
+            applyGameCommand("C", new Coordinate(1, 1));
         endGame(WON);
     }
 

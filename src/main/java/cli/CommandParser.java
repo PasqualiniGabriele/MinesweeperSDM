@@ -14,7 +14,7 @@ public class CommandParser {
     public static Command parseCommand(String userInput) throws IllegalArgumentException {
         String[] commandArray = userInput.split(" ");
         String action = commandArray[0].toUpperCase();
-        if((commandArray.length == 1) && (isValidMenuAction(action))) {
+        if ((commandArray.length == 1) && (isValidMenuAction(action))) {
             return new Command(action);
         } else if ((commandArray.length == 3) && (isValidGameCommand(action, commandArray))) {
             Coordinate coordinate = parseCoordinate(commandArray);
@@ -34,9 +34,9 @@ public class CommandParser {
         return VALID_GAME_ACTIONS.contains(action);
     }
 
-    public static Coordinate parseCoordinate (String[] commandArray){
-        int x = Integer.parseInt(commandArray[1])-1;
-        int y = Integer.parseInt(commandArray[2])-1;
+    public static Coordinate parseCoordinate(String[] commandArray) {
+        int x = Integer.parseInt(commandArray[1]) - 1;
+        int y = Integer.parseInt(commandArray[2]) - 1;
         return new Coordinate(x, y);
     }
 

@@ -16,13 +16,13 @@ class ClosedStateTest {
     }
 
     @Test
-    void testStateAfterReveal(){
+    void testStateAfterReveal() {
         cell.reveal();
         assertInstanceOf(OpenState.class, cell.getState());
     }
 
     @Test
-    void testStateAfterToggleFlag(){
+    void testStateAfterToggleFlag() {
         cell.toggleFlag();
         assertInstanceOf(FlaggedState.class, cell.getState());
     }
