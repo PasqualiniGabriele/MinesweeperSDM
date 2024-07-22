@@ -19,7 +19,7 @@ public class CommandParser {
         } else if ((commandArray.length == 3) && (isValidGameCommand(action, commandArray))) {
             Coordinate coordinate = parseCoordinate(commandArray);
             return new GameCommand(action, coordinate);
-        } else throw new IllegalArgumentException("Invalid command format");
+        } else throw new IllegalArgumentException("Not a valid command\nValid format: C x y or F x y");
     }
 
     private static boolean isValidMenuAction(String action) {

@@ -51,7 +51,7 @@ public class CLIHandler extends UIHandler {
         try {
             return CommandParser.parseCommand(input);
         } catch (IllegalArgumentException e) {
-            System.out.println("Not a valid command\nValid format: C x y or F x y");
+            System.out.println(e.getMessage());
             return hasNextCommand();
         }
     }
