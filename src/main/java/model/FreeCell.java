@@ -25,9 +25,9 @@ public class FreeCell extends Cell {
 
     @Override
     public void reveal() {
-        super.reveal();
-        if (eventManager != null)
+        if (isClosedCell() && eventManager != null)
             eventManager.onFreeCellReveal();
+        super.reveal();
     }
 
     @Override
