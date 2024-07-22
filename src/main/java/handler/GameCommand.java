@@ -4,6 +4,7 @@ import model.Coordinate;
 
 public class GameCommand extends Command {
     Coordinate coordinate;
+
     public GameCommand(String action, Coordinate coordinate) {
         super(action);
         this.coordinate = coordinate;

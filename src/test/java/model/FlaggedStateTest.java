@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FlaggedStateTest{
+class FlaggedStateTest {
 
     Cell cell;
 
@@ -16,13 +16,13 @@ class FlaggedStateTest{
     }
 
     @Test
-    void testStateAfterReveal(){
+    void testStateAfterReveal() {
         cell.reveal();
         assertInstanceOf(FlaggedState.class, cell.getState());
     }
 
     @Test
-    void testStateAfterToggleFlag(){
+    void testStateAfterToggleFlag() {
         cell.toggleFlag();
         assertInstanceOf(ClosedState.class, cell.getState());
     }

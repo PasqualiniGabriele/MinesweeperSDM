@@ -10,7 +10,7 @@ public class BombPlacer {
     private final Board board;
     private final Configuration configuration;
 
-    public BombPlacer(Configuration configuration, Board board){
+    public BombPlacer(Configuration configuration, Board board) {
         this.configuration = configuration;
         this.board = board;
     }

@@ -4,6 +4,7 @@ import cli.CLIHandler;
 import model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BoardManagerTest {
@@ -52,22 +53,23 @@ class BoardManagerTest {
         }
         assertArrayEquals(expectedOpenCells, actualOpenCells);
     }
+
     @Test
-    void testFreeCellsLeft(){
-        bombPlacer.placeBombsAvoiding(new Coordinate(4,4));
-        Command command = new GameCommand("C", new Coordinate(4,4));
+    void testFreeCellsLeft() {
+        bombPlacer.placeBombsAvoiding(new Coordinate(4, 4));
+        Command command = new GameCommand("C", new Coordinate(4, 4));
         gameController.createGame(Configuration.EASY);
         gameController.applyCommand(command);
         int expectedFreeCellsLeft = boardManager.getFreeCellsLeft();
         int actualFreeCellsLeft = 0;
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                if(board.getCell(new Coordinate(i,j)) instanceof FreeCell freeCell){
-                    if(freeCell.isClosedCell()) actualFreeCellsLeft++;
+                if (board.getCell(new Coordinate(i, j)) instanceof FreeCell freeCell) {
+                    if (freeCell.isClosedCell()) actualFreeCellsLeft++;
                 }
             }
         }
-        assertEquals(expectedFreeCellsLeft,actualFreeCellsLeft);
+        assertEquals(expectedFreeCellsLeft, actualFreeCellsLeft);
     }
 
     void setBombs(Coordinate... coordinates) {

@@ -45,7 +45,7 @@ public abstract class Cell {
         this.icon = icon;
     }
 
-    public void open(){
+    public void open() {
         state = new OpenState();
     }
 
@@ -58,7 +58,8 @@ public abstract class Cell {
         return state.isClosedState();
     }
 
-    public boolean isOpenCell(){
+    public boolean isOpenCell() {
         return state.isOpenState();
-    };
+    }
+
 }
