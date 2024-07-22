@@ -3,6 +3,7 @@ package handler;
 import model.*;
 
 import static model.GameStatus.*;
+import static handler.Command.*;
 
 public class GameController implements GameEventListener {
 
@@ -57,10 +58,10 @@ public class GameController implements GameEventListener {
     private void applyGameCommand(String action, Coordinate coordinate) {
         try {
             switch (action) {
-                case "F":
+                case FLAG_ACTION:
                     boardManager.applyFlag(coordinate);
                     break;
-                case "C":
+                case CLICK_ACTION:
                     boardManager.applyClick(coordinate);
                     break;
             }
@@ -71,13 +72,13 @@ public class GameController implements GameEventListener {
 
     private void applyMenuCommand(String action) {
         switch (action) {
-            case "Q":
+            case QUIT_ACTION:
                 game.end(QUIT);
                 break;
-            case "I":
+            case INFO_ACTION:
                 handler.gameRules();
                 break;
-            case "SALAMUCCIO":
+            case EASTER_EGG_ACTION:
                 easterEgg();
                 break;
         }
@@ -85,7 +86,7 @@ public class GameController implements GameEventListener {
 
     private void easterEgg() {
         if (!boardManager.isFirstClickMade())
-            applyGameCommand("C", new Coordinate(1, 1));
+            applyGameCommand(CLICK_ACTION, new Coordinate(1, 1));
         endGame(WON);
     }
 

@@ -6,10 +6,12 @@ import model.Coordinate;
 
 import java.util.Set;
 
+import static handler.Command.*;
+
 public class CommandParser {
 
-    private static final Set<String> VALID_MENU_ACTIONS = Set.of("I", "Q", "SALAMUCCIO");
-    private static final Set<String> VALID_GAME_ACTIONS = Set.of("F", "C");
+    private static final Set<String> VALID_MENU_ACTIONS = Set.of(INFO_ACTION, QUIT_ACTION, EASTER_EGG_ACTION);
+    private static final Set<String> VALID_GAME_ACTIONS = Set.of(FLAG_ACTION, CLICK_ACTION);
 
     public static Command parseCommand(String userInput) throws IllegalArgumentException {
         String[] commandArray = userInput.split(" ");
