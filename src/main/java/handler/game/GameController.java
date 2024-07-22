@@ -43,9 +43,6 @@ public class GameController implements GameEventListener {
             Command command = handler.hasNextCommand();
             applyCommand(command);
         }
-        GameEventManager.getInstance().unsubscribe(this);
-        handler.exit(game.getStatus());
-        handler.show(getGameStats(), boardManager.getBoard());
     }
 
     public void applyCommand(Command command) {
@@ -53,8 +50,11 @@ public class GameController implements GameEventListener {
     }
 
     public void endGame(GameStatus endStatus) {
-        boardManager.openAllCells();
         game.end(endStatus);
+        handler.exit(game.getStatus());
+        boardManager.openAllCells();
+        handler.show(getGameStats(), boardManager.getBoard());
+        GameEventManager.getInstance().unsubscribe(this);
     }
 
     public Game getGame() {
@@ -134,7 +134,6 @@ public class GameController implements GameEventListener {
                 applyGameCommand(CLICK_ACTION, new Coordinate(1, 1));
             endGame(WON);
         }
-
     }
 
 }

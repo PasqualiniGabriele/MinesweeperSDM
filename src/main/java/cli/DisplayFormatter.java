@@ -33,6 +33,7 @@ public class DisplayFormatter {
 
     protected static void displayDifficultyMenu() {
         System.out.print("""
+                
                 +-------------------------------------------------------------------------------------+
                 ||                             CHOOSE DIFFICULTY LEVEL                               ||
                 |_____________________________________________________________________________________|
