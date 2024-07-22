@@ -22,4 +22,6 @@ public abstract class UIHandler {
     public abstract void show(String[] gameStats, Board board);
 
     public abstract boolean isNewGameRequested();
+
+    public abstract void printWrongCoordinateError();
 }
