@@ -89,7 +89,7 @@ If you prefer to build, test, and run the project from the source code, follow t
 - To _unflag_ the cell at coordinates (5, 6): `F 5 6` (same command as flagging)
 
 ## License
-- This project is licensed under the [MIT License]([https://opensource.org/licenses/MIT](https://github.com/PasqualiniGabriele/MinesweeperSDM/tree/master?tab=MIT-1-ov-file)). See the _license_ file for more details.
+- This project is licensed under the MIT License. See the _license_ file for more details.
 
 ## Acknowledgements
 For the graphical representation of the board, we took inspiration from a similar implementation available in an open-source project under the MIT License. Specifically, we used the approach for rendering the game board but made significant modifications to suit the needs of our project.
