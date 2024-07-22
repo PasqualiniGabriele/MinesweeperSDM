@@ -1,4 +1,5 @@
 package main;
+
 import cli.CLIHandler;
 import handler.GameController;
 
