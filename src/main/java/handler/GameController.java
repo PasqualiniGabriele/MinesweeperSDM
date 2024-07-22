@@ -11,7 +11,6 @@ public class GameController implements GameEventListener {
     private BoardManager boardManager;
     private final UIHandler handler;
 
-
     public GameController(UIHandler handler) {
         this.handler = handler;
     }
@@ -42,52 +41,13 @@ public class GameController implements GameEventListener {
         handler.show(getGameStats(), boardManager.getBoard());
     }
 
+    public void applyCommand(Command command) {
+        new CommandProcessor().applyCommand(command);
+    }
+
     public void endGame(GameStatus endStatus) {
         boardManager.openAllCells();
         game.end(endStatus);
-    }
-
-    public void applyCommand(Command command) {
-        if (command instanceof GameCommand gameCommand) {
-            applyGameCommand(gameCommand.getAction(), gameCommand.getCoordinate());
-        } else {
-            applyMenuCommand(command.getAction());
-        }
-    }
-
-    private void applyGameCommand(String action, Coordinate coordinate) {
-        try {
-            switch (action) {
-                case FLAG_ACTION:
-                    boardManager.applyFlag(coordinate);
-                    break;
-                case CLICK_ACTION:
-                    boardManager.applyClick(coordinate);
-                    break;
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            handler.printWrongCoordinateError();
-        }
-    }
-
-    private void applyMenuCommand(String action) {
-        switch (action) {
-            case QUIT_ACTION:
-                game.end(QUIT);
-                break;
-            case INFO_ACTION:
-                handler.gameRules();
-                break;
-            case EASTER_EGG_ACTION:
-                easterEgg();
-                break;
-        }
-    }
-
-    private void easterEgg() {
-        if (!boardManager.isFirstClickMade())
-            applyGameCommand(CLICK_ACTION, new Coordinate(1, 1));
-        endGame(WON);
     }
 
     public Game getGame() {
@@ -132,4 +92,52 @@ public class GameController implements GameEventListener {
             endGame(WON);
         }
     }
+
+    public class CommandProcessor {
+
+        public void applyCommand(Command command) {
+            if (command instanceof GameCommand gameCommand) {
+                applyGameCommand(gameCommand.getAction(), gameCommand.getCoordinate());
+            } else {
+                applyMenuCommand(command.getAction());
+            }
+        }
+
+        private void applyGameCommand(String action, Coordinate coordinate) {
+            try {
+                switch (action) {
+                    case FLAG_ACTION:
+                        boardManager.applyFlag(coordinate);
+                        break;
+                    case CLICK_ACTION:
+                        boardManager.applyClick(coordinate);
+                        break;
+                }
+            } catch (ArrayIndexOutOfBoundsException e) {
+                handler.printWrongCoordinateError();
+            }
+        }
+
+        private void applyMenuCommand(String action) {
+            switch (action) {
+                case QUIT_ACTION:
+                    game.end(QUIT);
+                    break;
+                case INFO_ACTION:
+                    handler.gameRules();
+                    break;
+                case EASTER_EGG_ACTION:
+                    easterEgg();
+                    break;
+            }
+        }
+
+        private void easterEgg() {
+            if (!boardManager.isFirstClickMade())
+                applyGameCommand(CLICK_ACTION, new Coordinate(1, 1));
+            endGame(WON);
+        }
+
+    }
+
 }
