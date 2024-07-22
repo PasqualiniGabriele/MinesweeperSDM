@@ -112,6 +112,10 @@ public class DisplayFormatter {
         }
         System.out.println(RESET);
     }
+    public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
 
     protected static void displayWinMessage() {
         System.out.println("""

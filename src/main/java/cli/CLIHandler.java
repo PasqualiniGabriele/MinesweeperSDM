@@ -20,12 +20,12 @@ public class CLIHandler extends UIHandler {
 
     @Override
     public void welcome() {
-        DisplayFormatter.displayWelcomeScreen();
+        displayWelcomeScreen();
     }
 
     @Override
     public Configuration askForConfiguration() {
-        DisplayFormatter.displayDifficultyMenu();
+        displayDifficultyMenu();
         String input = scanner.nextLine().trim();
         return switch (input) {
             case "1" -> Configuration.EASY;
@@ -40,13 +40,14 @@ public class CLIHandler extends UIHandler {
 
     @Override
     public void show(String[] gameStats, Board board) {
-        DisplayFormatter.displayTopMenu(gameStats);
-        DisplayFormatter.displayBoard(board);
+        clearScreen();
+        displayTopMenu(gameStats);
+        displayBoard(board);
     }
 
     @Override
     public Command hasNextCommand() {
-        DisplayFormatter.displayBottomMenu();
+        displayBottomMenu();
         String input = scanner.nextLine();
         try {
             return CommandParser.parseCommand(input);
@@ -58,7 +59,7 @@ public class CLIHandler extends UIHandler {
 
     @Override
     protected void gameRules() {
-        DisplayFormatter.displayGameRules();
+        displayGameRules();
         scanner.nextLine();
     }
 
