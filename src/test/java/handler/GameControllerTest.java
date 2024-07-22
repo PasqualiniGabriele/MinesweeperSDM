@@ -34,13 +34,13 @@ class GameControllerTest {
 
     @Test
     public void testNoExceptionLaunch() {
-        setInput("1\nQ\nn");
+        setInput("\n1\nQ\nn");
         assertDoesNotThrow(() -> gameController.launch());
     }
 
     @Test
     public void testCreateGameCall() {
-        setInput("1\nC 1 1\nQ\nn");
+        setInput("\n1\nC 1 1\nQ\nn");
         gameController.launch();
         assertNotNull(gameController.getGame());
         assertNotNull(gameController.getBoardManager());

@@ -38,11 +38,11 @@ public class GameController implements GameEventListener {
         }
         GameEventManager.getInstance().unsubscribe(this);
         handler.exit(game.getStatus());
+        handler.show(getGameStats(), boardManager.getBoard());
     }
 
     public void endGame(GameStatus endStatus) {
         boardManager.openAllCells();
-        handler.show(getGameStats(), boardManager.getBoard());
         game.end(endStatus);
     }
 

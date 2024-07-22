@@ -20,7 +20,10 @@ public class CLIHandler extends UIHandler {
 
     @Override
     public void welcome() {
+        clearScreen();
         displayWelcomeScreen();
+        scanner.nextLine();
+        clearScreen();
     }
 
     @Override
@@ -49,6 +52,7 @@ public class CLIHandler extends UIHandler {
     public Command hasNextCommand() {
         displayBottomMenu();
         String input = scanner.nextLine();
+        clearScreen();
         try {
             return CommandParser.parseCommand(input);
         } catch (IllegalArgumentException e) {
@@ -67,12 +71,14 @@ public class CLIHandler extends UIHandler {
     protected void exit(GameStatus gameStatus) {
         if (gameStatus == GameStatus.WON) displayWinMessage();
         else if (gameStatus == GameStatus.LOST) displayLostMessage();
+        sleepFor(20);
     }
 
     @Override
     public boolean isNewGameRequested() {
         System.out.println("\nWant to play again? (y/n)");
         String input = scanner.nextLine().trim().toUpperCase();
+        clearScreen();
         return input.equals("Y");
     }
 

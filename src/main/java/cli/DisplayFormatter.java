@@ -4,6 +4,7 @@ import model.Board;
 import model.Coordinate;
 
 import static cli.ConsoleColor.*;
+import static java.lang.Thread.sleep;
 
 public class DisplayFormatter {
 
@@ -26,7 +27,8 @@ public class DisplayFormatter {
                 |                                                                                     |
                 |                              Good luck, and have fun!                               |
                 +-------------------------------------------------------------------------------------+
-                """);
+                
+                Press any key to continue:\s""");
     }
 
     protected static void displayDifficultyMenu() {
@@ -115,6 +117,14 @@ public class DisplayFormatter {
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
+    }
+
+    public static void sleepFor(int deciSeconds){
+        try {
+            sleep(deciSeconds*100L);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     protected static void displayWinMessage() {
