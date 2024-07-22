@@ -9,7 +9,7 @@ import static java.lang.Thread.sleep;
 public class DisplayFormatter {
 
     protected static void displayWelcomeScreen() {
-        System.out.println("""
+        System.out.print("""
                 
                 +-------------------------------------------------------------------------------------+
                 ||       ____ ___   (_)____   ___   _____ _      __ ___   ___   ____   ___   _____   ||
@@ -33,6 +33,7 @@ public class DisplayFormatter {
 
     protected static void displayDifficultyMenu() {
         System.out.print("""
+                
                 +-------------------------------------------------------------------------------------+
                 ||                             CHOOSE DIFFICULTY LEVEL                               ||
                 |_____________________________________________________________________________________|
