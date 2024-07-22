@@ -1,8 +1,11 @@
 package cli;
 
-import handler.BoardManager;
-import handler.BombPlacer;
-import model.*;
+import handler.board.BoardManager;
+import handler.board.BombPlacer;
+import model.board.Board;
+import model.board.Configuration;
+import model.board.Coordinate;
+import model.cell.BombedCell;
 import org.junit.jupiter.api.BeforeEach;
 
 import static cli.ConsoleColor.removeAnsiCodes;

@@ -1,12 +1,12 @@
 package cli;
 
-import handler.Command;
-import handler.GameCommand;
-import model.Coordinate;
+import handler.input.Command;
+import handler.input.GameCommand;
+import model.board.Coordinate;
 
 import java.util.Set;
 
-import static handler.Command.*;
+import static handler.input.Command.*;
 
 public class CommandParser {
 

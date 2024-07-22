@@ -1,9 +1,16 @@
-package handler;
+package handler.game;
 
-import model.*;
+import handler.board.BoardManager;
+import handler.input.Command;
+import handler.input.GameCommand;
+import handler.input.UIHandler;
+import model.board.Configuration;
+import model.board.Coordinate;
+import model.game.Game;
+import model.game.GameStatus;
 
-import static model.GameStatus.*;
-import static handler.Command.*;
+import static model.game.GameStatus.*;
+import static handler.input.Command.*;
 
 public class GameController implements GameEventListener {
 

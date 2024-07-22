@@ -1,4 +1,7 @@
-package model;
+package model.board;
+
+import model.cell.Cell;
+import model.cell.FreeCell;
 
 public class Board {
     private Cell[][] cells;

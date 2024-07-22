@@ -1,10 +1,10 @@
 package cli;
 
-import handler.Command;
-import handler.UIHandler;
-import model.Board;
-import model.Configuration;
-import model.GameStatus;
+import handler.input.Command;
+import handler.input.UIHandler;
+import model.board.Board;
+import model.board.Configuration;
+import model.game.GameStatus;
 
 import java.util.Scanner;
 
@@ -62,13 +62,13 @@ public class CLIHandler extends UIHandler {
     }
 
     @Override
-    protected void gameRules() {
+    public void gameRules() {
         displayGameRules();
         scanner.nextLine();
     }
 
     @Override
-    protected void exit(GameStatus gameStatus) {
+    public void exit(GameStatus gameStatus) {
         if (gameStatus == GameStatus.WON) displayWinMessage();
         else if (gameStatus == GameStatus.LOST) displayLostMessage();
         sleepFor(20);

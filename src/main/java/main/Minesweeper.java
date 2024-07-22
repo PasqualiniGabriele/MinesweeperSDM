@@ -1,7 +1,7 @@
 package main;
 
 import cli.CLIHandler;
-import handler.GameController;
+import handler.game.GameController;
 
 
 public class Minesweeper {

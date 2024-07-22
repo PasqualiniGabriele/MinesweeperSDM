@@ -1,6 +1,12 @@
-package handler;
+package handler.board;
 
-import model.*;
+import handler.game.GameEventListener;
+import handler.game.GameEventManager;
+import model.board.Board;
+import model.board.Configuration;
+import model.board.Coordinate;
+import model.cell.Cell;
+import model.cell.FreeCell;
 
 public class BoardManager implements GameEventListener {
 

@@ -1,9 +1,9 @@
-package handler;
+package handler.board;
 
-import model.Board;
-import model.BombedCell;
-import model.Configuration;
-import model.Coordinate;
+import model.board.Board;
+import model.cell.BombedCell;
+import model.board.Configuration;
+import model.board.Coordinate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,8 +1,8 @@
 package cli;
 
-import handler.Command;
-import handler.GameCommand;
-import model.Coordinate;
+import handler.input.Command;
+import handler.input.GameCommand;
+import model.board.Coordinate;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,6 +15,7 @@ class CommandParserTest {
         assertValidGameCommand("F 10 20", new GameCommand("F", new Coordinate(9, 19)));
         assertValidGameCommand("C 1 2", new GameCommand("C", new Coordinate(0, 1)));
         assertValidCommand("Q", new Command("Q"));
+        assertValidCommand("I", new Command("I"));
     }
 
     @Test

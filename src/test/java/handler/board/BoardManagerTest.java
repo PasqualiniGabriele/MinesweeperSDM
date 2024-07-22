@@ -1,7 +1,15 @@
-package handler;
+package handler.board;
 
 import cli.CLIHandler;
-import model.*;
+import handler.game.GameController;
+import handler.input.Command;
+import handler.input.GameCommand;
+import model.board.Board;
+import model.board.Configuration;
+import model.board.Coordinate;
+import model.cell.BombedCell;
+import model.cell.Cell;
+import model.cell.FreeCell;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

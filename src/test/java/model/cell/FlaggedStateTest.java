@@ -1,29 +1,29 @@
-package model;
+package model.cell;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ClosedStateTest {
+class FlaggedStateTest {
 
     Cell cell;
 
     @BeforeEach
     void setUp() {
         cell = new BombedCell();
-        cell.setState(new ClosedState());
+        cell.setState(new FlaggedState());
     }
 
     @Test
     void testStateAfterReveal() {
         cell.reveal();
-        assertInstanceOf(OpenState.class, cell.getState());
+        assertInstanceOf(FlaggedState.class, cell.getState());
     }
 
     @Test
     void testStateAfterToggleFlag() {
         cell.toggleFlag();
-        assertInstanceOf(FlaggedState.class, cell.getState());
+        assertInstanceOf(ClosedState.class, cell.getState());
     }
 }

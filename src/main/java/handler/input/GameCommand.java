@@ -1,6 +1,6 @@
-package handler;
+package handler.input;
 
-import model.Coordinate;
+import model.board.Coordinate;
 
 public class GameCommand extends Command {
     Coordinate coordinate;

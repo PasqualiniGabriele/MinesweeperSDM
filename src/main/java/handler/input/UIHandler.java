@@ -1,17 +1,17 @@
-package handler;
+package handler.input;
 
-import model.Board;
-import model.Configuration;
-import model.GameStatus;
+import model.board.Board;
+import model.board.Configuration;
+import model.game.GameStatus;
 
 public abstract class UIHandler {
 
     public UIHandler() {
     }
 
-    protected abstract void gameRules();
+    public abstract void gameRules();
 
-    protected abstract void exit(GameStatus gameStatus);
+    public abstract void exit(GameStatus gameStatus);
 
     public abstract Configuration askForConfiguration();
 

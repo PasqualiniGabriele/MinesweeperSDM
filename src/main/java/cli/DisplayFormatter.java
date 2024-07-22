@@ -1,7 +1,7 @@
 package cli;
 
-import model.Board;
-import model.Coordinate;
+import model.board.Board;
+import model.board.Coordinate;
 
 import static cli.ConsoleColor.*;
 import static java.lang.Thread.sleep;

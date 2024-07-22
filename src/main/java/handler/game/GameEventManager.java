@@ -1,4 +1,4 @@
-package handler;
+package handler.game;
 
 import java.util.ArrayList;
 import java.util.List;

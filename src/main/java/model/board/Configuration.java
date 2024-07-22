@@ -1,5 +1,5 @@
 
-package model;
+package model.board;
 
 public enum Configuration {
     EASY(10, 8, 8),

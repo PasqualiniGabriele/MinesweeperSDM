@@ -1,6 +1,6 @@
-package model;
+package model.cell;
 
-import handler.GameEventManager;
+import handler.game.GameEventManager;
 
 public abstract class Cell {
     private CellState state;

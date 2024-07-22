@@ -1,6 +1,10 @@
-package handler;
+package handler.board;
 
-import model.*;
+import model.board.Board;
+import model.board.Configuration;
+import model.board.Coordinate;
+import model.cell.BombedCell;
+import model.cell.FreeCell;
 
 import java.util.HashSet;
 import java.util.Random;
