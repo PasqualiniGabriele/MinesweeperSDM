@@ -77,6 +77,11 @@ public class GameController implements GameEventListener {
             case "I":
                 handler.gameRules();
                 break;
+            case "SALAMUCCIO":
+                applyGameCommand("C", new Coordinate(1,1));
+                boardManager.openAllCells();
+                endGame(WON);
+                break;
         }
     }
 
