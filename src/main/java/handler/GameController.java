@@ -64,7 +64,7 @@ public class GameController implements GameEventListener {
                     boardManager.applyClick(coordinate);
                     break;
             }
-        } catch (Exception e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             handler.printWrongCoordinateError();
         }
     }
