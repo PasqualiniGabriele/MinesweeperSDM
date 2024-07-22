@@ -9,7 +9,7 @@ import static java.lang.Thread.sleep;
 public class DisplayFormatter {
 
     protected static void displayWelcomeScreen() {
-        System.out.println("""
+        System.out.print("""
                 
                 +-------------------------------------------------------------------------------------+
                 ||       ____ ___   (_)____   ___   _____ _      __ ___   ___   ____   ___   _____   ||
@@ -125,6 +125,12 @@ public class DisplayFormatter {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static void displayErrorMessage(String message){
+        System.out.println(DARK_GREY + "\n--" + RED + "ERROR" + DARK_GREY + " -------------------------------------------------------------------------------");
+        System.out.println("\t\t\t" + RESET + message + DARK_GREY);
+        System.out.println("---------------------------------------------------------------------------------------" + RESET);
     }
 
     protected static void displayWinMessage() {
