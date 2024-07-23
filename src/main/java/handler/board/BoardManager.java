@@ -166,15 +166,6 @@ public class BoardManager implements GameEventListener {
     }
 
     /**
-     * Sets the state of the first click made flag.
-     *
-     * @param firstClickMade {@code true} to indicate the first click has been made, {@code false} otherwise
-     */
-    public void setFirstClickMade(boolean firstClickMade) {
-        this.firstClickMade = firstClickMade;
-    }
-
-    /**
      * Handles the event when a flag is removed from a cell.
      * Increments the count of flags left.
      */
