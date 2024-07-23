@@ -7,10 +7,9 @@ import handler.input.UIHandler;
 import model.board.Configuration;
 import model.board.Coordinate;
 import model.game.Game;
-import model.game.GameStatus;
 
 import static handler.input.Command.Action.*;
-import static model.game.GameStatus.*;
+import static model.game.Game.Status.*;
 import static handler.input.Command.*;
 
 /**
@@ -92,7 +91,7 @@ public class GameController implements GameEventListener {
      * @param endStatus the {@code GameStatus} indicating how the game ended (e.g., WON or LOST)
      */
 
-    public void endGame(GameStatus endStatus) {
+    public void endGame(Game.Status endStatus) {
         game.setEndStatus(endStatus);
         handler.exit(endStatus);
         boardManager.openAllCells();
@@ -165,14 +164,14 @@ public class GameController implements GameEventListener {
          */
 
         private void applyGameCommand(Action action, Coordinate coordinate) {
-            switch (action) {
-                case FLAG_ACTION:
-                    boardManager.applyFlag(coordinate);
-                    break;
-                case CLICK_ACTION:
-                    boardManager.applyClick(coordinate);
-                    break;
-            }
+                switch (action) {
+                    case FLAG_ACTION:
+                        boardManager.applyFlag(coordinate);
+                        break;
+                    case CLICK_ACTION:
+                        boardManager.applyClick(coordinate);
+                        break;
+                }
         }
 
         /**

@@ -2,7 +2,7 @@ package handler.input;
 
 import model.board.Board;
 import model.board.Configuration;
-import model.game.GameStatus;
+import model.game.Game;
 
 /**
  * The {@code UIHandler} abstract class defining the interface for handling user input and rendering UI components.
@@ -23,9 +23,9 @@ public abstract class UIHandler {
     /**
      * Handles the game exit process.
      *
-     * @param gameStatus The final status of the game, indicating whether it was won, lost, or otherwise.
+     * @param status The final status of the game, indicating whether it was won, lost, or otherwise.
      */
-    public abstract void exit(GameStatus gameStatus);
+    public abstract void exit(Game.Status status);
 
     /**
      * Prompts the user to provide a game configuration.

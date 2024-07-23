@@ -9,7 +9,6 @@ import model.board.Configuration;
 import model.board.Coordinate;
 import model.cell.FreeCell;
 import model.game.Game;
-import model.game.GameStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -59,7 +58,7 @@ class GameControllerTest {
 
     @Test
     void testGameLoop() {
-        when(game.getStatus()).thenReturn(GameStatus.ONGOING).thenReturn(GameStatus.LOST);
+        when(game.getStatus()).thenReturn(Game.Status.ONGOING).thenReturn(Game.Status.LOST);
         when(handler.hasNextCommand()).thenReturn(new Command(FLAG_ACTION));
         gameController.gameLoop();
         verify(handler, times(1)).hasNextCommand();
@@ -111,7 +110,7 @@ class GameControllerTest {
     }
 
     private void winGame(Board board) {
-        while (gameController.game.getStatus() != GameStatus.WON) {
+        while (gameController.game.getStatus() != Game.Status.WON) {
             Random random = new Random();
             int x = random.nextInt(board.getWidth());
             int y = random.nextInt(board.getHeight());
@@ -124,8 +123,8 @@ class GameControllerTest {
     @Test
     void testOnBombReveal() {
         gameController.onBombReveal();
-        verify(game, times(1)).setEndStatus(GameStatus.LOST);
-        verify(handler, times(1)).exit(GameStatus.LOST);
+        verify(game, times(1)).setEndStatus(Game.Status.LOST);
+        verify(handler, times(1)).exit(Game.Status.LOST);
     }
 
 }
