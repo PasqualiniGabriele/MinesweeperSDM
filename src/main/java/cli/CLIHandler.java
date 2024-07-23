@@ -88,11 +88,6 @@ public class CLIHandler extends UIHandler {
         return input.equals("Y");
     }
 
-    @Override
-    public void printWrongCoordinateError() {
-        System.out.println("Coordinates exceeded the board limits");
-    }
-
     public void setScanner(Scanner scanner) {
         this.scanner = scanner;
     }

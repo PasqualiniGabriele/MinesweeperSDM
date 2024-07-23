@@ -21,10 +21,6 @@ public class GameEventManager {
         listeners.add(listener);
     }
 
-    public void unsubscribe(GameEventListener listener) {
-        listeners.remove(listener);
-    }
-
     public void unsubscribeAll() {
         listeners.clear();
     }
