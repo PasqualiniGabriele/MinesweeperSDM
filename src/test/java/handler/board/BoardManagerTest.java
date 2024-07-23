@@ -7,11 +7,12 @@ import handler.input.GameCommand;
 import model.board.Board;
 import model.board.Configuration;
 import model.board.Coordinate;
-import model.cell.BombedCell;
 import model.cell.Cell;
 import model.cell.FreeCell;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.Set;
 
 import static handler.input.Command.Action.CLICK_ACTION;
 import static org.junit.jupiter.api.Assertions.*;
@@ -42,8 +43,11 @@ class BoardManagerTest {
 
     @Test
     void testRevealSurroundingCells() {
-        setBombs(new Coordinate(0, 3), new Coordinate(3, 0),
-                new Coordinate(6, 0), new Coordinate(7, 2));
+        Set<Coordinate> bombCoordinates = Set.of(new Coordinate(0, 3),
+                                                 new Coordinate(3, 0),
+                                                 new Coordinate(6, 0),
+                                                 new Coordinate(7, 2));
+        bombPlacer.placeBombs(bombCoordinates);
 
         boardManager.revealCell(new Coordinate(5, 5));
 
@@ -104,13 +108,4 @@ class BoardManagerTest {
         }
         assertEquals(expectedFreeCellsLeft, actualFreeCellsLeft);
     }
-
-    private void setBombs(Coordinate... coordinates) {
-        for (Coordinate coordinate : coordinates) {
-            BombedCell bombedCell = new BombedCell();
-            board.setCell(bombedCell, coordinate);
-            bombPlacer.updateProximity(coordinate);
-        }
-    }
-
 }

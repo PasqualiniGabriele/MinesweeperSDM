@@ -22,6 +22,10 @@ public class BombPlacer {
     public void placeBombsAvoiding(Coordinate safeZoneCenter) {
         Set<Coordinate> safeZone = generateSafeZone(safeZoneCenter);
         Set<Coordinate> bombCoordinates = generateBombCoordinates(safeZone);
+        placeBombs(bombCoordinates);
+    }
+
+    public void placeBombs(Set<Coordinate> bombCoordinates) {
         for (Coordinate bombCoordinate : bombCoordinates) {
             board.setCell(new BombedCell(), bombCoordinate);
             updateProximity(bombCoordinate);
@@ -52,7 +56,7 @@ public class BombPlacer {
         return randomCoordinates;
     }
 
-    public void updateProximity(Coordinate bombCoordinate) {
+    private void updateProximity(Coordinate bombCoordinate) {
         int bombX = bombCoordinate.x();
         int bombY = bombCoordinate.y();
         for (int dx = -1; dx <= 1; dx++) {

@@ -7,7 +7,7 @@ import static cli.ConsoleColor.*;
 import static java.lang.Thread.sleep;
 
 /**
- * Utility class for formatting and displaying information on the console.
+ * The {@code DisplayFormatter} is a utility class for formatting and displaying information on the console.
  * Provides methods to clear the screen, display various menus, game boards, and messages.
  */
 public class DisplayFormatter {
