@@ -15,6 +15,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Random;
 
+import static handler.input.Command.Action.CLICK_ACTION;
+import static handler.input.Command.Action.FLAG_ACTION;
 import static java.lang.Thread.sleep;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -59,7 +61,7 @@ class GameControllerTest {
     @Test
     void testGameLoop() {
         when(game.getStatus()).thenReturn(GameStatus.ONGOING).thenReturn(GameStatus.LOST);
-        when(handler.hasNextCommand()).thenReturn(new Command(Command.FLAG_ACTION));
+        when(handler.hasNextCommand()).thenReturn(new Command(FLAG_ACTION));
         gameController.gameLoop();
         verify(handler, times(1)).hasNextCommand();
         verify(game, times(2)).getStatus();
@@ -68,7 +70,7 @@ class GameControllerTest {
     @Test
     public void testApplyCommandFlag() {
         Coordinate testCoordinate = new Coordinate(1, 1);
-        GameCommand testCommand = new GameCommand(Command.FLAG_ACTION, testCoordinate);
+        GameCommand testCommand = new GameCommand(FLAG_ACTION, testCoordinate);
         gameController.applyCommand(testCommand);
         verify(boardManager).applyFlag(testCoordinate);
     }
@@ -76,7 +78,7 @@ class GameControllerTest {
     @Test
     public void testApplyCommandClick() {
         Coordinate testCoordinate = new Coordinate(1, 1);
-        GameCommand testCommand = new GameCommand(Command.CLICK_ACTION, testCoordinate);
+        GameCommand testCommand = new GameCommand(CLICK_ACTION, testCoordinate);
         gameController.applyCommand(testCommand);
         verify(boardManager).applyClick(testCoordinate);
     }
@@ -103,7 +105,7 @@ class GameControllerTest {
     @Test
     public void testWinGame() {
         gameController.createGame(Configuration.EASY);
-        gameController.applyCommand(new GameCommand("C", new Coordinate(5, 5)));
+        gameController.applyCommand(new GameCommand(CLICK_ACTION, new Coordinate(5, 5)));
         Board board = gameController.boardManager.getBoard();
         winGame(board);
         assertEquals(0, gameController.boardManager.getFreeCellsLeft());
@@ -116,7 +118,7 @@ class GameControllerTest {
             int y = random.nextInt(board.getHeight());
             Coordinate coordinate = new Coordinate(x, y);
             if (board.getCell(coordinate) instanceof FreeCell)
-                gameController.applyCommand(new GameCommand("C", coordinate));
+                gameController.applyCommand(new GameCommand(CLICK_ACTION, coordinate));
         }
     }
 

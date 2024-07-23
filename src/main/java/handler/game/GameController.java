@@ -9,7 +9,7 @@ import model.board.Coordinate;
 import model.game.Game;
 import model.game.GameStatus;
 
-
+import static handler.input.Command.Action.*;
 import static model.game.GameStatus.*;
 import static handler.input.Command.*;
 
@@ -91,18 +91,18 @@ public class GameController implements GameEventListener {
             }
         }
 
-        private void applyGameCommand(String action, Coordinate coordinate) {
-            switch (action) {
-                case FLAG_ACTION:
-                    boardManager.applyFlag(coordinate);
-                    break;
-                case CLICK_ACTION:
-                    boardManager.applyClick(coordinate);
-                    break;
-            }
+        private void applyGameCommand(Action action, Coordinate coordinate) {
+                switch (action) {
+                    case FLAG_ACTION:
+                        boardManager.applyFlag(coordinate);
+                        break;
+                    case CLICK_ACTION:
+                        boardManager.applyClick(coordinate);
+                        break;
+                }
         }
 
-        private void applyMenuCommand(String action) {
+        private void applyMenuCommand(Action action) {
             switch (action) {
                 case QUIT_ACTION:
                     game.end(QUIT);

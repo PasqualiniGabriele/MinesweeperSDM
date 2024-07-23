@@ -2,19 +2,15 @@ package handler.input;
 
 public class Command {
 
-    public static final String FLAG_ACTION = "F";
-    public static final String CLICK_ACTION = "C";
-    public static final String QUIT_ACTION = "Q";
-    public static final String INFO_ACTION = "I";
-    public static final String EASTER_EGG_ACTION = "SALAMUCCIO";
+    public enum Action {FLAG_ACTION, CLICK_ACTION, QUIT_ACTION, INFO_ACTION, EASTER_EGG_ACTION}
 
-    String action;
+    Action action;
 
-    public Command(String action) {
+    public Command(Action action) {
         this.action = action;
     }
 
-    public String getAction() {
+    public Action getAction() {
         return action;
     }
 
