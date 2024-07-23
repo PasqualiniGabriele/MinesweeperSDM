@@ -23,8 +23,8 @@ class GameControllerTest {
 
     private GameController gameController;
     private UIHandler mockHandler;
-    private Game game;
     private BoardManager boardManager;
+    private Game game;
 
 
     @BeforeEach
@@ -54,6 +54,15 @@ class GameControllerTest {
         gameController.createGame(Configuration.EASY);
         assertNotNull(gameController.game);
         assertNotNull(gameController.boardManager);
+    }
+
+    @Test
+    void testGameLoop(){
+        when(game.getStatus()).thenReturn(GameStatus.ONGOING).thenReturn(GameStatus.LOST);
+        when(mockHandler.hasNextCommand()).thenReturn(new Command(Command.FLAG_ACTION));
+        gameController.gameLoop();
+        verify(mockHandler, times(1)).hasNextCommand();
+        verify(game, times(2)).getStatus();
     }
 
     @Test
