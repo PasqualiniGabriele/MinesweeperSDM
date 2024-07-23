@@ -28,12 +28,20 @@ class BoardManagerTest {
         board = boardManager.getBoard();
         bombPlacer = new BombPlacer(Configuration.EASY, board);
         gameController = new GameController(new CLIHandler());
-
-
     }
 
     @Test
-    void testRevealAdjacentArea() {
+    void testInitialization() {
+        Configuration config = Configuration.EASY;
+        BoardManager manager = new BoardManager(config);
+
+        assertEquals(config.getWidth() * config.getHeight() - config.getNumOfBombs(), manager.getFreeCellsLeft());
+        assertEquals(config.getNumOfBombs(), manager.getFlagsLeft());
+        assertFalse(manager.isFirstClickMade());
+    }
+
+    @Test
+    void testRevealSurroundingCells() {
         setBombs(new Coordinate(0, 3), new Coordinate(3, 0),
                 new Coordinate(6, 0), new Coordinate(7, 2));
 
@@ -53,11 +61,7 @@ class BoardManagerTest {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 Cell cell = board.getCell(new Coordinate(j, i));
-                if (cell.isOpenCell()) {
-                    actualOpenCells[i][j] = 1;
-                } else {
-                    actualOpenCells[i][j] = 0;
-                }
+                actualOpenCells[i][j] = cell.isOpenCell() ? 1 : 0;
             }
         }
         assertArrayEquals(expectedOpenCells, actualOpenCells);
@@ -69,23 +73,26 @@ class BoardManagerTest {
         Command command = new GameCommand(CLICK_ACTION, new Coordinate(4, 4));
         gameController.createGame(Configuration.EASY);
         gameController.applyCommand(command);
+
         int expectedFreeCellsLeft = boardManager.getFreeCellsLeft();
         int actualFreeCellsLeft = 0;
+
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                if (board.getCell(new Coordinate(i, j)) instanceof FreeCell freeCell) {
-                    if (freeCell.isClosedCell()) actualFreeCellsLeft++;
+                if (board.getCell(new Coordinate(i, j)) instanceof FreeCell freeCell && freeCell.isClosedCell()) {
+                    actualFreeCellsLeft++;
                 }
             }
         }
         assertEquals(expectedFreeCellsLeft, actualFreeCellsLeft);
     }
 
-    void setBombs(Coordinate... coordinates) {
+    private void setBombs(Coordinate... coordinates) {
         for (Coordinate coordinate : coordinates) {
             BombedCell bombedCell = new BombedCell();
             board.setCell(bombedCell, coordinate);
             bombPlacer.updateProximity(coordinate);
         }
     }
+
 }
