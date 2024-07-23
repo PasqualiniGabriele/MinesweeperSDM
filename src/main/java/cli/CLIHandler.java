@@ -27,22 +27,22 @@ public class CLIHandler extends UIHandler {
     }
 
     @Override
-    public Configuration askForConfiguration() {
+    public Configuration askConfigurationToUser() {
         displayDifficultyMenu();
         String input = scanner.nextLine().trim();
-        Configuration configuration = getConfiguration(input);
+        Configuration configuration = parseConfiguration(input);
         CommandParser.setMaxCoordinate(configuration.getWidth(), configuration.getHeight());
         return configuration;
     }
 
-    private Configuration getConfiguration(String input) {
+    private Configuration parseConfiguration(String input) {
         return switch (input) {
             case "1" -> Configuration.EASY;
             case "2" -> Configuration.MEDIUM;
             case "3" -> Configuration.HARD;
             default -> {
                 displayErrorMessage("Unknown command, try again.");
-                yield askForConfiguration();
+                yield askConfigurationToUser();
             }
         };
     }
@@ -85,9 +85,5 @@ public class CLIHandler extends UIHandler {
         String input = scanner.nextLine().trim().toUpperCase();
         clearScreen();
         return input.equals("Y");
-    }
-
-    public void setScanner(Scanner scanner) {
-        this.scanner = scanner;
     }
 }

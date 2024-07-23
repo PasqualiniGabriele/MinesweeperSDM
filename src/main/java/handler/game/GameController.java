@@ -28,7 +28,7 @@ public class GameController implements GameEventListener {
     public void launch() {
         handler.welcome();
         do {
-            Configuration configuration = handler.askForConfiguration();
+            Configuration configuration = handler.askConfigurationToUser();
             createGame(configuration);
             gameLoop();
             GameEventManager.getInstance().unsubscribeAll();

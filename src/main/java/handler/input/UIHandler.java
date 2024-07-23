@@ -13,7 +13,7 @@ public abstract class UIHandler {
 
     public abstract void exit(GameStatus gameStatus);
 
-    public abstract Configuration askForConfiguration();
+    public abstract Configuration askConfigurationToUser();
 
     public abstract void welcome();
 
