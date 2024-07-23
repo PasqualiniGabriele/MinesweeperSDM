@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import static handler.input.Command.Action.CLICK_ACTION;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 class BoardManagerTest {
     private GameController gameController;
@@ -66,6 +67,17 @@ class BoardManagerTest {
         }
         assertArrayEquals(expectedOpenCells, actualOpenCells);
     }
+
+    @Test
+    void testFlagsLeftUpdate() {
+        Coordinate coord = new Coordinate(0, 0);
+        boardManager.applyFlag(coord);
+        assertEquals(Configuration.EASY.getNumOfBombs() - 1, boardManager.getFlagsLeft());
+
+        boardManager.applyFlag(coord);
+        assertEquals(Configuration.EASY.getNumOfBombs(), boardManager.getFlagsLeft());
+    }
+
 
     @Test
     void testFreeCellsLeft() {
