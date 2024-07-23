@@ -25,30 +25,19 @@ public class BombPlacer {
         placeBombs(bombCoordinates);
     }
 
-    public void placeBombs(Set<Coordinate> bombCoordinates) {
-        for (Coordinate bombCoordinate : bombCoordinates) {
-            board.setCell(new BombedCell(), bombCoordinate);
-            updateProximity(bombCoordinate);
-        }
-    }
-
-    private static Set<Coordinate> generateSafeZone(Coordinate safeZoneCenter) {
+    private Set<Coordinate> generateSafeZone(Coordinate safeZoneCenter) {
         Set<Coordinate> safeZone = new HashSet<>();
-        for (int dx = -1; dx <= 1; dx++) {
-            for (int dy = -1; dy <= 1; dy++) {
-                safeZone.add(new Coordinate(safeZoneCenter.x() + dx, safeZoneCenter.y() + dy));
-            }
+        for (Coordinate neighborCoordinate : getNeighbors(safeZoneCenter)) {
+            if (board.isValidCoordinate(neighborCoordinate))
+                safeZone.add(neighborCoordinate);
         }
         return safeZone;
     }
 
     private Set<Coordinate> generateBombCoordinates(Set<Coordinate> safeZone) {
         Set<Coordinate> randomCoordinates = new HashSet<>();
-        Random random = new Random();
         while (randomCoordinates.size() < configuration.getNumOfBombs()) {
-            int x = random.nextInt(board.getWidth());
-            int y = random.nextInt(board.getHeight());
-            Coordinate coordinate = new Coordinate(x, y);
+            Coordinate coordinate = generateRandomCoordinate();
             if (!safeZone.contains(coordinate)) {
                 randomCoordinates.add(coordinate);
             }
@@ -56,18 +45,40 @@ public class BombPlacer {
         return randomCoordinates;
     }
 
+    private Coordinate generateRandomCoordinate() {
+        Random random = new Random();
+        int x = random.nextInt(board.getWidth());
+        int y = random.nextInt(board.getHeight());
+        return new Coordinate(x, y);
+    }
+
+    public void placeBombs(Set<Coordinate> bombCoordinates) {
+        for (Coordinate bombCoordinate : bombCoordinates) {
+            board.setCell(new BombedCell(), bombCoordinate);
+            updateProximity(bombCoordinate);
+        }
+    }
+
     private void updateProximity(Coordinate bombCoordinate) {
-        int bombX = bombCoordinate.x();
-        int bombY = bombCoordinate.y();
-        for (int dx = -1; dx <= 1; dx++) {
-            for (int dy = -1; dy <= 1; dy++) {
-                Coordinate nextCoordinate = new Coordinate(bombX + dx, bombY + dy);
-                if (board.isValidCoordinate(nextCoordinate)) {
-                    if (board.getCell(nextCoordinate) instanceof FreeCell freeCell) {
-                        freeCell.setProximity(freeCell.getProximity() + 1);
-                    }
-                }
+        for (Coordinate neighborCoordinate : getNeighbors(bombCoordinate)) {
+            if (board.isValidCoordinate(neighborCoordinate) && board.getCell(neighborCoordinate) instanceof FreeCell freeCell) {
+                freeCell.setProximity(freeCell.getProximity() + 1);
             }
         }
     }
+
+    private Set<Coordinate> getNeighbors(Coordinate center) {
+        Set<Coordinate> neighbors = new HashSet<>();
+        for (int dx = -1; dx <= 1; dx++) {
+            for (int dy = -1; dy <= 1; dy++) {
+                if (dx != 0 || dy != 0) {
+                    neighbors.add(new Coordinate(center.x() + dx, center.y() + dy));
+                }
+            }
+        }
+        return neighbors;
+    }
+
 }
+
+
