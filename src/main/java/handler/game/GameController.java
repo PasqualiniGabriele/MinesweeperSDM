@@ -67,14 +67,6 @@ public class GameController implements GameEventListener {
         return stats;
     }
 
-    public Game getGame() {
-        return game;
-    }
-
-    public BoardManager getBoardManager() {
-        return boardManager;
-    }
-
     public void setBoardManager(BoardManager boardManager) {
         this.boardManager = boardManager;
     }

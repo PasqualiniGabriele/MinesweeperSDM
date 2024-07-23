@@ -107,13 +107,13 @@ class GameControllerTest {
     public void testWinGame() {
         gameController.createGame(Configuration.EASY);
         gameController.applyCommand(new GameCommand("C", new Coordinate(5, 5)));
-        Board board = gameController.getBoardManager().getBoard();
+        Board board = gameController.boardManager.getBoard();
         winGame(board);
-        assertEquals(0, gameController.getBoardManager().getFreeCellsLeft());
+        assertEquals(0, gameController.boardManager.getFreeCellsLeft());
     }
 
     private void winGame(Board board) {
-        while (gameController.getGame().getStatus() != GameStatus.WON) {
+        while (gameController.game.getStatus() != GameStatus.WON) {
             Random random = new Random();
             int x = random.nextInt(board.getWidth());
             int y = random.nextInt(board.getHeight());
