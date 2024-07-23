@@ -58,6 +58,15 @@ public class Board {
     }
 
     /**
+     * Returns the number of bombs that should be placed on the board.
+     *
+     * @return the number of bombs as specified in the board's configuration
+     */
+    public int getNumOfBombs() {
+        return configuration.getNumOfBombs();
+    }
+
+    /**
      * Retrieves the cell at the specified coordinates.
      *
      * @param coordinate The coordinates of the cell to retrieve.
