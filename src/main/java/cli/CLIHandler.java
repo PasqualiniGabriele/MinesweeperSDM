@@ -41,7 +41,7 @@ public class CLIHandler extends UIHandler {
             case "2" -> Configuration.MEDIUM;
             case "3" -> Configuration.HARD;
             default -> {
-                System.out.println("\nUnknown command, try again.\n\n");
+                displayErrorMessage("Unknown command, try again.");
                 yield askForConfiguration();
             }
         };
@@ -62,7 +62,7 @@ public class CLIHandler extends UIHandler {
         try {
             return CommandParser.parseCommand(input);
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            displayErrorMessage("Not a valid command.\n\t\t\tValid format: C x y or F x y");
             return hasNextCommand();
         }
     }

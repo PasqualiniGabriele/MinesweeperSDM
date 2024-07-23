@@ -128,6 +128,12 @@ public class DisplayFormatter {
         }
     }
 
+    public static void displayErrorMessage(String message){
+        System.out.println(DARK_GREY + "\n--" + RED + "ERROR" + DARK_GREY + " -------------------------------------------------------------------------------");
+        System.out.println("\t\t\t" + RESET + message + DARK_GREY);
+        System.out.println("---------------------------------------------------------------------------------------" + RESET);
+    }
+
     protected static void displayWinMessage() {
         System.out.println("""
 
