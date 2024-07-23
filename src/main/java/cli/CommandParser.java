@@ -39,7 +39,7 @@ public class CommandParser {
         String action = commandArray[0].toUpperCase();
         switch (commandArray.length) {
             case 1:
-                if (isValidGameAction(action))
+                if (isValidMenuAction(action))
                     return new Command(VALID_MENU_ACTIONS.get(action));
                 break;
             case 3:
