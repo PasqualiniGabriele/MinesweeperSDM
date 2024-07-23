@@ -77,7 +77,6 @@ public class CLIHandler extends UIHandler {
     public void exit(GameStatus gameStatus) {
         if (gameStatus == GameStatus.WON) displayWinMessage();
         else if (gameStatus == GameStatus.LOST) displayLostMessage();
-        sleepFor(20);
     }
 
     @Override
