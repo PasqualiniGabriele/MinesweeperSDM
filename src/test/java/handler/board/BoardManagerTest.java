@@ -37,7 +37,7 @@ class BoardManagerTest {
         setBombs(new Coordinate(0, 3), new Coordinate(3, 0),
                 new Coordinate(6, 0), new Coordinate(7, 2));
 
-        boardManager.revealAdjacentArea(new Coordinate(5, 5));
+        boardManager.revealCell(new Coordinate(5, 5));
         int[][] expectedOpenCells = {
                 {1, 1, 1, 0, 0, 0, 0, 0},
                 {1, 1, 1, 1, 1, 1, 1, 0},

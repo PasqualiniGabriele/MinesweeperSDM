@@ -25,23 +25,6 @@ public class BoardManager implements GameEventListener {
         Cell.setEventManager(GameEventManager.getInstance());
     }
 
-    public void revealAdjacentArea(Coordinate coordinate) {
-        if (!board.isValidCoordinate(coordinate) || !board.getCell(coordinate).isClosedCell()) {
-            return;
-        }
-        FreeCell freeCell = (FreeCell) board.getCell(coordinate);
-        freeCell.reveal();
-
-        if (freeCell.isZeroProximity()) {
-            for (int dx = -1; dx <= 1; dx++) {
-                for (int dy = -1; dy <= 1; dy++) {
-                    Coordinate nextCoordinate = new Coordinate(coordinate.x() + dx, coordinate.y() + dy);
-                    revealAdjacentArea(nextCoordinate);
-                }
-            }
-        }
-    }
-
     public Board getBoard() {
         return board;
     }
@@ -56,11 +39,31 @@ public class BoardManager implements GameEventListener {
             bombPlacer.placeBombsAvoiding(coordinate);
             firstClickMade = true;
         }
+        revealCell(coordinate);
+    }
+
+    public void revealCell(Coordinate coordinate) {
+        if (!isValidCoordinateForReveal(coordinate)) {
+            return;
+        }
         Cell cell = board.getCell(coordinate);
+        cell.reveal();
+
         if (cell instanceof FreeCell freeCell && freeCell.isZeroProximity()) {
-            revealAdjacentArea(coordinate);
-        } else {
-            cell.reveal();
+            revealSurroundingCells(coordinate);
+        }
+    }
+
+    private boolean isValidCoordinateForReveal(Coordinate coordinate) {
+        return board.isValidCoordinate(coordinate) && board.getCell(coordinate).isClosedCell();
+    }
+
+    private void revealSurroundingCells(Coordinate coordinate) {
+        for (int dx = -1; dx <= 1; dx++) {
+            for (int dy = -1; dy <= 1; dy++) {
+                Coordinate nextCoordinate = new Coordinate(coordinate.x() + dx, coordinate.y() + dy);
+                revealCell(nextCoordinate);
+            }
         }
     }
 
