@@ -1,3 +1,9 @@
+![Static Badge](https://img.shields.io/badge/Java-Java?logo=Oracle&logoColor=%23F80000&color=%23343434)
+![Static Badge](https://img.shields.io/badge/OpenJDK-OpenJDK?logo=OpenJDK&logoColor=white&color=%23437291)
+![Static Badge](https://img.shields.io/badge/gradle-gradle?logo=gradle&color=%2302303A)&nbsp;
+![Static Badge](https://img.shields.io/badge/Apache%20Groovy-groovy?logo=Apache%20Groovy&logoColor=white&color=%234298B8)&nbsp;
+![Static Badge](https://img.shields.io/badge/JUnit5-JUnit5?logo=JUnit5&logoColor=white&color=%2325A162)&nbsp;
+
 # Minesweeper - game
 
 ## Introduction
@@ -9,6 +15,11 @@ The goal of this project was to develop a game, practice Continuous Integration 
 The game implemented is the classic Minesweeper.
 
 This project is built using Gradle and programmed in Java.
+
+## Gameplay
+<p align="center">
+<img src="Gameplay.gif" alt="minesweeper screenshot" width="600" align=center>
+</p>
 
 ## Structure
 
