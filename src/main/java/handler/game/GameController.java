@@ -9,6 +9,8 @@ import model.board.Coordinate;
 import model.game.Game;
 import model.game.GameStatus;
 
+import java.sql.SQLOutput;
+
 import static model.game.GameStatus.*;
 import static handler.input.Command.*;
 
@@ -54,7 +56,7 @@ public class GameController implements GameEventListener {
 
     public void endGame(GameStatus endStatus) {
         game.end(endStatus);
-        handler.exit(game.getStatus());
+        handler.exit(endStatus);
         boardManager.openAllCells();
         handler.show(getGameStats(), boardManager.getBoard());
     }

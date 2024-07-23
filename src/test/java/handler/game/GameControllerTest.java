@@ -22,15 +22,15 @@ import static org.mockito.Mockito.*;
 class GameControllerTest {
 
     private GameController gameController;
-    private UIHandler mockHandler;
+    private UIHandler handler;
     private BoardManager boardManager;
     private Game game;
 
 
     @BeforeEach
     public void setUp() {
-        mockHandler = mock(UIHandler.class);
-        gameController = new GameController(mockHandler);
+        handler = mock(UIHandler.class);
+        gameController = new GameController(handler);
         gameController.createGame(Configuration.EASY);
         game = mock(Game.class);
         boardManager = mock(BoardManager.class);
@@ -41,12 +41,12 @@ class GameControllerTest {
 
     @Test
     void testLaunch(){
-        when(mockHandler.isNewGameRequested()).thenReturn(false);
-        when(mockHandler.askForConfiguration()).thenReturn(Configuration.EASY);
-        when(mockHandler.hasNextCommand()).thenReturn(new Command(Command.QUIT_ACTION));
+        when(handler.isNewGameRequested()).thenReturn(false);
+        when(handler.askForConfiguration()).thenReturn(Configuration.EASY);
+        when(handler.hasNextCommand()).thenReturn(new Command(Command.QUIT_ACTION));
         gameController.launch();
-        verify(mockHandler, times(1)).welcome();
-        verify(mockHandler, times(1)).askForConfiguration();
+        verify(handler, times(1)).welcome();
+        verify(handler, times(1)).askForConfiguration();
     }
 
     @Test
@@ -59,16 +59,16 @@ class GameControllerTest {
     @Test
     void testGameLoop(){
         when(game.getStatus()).thenReturn(GameStatus.ONGOING).thenReturn(GameStatus.LOST);
-        when(mockHandler.hasNextCommand()).thenReturn(new Command(Command.FLAG_ACTION));
+        when(handler.hasNextCommand()).thenReturn(new Command(Command.FLAG_ACTION));
         gameController.gameLoop();
-        verify(mockHandler, times(1)).hasNextCommand();
+        verify(handler, times(1)).hasNextCommand();
         verify(game, times(2)).getStatus();
     }
 
     @Test
     public void testApplyCommandFlag() {
         Coordinate testCoordinate = new Coordinate(1, 1);
-        GameCommand testCommand = new GameCommand("F", testCoordinate);
+        GameCommand testCommand = new GameCommand(Command.FLAG_ACTION, testCoordinate);
         gameController.applyCommand(testCommand);
         verify(boardManager).applyFlag(testCoordinate);
     }
@@ -76,7 +76,7 @@ class GameControllerTest {
     @Test
     public void testApplyCommandClick() {
         Coordinate testCoordinate = new Coordinate(1, 1);
-        GameCommand testCommand = new GameCommand("C", testCoordinate);
+        GameCommand testCommand = new GameCommand(Command.CLICK_ACTION, testCoordinate);
         gameController.applyCommand(testCommand);
         verify(boardManager).applyClick(testCoordinate);
     }
@@ -118,6 +118,13 @@ class GameControllerTest {
             if (board.getCell(coordinate) instanceof FreeCell)
                 gameController.applyCommand(new GameCommand("C", coordinate));
         }
+    }
+
+    @Test
+    void testOnBombReveal(){
+        gameController.onBombReveal();
+        verify(game, times(1)).end(GameStatus.LOST);
+        verify(handler, times(1)).exit(GameStatus.LOST);
     }
 }
 
