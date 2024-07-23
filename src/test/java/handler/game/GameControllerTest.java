@@ -40,7 +40,7 @@ class GameControllerTest {
 
 
     @Test
-    void testLaunch(){
+    void testLaunch() {
         when(handler.isNewGameRequested()).thenReturn(false);
         when(handler.askForConfiguration()).thenReturn(Configuration.EASY);
         when(handler.hasNextCommand()).thenReturn(new Command(Command.QUIT_ACTION));
@@ -50,14 +50,14 @@ class GameControllerTest {
     }
 
     @Test
-    void testCreateGame(){
+    void testCreateGame() {
         gameController.createGame(Configuration.EASY);
         assertNotNull(gameController.game);
         assertNotNull(gameController.boardManager);
     }
 
     @Test
-    void testGameLoop(){
+    void testGameLoop() {
         when(game.getStatus()).thenReturn(GameStatus.ONGOING).thenReturn(GameStatus.LOST);
         when(handler.hasNextCommand()).thenReturn(new Command(Command.FLAG_ACTION));
         gameController.gameLoop();
@@ -121,10 +121,11 @@ class GameControllerTest {
     }
 
     @Test
-    void testOnBombReveal(){
+    void testOnBombReveal() {
         gameController.onBombReveal();
         verify(game, times(1)).end(GameStatus.LOST);
         verify(handler, times(1)).exit(GameStatus.LOST);
     }
+
 }
 

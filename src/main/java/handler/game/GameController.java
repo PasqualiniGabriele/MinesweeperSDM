@@ -9,7 +9,6 @@ import model.board.Coordinate;
 import model.game.Game;
 import model.game.GameStatus;
 
-import java.sql.SQLOutput;
 
 import static model.game.GameStatus.*;
 import static handler.input.Command.*;
@@ -93,14 +92,14 @@ public class GameController implements GameEventListener {
         }
 
         private void applyGameCommand(String action, Coordinate coordinate) {
-                switch (action) {
-                    case FLAG_ACTION:
-                        boardManager.applyFlag(coordinate);
-                        break;
-                    case CLICK_ACTION:
-                        boardManager.applyClick(coordinate);
-                        break;
-                }
+            switch (action) {
+                case FLAG_ACTION:
+                    boardManager.applyFlag(coordinate);
+                    break;
+                case CLICK_ACTION:
+                    boardManager.applyClick(coordinate);
+                    break;
+            }
         }
 
         private void applyMenuCommand(String action) {
