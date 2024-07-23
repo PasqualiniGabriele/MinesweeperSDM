@@ -14,12 +14,17 @@ public class Game {
     }
 
     public long calculateGameTime() {
-        if (startTime == null)
-            startTime = LocalDateTime.now();
-        if (endTime == null)
-            return Duration.between(startTime, LocalDateTime.now()).getSeconds();
-        return Duration.between(startTime, endTime).getSeconds();
+        LocalDateTime now = LocalDateTime.now();
+
+        if (startTime == null) {
+            startTime = now;
+        }
+
+        LocalDateTime end = (endTime != null) ? endTime : now;
+
+        return Duration.between(startTime, end).getSeconds();
     }
+
 
     public void end(GameStatus gameStatus) {
         endTime = LocalDateTime.now();

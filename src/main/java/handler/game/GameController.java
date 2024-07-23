@@ -30,7 +30,7 @@ public class GameController implements GameEventListener {
             Configuration configuration = handler.askForConfiguration();
             createGame(configuration);
             gameLoop();
-            GameEventManager.getInstance().unsubscribe(this);
+            GameEventManager.getInstance().unsubscribeAll();
         } while (handler.isNewGameRequested());
     }
 
