@@ -60,6 +60,13 @@ class GameControllerTest {
     }
 
     @Test
+    void testCreateGame(){
+        gameController1.createGame(Configuration.EASY);
+        assertNotNull(gameController1.game);
+        assertNotNull(gameController1.boardManager);
+    }
+
+    @Test
     public void testApplyCommandFlag() {
         gameController.setBoardManager(mockBoardManager);
         Coordinate testCoordinate = new Coordinate(1, 1);
