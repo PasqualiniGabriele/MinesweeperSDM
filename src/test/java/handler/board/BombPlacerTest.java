@@ -11,21 +11,25 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.*;
 
 class BombPlacerTest {
 
     private Board board;
+    private Board mockBoard;
     private BombPlacer bombPlacer;
 
     @BeforeEach
     void setUp() {
-        BoardManager boardManager = new BoardManager(Configuration.EASY);
-        board = boardManager.getBoard();
-        bombPlacer = new BombPlacer(Configuration.EASY, board);
+        mockBoard = mock(Board.class);
+        board = new Board(Configuration.EASY);
+        when(mockBoard.getWidth()).thenReturn(8);
+        when(mockBoard.getHeight()).thenReturn(8);
     }
 
     @Test
-    void testGenerateRandomCoordinates_RightNumber() {
+    void testGenerateBombCoordinates_RightNumber() {
+        bombPlacer = new BombPlacer(Configuration.EASY, board);
         Coordinate safeZoneCenter = new Coordinate(1, 1);
         bombPlacer.placeBombsAvoiding(safeZoneCenter);
 
@@ -42,6 +46,7 @@ class BombPlacerTest {
 
     @Test
     void testSafeZone() {
+        bombPlacer = new BombPlacer(Configuration.EASY, board);
         Random random = new Random();
         int randX = random.nextInt(board.getWidth());
         int randY = random.nextInt(board.getHeight());
@@ -59,6 +64,14 @@ class BombPlacerTest {
             }
         }
         assertTrue(check);
+    }
+
+    @Test
+    void testPlaceBombsAvoiding_NumberOfIterations(){
+        bombPlacer = new BombPlacer(Configuration.EASY, mockBoard);
+        Coordinate coordinate = new Coordinate(1, 1);
+        bombPlacer.placeBombsAvoiding(coordinate);
+        verify(mockBoard, times(10)).setCell(any(BombedCell.class), any(Coordinate.class));
     }
 
 }

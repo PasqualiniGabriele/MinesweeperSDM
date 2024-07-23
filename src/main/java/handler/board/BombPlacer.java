@@ -21,14 +21,14 @@ public class BombPlacer {
 
     public void placeBombsAvoiding(Coordinate safeZoneCenter) {
         Set<Coordinate> safeZone = generateSafeZone(safeZoneCenter);
-        Set<Coordinate> randomGeneratedBombs = generateRandomCoordinates(safeZone);
-        for (Coordinate bombCoordinate : randomGeneratedBombs) {
+        Set<Coordinate> bombCoordinates = generateBombCoordinates(safeZone);
+        for (Coordinate bombCoordinate : bombCoordinates) {
             board.setCell(new BombedCell(), bombCoordinate);
             updateProximity(bombCoordinate);
         }
     }
 
-    public static Set<Coordinate> generateSafeZone(Coordinate safeZoneCenter) {
+    private static Set<Coordinate> generateSafeZone(Coordinate safeZoneCenter) {
         Set<Coordinate> safeZone = new HashSet<>();
         for (int dx = -1; dx <= 1; dx++) {
             for (int dy = -1; dy <= 1; dy++) {
@@ -38,7 +38,7 @@ public class BombPlacer {
         return safeZone;
     }
 
-    public Set<Coordinate> generateRandomCoordinates(Set<Coordinate> safeZone) {
+    private Set<Coordinate> generateBombCoordinates(Set<Coordinate> safeZone) {
         Set<Coordinate> randomCoordinates = new HashSet<>();
         Random random = new Random();
         while (randomCoordinates.size() < configuration.getNumOfBombs()) {
