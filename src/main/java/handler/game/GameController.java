@@ -67,10 +67,6 @@ public class GameController implements GameEventListener {
         return stats;
     }
 
-    public void setBoardManager(BoardManager boardManager) {
-        this.boardManager = boardManager;
-    }
-
     @Override
     public void onBombReveal() {
         endGame(LOST);

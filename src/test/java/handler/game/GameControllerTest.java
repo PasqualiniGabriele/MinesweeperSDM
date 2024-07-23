@@ -1,6 +1,5 @@
 package handler.game;
 
-import cli.CLIHandler;
 import handler.board.BoardManager;
 import handler.input.Command;
 import handler.input.GameCommand;
@@ -23,29 +22,20 @@ import static org.mockito.Mockito.*;
 class GameControllerTest {
 
     private GameController gameController;
-    private CLIHandler handler;
-    private BoardManager mockBoardManager;
-
-
-    private GameController gameController1;
     private UIHandler mockHandler;
     private Game game;
-    private BoardManager mockBoardManager1;
+    private BoardManager boardManager;
 
 
     @BeforeEach
     public void setUp() {
-        handler = new CLIHandler();
-        gameController = new GameController(handler);
-        mockBoardManager = mock(BoardManager.class);
-
         mockHandler = mock(UIHandler.class);
-        gameController1 = new GameController(mockHandler);
-        gameController1.createGame(Configuration.EASY);
+        gameController = new GameController(mockHandler);
+        gameController.createGame(Configuration.EASY);
         game = mock(Game.class);
-        mockBoardManager1 = mock(BoardManager.class);
-        gameController1.boardManager = mockBoardManager1;
-        gameController1.game = game;
+        boardManager = mock(BoardManager.class);
+        gameController.boardManager = boardManager;
+        gameController.game = game;
     }
 
 
@@ -54,34 +44,32 @@ class GameControllerTest {
         when(mockHandler.isNewGameRequested()).thenReturn(false);
         when(mockHandler.askForConfiguration()).thenReturn(Configuration.EASY);
         when(mockHandler.hasNextCommand()).thenReturn(new Command(Command.QUIT_ACTION));
-        gameController1.launch();
+        gameController.launch();
         verify(mockHandler, times(1)).welcome();
         verify(mockHandler, times(1)).askForConfiguration();
     }
 
     @Test
     void testCreateGame(){
-        gameController1.createGame(Configuration.EASY);
-        assertNotNull(gameController1.game);
-        assertNotNull(gameController1.boardManager);
+        gameController.createGame(Configuration.EASY);
+        assertNotNull(gameController.game);
+        assertNotNull(gameController.boardManager);
     }
 
     @Test
     public void testApplyCommandFlag() {
-        gameController.setBoardManager(mockBoardManager);
         Coordinate testCoordinate = new Coordinate(1, 1);
         GameCommand testCommand = new GameCommand("F", testCoordinate);
         gameController.applyCommand(testCommand);
-        verify(mockBoardManager).applyFlag(testCoordinate);
+        verify(boardManager).applyFlag(testCoordinate);
     }
 
     @Test
     public void testApplyCommandClick() {
-        gameController.setBoardManager(mockBoardManager);
         Coordinate testCoordinate = new Coordinate(1, 1);
         GameCommand testCommand = new GameCommand("C", testCoordinate);
         gameController.applyCommand(testCommand);
-        verify(mockBoardManager).applyClick(testCoordinate);
+        verify(boardManager).applyClick(testCoordinate);
     }
 
     @Test
