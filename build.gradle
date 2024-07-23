@@ -34,7 +34,7 @@ java {
 }
 
 jar {
-    jar.enabled = false
+    jar.enabled = true
     manifest {
         attributes(
                 'Main-Class': 'main.Minesweeper'
