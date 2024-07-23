@@ -12,10 +12,8 @@ import java.util.Set;
 
 public class BombPlacer {
     private final Board board;
-    private final Configuration configuration;
 
-    public BombPlacer(Configuration configuration, Board board) {
-        this.configuration = configuration;
+    public BombPlacer(Board board) {
         this.board = board;
     }
 
@@ -36,7 +34,7 @@ public class BombPlacer {
 
     private Set<Coordinate> generateBombCoordinates(Set<Coordinate> safeZone) {
         Set<Coordinate> randomCoordinates = new HashSet<>();
-        while (randomCoordinates.size() < configuration.getNumOfBombs()) {
+        while (randomCoordinates.size() < board.getNumOfBombs()) {
             Coordinate coordinate = generateRandomCoordinate();
             if (!safeZone.contains(coordinate)) {
                 randomCoordinates.add(coordinate);

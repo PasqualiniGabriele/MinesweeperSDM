@@ -27,7 +27,7 @@ class BoardManagerTest {
     void setUp() {
         boardManager = new BoardManager(Configuration.EASY);
         board = boardManager.getBoard();
-        bombPlacer = new BombPlacer(Configuration.EASY, board);
+        bombPlacer = new BombPlacer(board);
         gameController = new GameController(new CLIHandler());
     }
 

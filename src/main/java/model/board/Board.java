@@ -31,6 +31,10 @@ public class Board {
         return configuration.getHeight();
     }
 
+    public int getNumOfBombs() {
+        return configuration.getNumOfBombs();
+    }
+
     public Cell getCell(Coordinate coordinate) {
         return cells[coordinate.x()][coordinate.y()];
     }
