@@ -13,6 +13,7 @@ import model.cell.FreeCell;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static handler.input.Command.Action.CLICK_ACTION;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BoardManagerTest {
@@ -65,7 +66,7 @@ class BoardManagerTest {
     @Test
     void testFreeCellsLeft() {
         bombPlacer.placeBombsAvoiding(new Coordinate(4, 4));
-        Command command = new GameCommand("C", new Coordinate(4, 4));
+        Command command = new GameCommand(CLICK_ACTION, new Coordinate(4, 4));
         gameController.createGame(Configuration.EASY);
         gameController.applyCommand(command);
         int expectedFreeCellsLeft = boardManager.getFreeCellsLeft();

@@ -15,6 +15,8 @@ import java.io.ByteArrayInputStream;
 import java.util.Random;
 import java.util.Scanner;
 
+import static handler.input.Command.Action.CLICK_ACTION;
+import static handler.input.Command.Action.FLAG_ACTION;
 import static java.lang.Thread.sleep;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -56,7 +58,7 @@ class GameControllerTest {
     public void testApplyCommandFlag() {
         gameController.setBoardManager(mockBoardManager);
         Coordinate testCoordinate = new Coordinate(1, 1);
-        GameCommand testCommand = new GameCommand("F", testCoordinate);
+        GameCommand testCommand = new GameCommand(FLAG_ACTION, testCoordinate);
         gameController.applyCommand(testCommand);
         verify(mockBoardManager).applyFlag(testCoordinate);
     }
@@ -65,7 +67,7 @@ class GameControllerTest {
     public void testApplyCommandClick() {
         gameController.setBoardManager(mockBoardManager);
         Coordinate testCoordinate = new Coordinate(1, 1);
-        GameCommand testCommand = new GameCommand("C", testCoordinate);
+        GameCommand testCommand = new GameCommand(CLICK_ACTION, testCoordinate);
         gameController.applyCommand(testCommand);
         verify(mockBoardManager).applyClick(testCoordinate);
     }
@@ -92,7 +94,7 @@ class GameControllerTest {
     @Test
     public void testWinGame() {
         gameController.createGame(Configuration.EASY);
-        gameController.applyCommand(new GameCommand("C", new Coordinate(5, 5)));
+        gameController.applyCommand(new GameCommand(CLICK_ACTION, new Coordinate(5, 5)));
         Board board = gameController.getBoardManager().getBoard();
         winGame(board);
         assertEquals(0, gameController.getBoardManager().getFreeCellsLeft());
@@ -105,7 +107,7 @@ class GameControllerTest {
             int y = random.nextInt(board.getHeight());
             Coordinate coordinate = new Coordinate(x, y);
             if (board.getCell(coordinate) instanceof FreeCell)
-                gameController.applyCommand(new GameCommand("C", coordinate));
+                gameController.applyCommand(new GameCommand(CLICK_ACTION, coordinate));
         }
     }
 }

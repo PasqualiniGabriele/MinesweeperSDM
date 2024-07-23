@@ -7,6 +7,7 @@ import model.board.Coordinate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static handler.input.Command.Action.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CommandParserTest {
@@ -18,10 +19,10 @@ class CommandParserTest {
 
     @Test
     public void testParseCommandWithValidInputs() {
-        assertValidGameCommand("f 9 9", new GameCommand("F", new Coordinate(8, 8)));
-        assertValidGameCommand("c 1 2", new GameCommand("C", new Coordinate(0, 1)));
-        assertValidCommand("q", new Command("Q"));
-        assertValidCommand("i", new Command("I"));
+        assertValidGameCommand("f 9 9", new GameCommand(FLAG_ACTION, new Coordinate(8, 8)));
+        assertValidGameCommand("c 1 2", new GameCommand(CLICK_ACTION, new Coordinate(0, 1)));
+        assertValidCommand("q", new Command(QUIT_ACTION));
+        assertValidCommand("i", new Command(INFO_ACTION));
     }
 
     @Test
