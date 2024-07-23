@@ -15,8 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Random;
 
-import static handler.input.Command.Action.CLICK_ACTION;
-import static handler.input.Command.Action.FLAG_ACTION;
+import static handler.input.Command.Action.*;
 import static java.lang.Thread.sleep;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -45,7 +44,7 @@ class GameControllerTest {
     void testLaunch() {
         when(handler.isNewGameRequested()).thenReturn(false);
         when(handler.askForConfiguration()).thenReturn(Configuration.EASY);
-        when(handler.hasNextCommand()).thenReturn(new Command(Command.QUIT_ACTION));
+        when(handler.hasNextCommand()).thenReturn(new Command(QUIT_ACTION));
         gameController.launch();
         verify(handler, times(1)).welcome();
         verify(handler, times(1)).askForConfiguration();
