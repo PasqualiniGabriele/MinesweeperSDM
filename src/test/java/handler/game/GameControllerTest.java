@@ -2,18 +2,19 @@ package handler.game;
 
 import cli.CLIHandler;
 import handler.board.BoardManager;
+import handler.input.Command;
 import handler.input.GameCommand;
+import handler.input.UIHandler;
 import model.board.Board;
 import model.board.Configuration;
 import model.board.Coordinate;
 import model.cell.FreeCell;
+import model.game.Game;
 import model.game.GameStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayInputStream;
 import java.util.Random;
-import java.util.Scanner;
 
 import static java.lang.Thread.sleep;
 import static org.junit.jupiter.api.Assertions.*;
@@ -26,30 +27,36 @@ class GameControllerTest {
     private BoardManager mockBoardManager;
 
 
+    private GameController gameController1;
+    private UIHandler mockHandler;
+    private Game game;
+    private BoardManager mockBoardManager1;
+
+
     @BeforeEach
     public void setUp() {
         handler = new CLIHandler();
         gameController = new GameController(handler);
         mockBoardManager = mock(BoardManager.class);
+
+        mockHandler = mock(UIHandler.class);
+        gameController1 = new GameController(mockHandler);
+        gameController1.createGame(Configuration.EASY);
+        game = mock(Game.class);
+        mockBoardManager1 = mock(BoardManager.class);
+        gameController1.boardManager = mockBoardManager1;
+        gameController1.game = game;
     }
 
-    private void setInput(String userInput) {
-        ByteArrayInputStream testIn = new ByteArrayInputStream(userInput.getBytes());
-        handler.setScanner(new Scanner(testIn));
-    }
-
-    @Test
-    public void testNoExceptionLaunch() {
-        setInput("\n1\nQ\nn");
-        assertDoesNotThrow(() -> gameController.launch());
-    }
 
     @Test
-    public void testCreateGameCall() {
-        setInput("\n1\nC 1 1\nQ\nn");
-        gameController.launch();
-        assertNotNull(gameController.getGame());
-        assertNotNull(gameController.getBoardManager());
+    void testLaunch(){
+        when(mockHandler.isNewGameRequested()).thenReturn(false);
+        when(mockHandler.askForConfiguration()).thenReturn(Configuration.EASY);
+        when(mockHandler.hasNextCommand()).thenReturn(new Command(Command.QUIT_ACTION));
+        gameController1.launch();
+        verify(mockHandler, times(1)).welcome();
+        verify(mockHandler, times(1)).askForConfiguration();
     }
 
     @Test
