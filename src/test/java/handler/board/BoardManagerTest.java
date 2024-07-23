@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 
 import static handler.input.Command.Action.CLICK_ACTION;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
 
 class BoardManagerTest {
     private GameController gameController;
@@ -47,6 +46,7 @@ class BoardManagerTest {
                 new Coordinate(6, 0), new Coordinate(7, 2));
 
         boardManager.revealCell(new Coordinate(5, 5));
+
         int[][] expectedOpenCells = {
                 {1, 1, 1, 0, 0, 0, 0, 0},
                 {1, 1, 1, 1, 1, 1, 1, 0},
@@ -57,15 +57,21 @@ class BoardManagerTest {
                 {1, 1, 1, 1, 1, 1, 1, 1},
                 {1, 1, 1, 1, 1, 1, 1, 1}
         };
-        int[][] actualOpenCells = new int[8][8];
 
+        int[][] actualOpenCells = getActualOpenCellsMatrix();
+
+        assertArrayEquals(expectedOpenCells, actualOpenCells);
+    }
+
+    private int[][] getActualOpenCellsMatrix() {
+        int[][] openCellsMatrix = new int[8][8];
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 Cell cell = board.getCell(new Coordinate(j, i));
-                actualOpenCells[i][j] = cell.isOpenCell() ? 1 : 0;
+                openCellsMatrix[i][j] = cell.isOpenCell() ? 1 : 0;
             }
         }
-        assertArrayEquals(expectedOpenCells, actualOpenCells);
+        return openCellsMatrix;
     }
 
     @Test
