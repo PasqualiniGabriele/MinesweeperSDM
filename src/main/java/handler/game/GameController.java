@@ -7,10 +7,9 @@ import handler.input.UIHandler;
 import model.board.Configuration;
 import model.board.Coordinate;
 import model.game.Game;
-import model.game.GameStatus;
 
 import static handler.input.Command.Action.*;
-import static model.game.GameStatus.*;
+import static model.game.Game.Status.*;
 import static handler.input.Command.*;
 
 public class GameController implements GameEventListener {
@@ -53,7 +52,7 @@ public class GameController implements GameEventListener {
         commandProcessor.applyCommand(command);
     }
 
-    public void endGame(GameStatus endStatus) {
+    public void endGame(Game.Status endStatus) {
         game.setEndStatus(endStatus);
         handler.exit(endStatus);
         boardManager.openAllCells();

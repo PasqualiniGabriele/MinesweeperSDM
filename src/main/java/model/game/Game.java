@@ -7,18 +7,29 @@ import java.time.LocalDateTime;
  * The {@code Game} class is used to track the duration of the game and its status throughout its lifecycle.
  */
 public class Game {
+
+    /**
+     * This enum representing the various statuses of a game.
+     */
+    public enum Status {
+        WON,
+        LOST,
+        QUIT,
+        ONGOING
+    }
+
     private LocalDateTime startTime;
     private LocalDateTime endTime;
-    private GameStatus status;
+    private Status status;
 
     /**
      * Constructs a new {@code Game} instance.
      * Initializes the {@code startTime} to the current time and sets the {@code status}
-     * to {@link GameStatus#ONGOING}.
+     * to {@link Status#ONGOING}.
      */
     public Game() {
         startTime = LocalDateTime.now();
-        status = GameStatus.ONGOING;
+        status = Status.ONGOING;
     }
 
     /**
@@ -41,11 +52,11 @@ public class Game {
     /**
      * Ends the game and sets its status.
      *
-     * @param gameStatus The final status of the game.
+     * @param status The final status of the game.
      */
-    public void setEndStatus(GameStatus gameStatus) {
+    public void setEndStatus(Status status) {
         endTime = LocalDateTime.now();
-        status = gameStatus;
+        this.status = status;
     }
 
     /**
@@ -53,7 +64,7 @@ public class Game {
      *
      * @return The current {@code GameStatus}.
      */
-    public GameStatus getStatus() {
+    public Status getStatus() {
         return status;
     }
 }

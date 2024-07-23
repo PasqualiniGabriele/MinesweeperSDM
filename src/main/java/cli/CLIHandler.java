@@ -4,7 +4,7 @@ import handler.input.Command;
 import handler.input.UIHandler;
 import model.board.Board;
 import model.board.Configuration;
-import model.game.GameStatus;
+import model.game.Game;
 
 import java.util.Scanner;
 
@@ -115,12 +115,12 @@ public class CLIHandler extends UIHandler {
     /**
      * Displays a message based on the game's outcome.
      *
-     * @param gameStatus The {@link GameStatus} representing the outcome of the game.
+     * @param status The {@link Game.Status} representing the outcome of the game.
      */
     @Override
-    public void exit(GameStatus gameStatus) {
-        if (gameStatus == GameStatus.WON) displayWinMessage();
-        else if (gameStatus == GameStatus.LOST) displayLostMessage();
+    public void exit(Game.Status status) {
+        if (status == Game.Status.WON) displayWinMessage();
+        else if (status == Game.Status.LOST) displayLostMessage();
     }
 
 
