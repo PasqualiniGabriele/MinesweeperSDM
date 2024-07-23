@@ -25,7 +25,7 @@ class BombPlacerTest {
     }
 
     @Test
-    void testGenerateRandomCoordinates_RightNumber() {
+    void testGenerateBombCoordinates_RightNumber() {
         Coordinate safeZoneCenter = new Coordinate(1, 1);
         bombPlacer.placeBombsAvoiding(safeZoneCenter);
 
