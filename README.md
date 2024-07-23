@@ -42,11 +42,11 @@ Follow these steps to set up and run the Minesweeper project:
 
 ### **_1. Running the .jar File_**
 
-- Download the `MinesweeperSDM-1.0-SNAPSHOT.jar` file from the releases page. 
+- Download the `MinesweeperSDM-1.1.jar` file from the releases page. 
 - Run the following command to execute the file:
 
 ```sh
- java -jar MinesweeperSDM-1.0-SNAPSHOT.jar 
+ java -jar MinesweeperSDM-1.1.jar 
  ```
 
 ### **_2. Using Gradle Wrapper_**
