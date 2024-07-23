@@ -45,6 +45,7 @@ public class BombPlacer {
      */
     private Set<Coordinate> generateSafeZone(Coordinate safeZoneCenter) {
         Set<Coordinate> safeZone = new HashSet<>();
+        safeZone.add(safeZoneCenter);
         for (Coordinate neighborCoordinate : getNeighbors(safeZoneCenter)) {
             if (board.isValidCoordinate(neighborCoordinate)) {
                 safeZone.add(neighborCoordinate);
