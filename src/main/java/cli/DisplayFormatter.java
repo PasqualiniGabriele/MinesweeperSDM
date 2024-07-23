@@ -8,6 +8,19 @@ import static java.lang.Thread.sleep;
 
 public class DisplayFormatter {
 
+    public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
+    public static void sleepFor(int deciSeconds){
+        try {
+            sleep(deciSeconds*100L);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     protected static void displayWelcomeScreen() {
         System.out.print("""
                 
@@ -114,18 +127,6 @@ public class DisplayFormatter {
             System.out.printf("%-2d ", x + 1);
         }
         System.out.println(RESET);
-    }
-    public static void clearScreen() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
-
-    public static void sleepFor(int deciSeconds){
-        try {
-            sleep(deciSeconds*100L);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public static void displayErrorMessage(String message){
