@@ -30,6 +30,12 @@ public class CLIHandler extends UIHandler {
     public Configuration askForConfiguration() {
         displayDifficultyMenu();
         String input = scanner.nextLine().trim();
+        Configuration configuration = getConfiguration(input);
+        CommandParser.setMaxCoordinate(configuration.getWidth(), configuration.getHeight());
+        return configuration;
+    }
+
+    private Configuration getConfiguration(String input) {
         return switch (input) {
             case "1" -> Configuration.EASY;
             case "2" -> Configuration.MEDIUM;

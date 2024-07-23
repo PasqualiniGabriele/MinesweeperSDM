@@ -4,18 +4,24 @@ import handler.input.Command;
 import handler.input.GameCommand;
 import model.board.Coordinate;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CommandParserTest {
 
+    @BeforeEach
+    void setUp() {
+        CommandParser.setMaxCoordinate(10, 10);
+    }
+
     @Test
     public void testParseCommandWithValidInputs() {
-        assertValidGameCommand("F 10 20", new GameCommand("F", new Coordinate(9, 19)));
-        assertValidGameCommand("C 1 2", new GameCommand("C", new Coordinate(0, 1)));
-        assertValidCommand("Q", new Command("Q"));
-        assertValidCommand("I", new Command("I"));
+        assertValidGameCommand("f 9 9", new GameCommand("F", new Coordinate(8, 8)));
+        assertValidGameCommand("c 1 2", new GameCommand("C", new Coordinate(0, 1)));
+        assertValidCommand("q", new Command("Q"));
+        assertValidCommand("i", new Command("I"));
     }
 
     @Test
@@ -26,6 +32,7 @@ class CommandParserTest {
         assertInvalidCommand("C 1 2 3");
         assertInvalidCommand("F ten twenty");
         assertInvalidCommand("F");
+        assertInvalidCommand("c 20 20");
     }
 
     private void assertValidCommand(String input, Command expected) {

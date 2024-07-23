@@ -17,9 +17,11 @@ public class GameController implements GameEventListener {
     private Game game;
     private BoardManager boardManager;
     private final UIHandler handler;
+    private final CommandProcessor commandProcessor;
 
     public GameController(UIHandler handler) {
         this.handler = handler;
+        commandProcessor = new CommandProcessor();
     }
 
     public void launch() {
@@ -28,6 +30,7 @@ public class GameController implements GameEventListener {
             Configuration configuration = handler.askForConfiguration();
             createGame(configuration);
             gameLoop();
+            GameEventManager.getInstance().unsubscribe(this);
         } while (handler.isNewGameRequested());
     }
 
@@ -46,7 +49,7 @@ public class GameController implements GameEventListener {
     }
 
     public void applyCommand(Command command) {
-        new CommandProcessor().applyCommand(command);
+        commandProcessor.applyCommand(command);
     }
 
     public void endGame(GameStatus endStatus) {
@@ -54,7 +57,6 @@ public class GameController implements GameEventListener {
         handler.exit(game.getStatus());
         boardManager.openAllCells();
         handler.show(getGameStats(), boardManager.getBoard());
-        GameEventManager.getInstance().unsubscribe(this);
     }
 
     public Game getGame() {
@@ -101,7 +103,6 @@ public class GameController implements GameEventListener {
         }
 
         private void applyGameCommand(String action, Coordinate coordinate) {
-            try {
                 switch (action) {
                     case FLAG_ACTION:
                         boardManager.applyFlag(coordinate);
@@ -110,9 +111,6 @@ public class GameController implements GameEventListener {
                         boardManager.applyClick(coordinate);
                         break;
                 }
-            } catch (ArrayIndexOutOfBoundsException e) {
-                handler.printWrongCoordinateError();
-            }
         }
 
         private void applyMenuCommand(String action) {
