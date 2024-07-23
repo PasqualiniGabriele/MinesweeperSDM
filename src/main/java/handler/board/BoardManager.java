@@ -21,6 +21,7 @@ public class BoardManager implements GameEventListener {
         freeCellsLeft = configuration.getWidth() * configuration.getHeight() - configuration.getNumOfBombs();
         flagsLeft = configuration.getNumOfBombs();
         bombPlacer = new BombPlacer(configuration, board);
+        GameEventManager.getInstance().subscribe(this);
         Cell.setEventManager(GameEventManager.getInstance());
     }
 

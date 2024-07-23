@@ -25,6 +25,10 @@ public class GameEventManager {
         listeners.remove(listener);
     }
 
+    public void unsubscribeAll() {
+        listeners.clear();
+    }
+
     public void onBombReveal() {
         for (GameEventListener listener : listeners) {
             listener.onBombReveal();
