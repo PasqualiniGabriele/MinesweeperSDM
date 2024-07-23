@@ -14,8 +14,8 @@ import static handler.input.Command.*;
 
 public class GameController implements GameEventListener {
 
-    private Game game;
-    private BoardManager boardManager;
+    protected Game game;
+    protected BoardManager boardManager;
     private final UIHandler handler;
     private final CommandProcessor commandProcessor;
 
@@ -59,16 +59,16 @@ public class GameController implements GameEventListener {
         handler.show(getGameStats(), boardManager.getBoard());
     }
 
-    public Game getGame() {
-        return game;
-    }
-
     public String[] getGameStats() {
         String[] stats = new String[3];
         stats[0] = String.valueOf(boardManager.getConfiguration());
         stats[1] = String.valueOf(boardManager.getFlagsLeft());
         stats[2] = String.valueOf(game.calculateGameTime());
         return stats;
+    }
+
+    public Game getGame() {
+        return game;
     }
 
     public BoardManager getBoardManager() {
