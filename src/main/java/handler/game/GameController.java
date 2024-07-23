@@ -26,9 +26,9 @@ public class GameController implements GameEventListener {
     }
 
     public void launch() {
-        handler.welcome();
+        handler.renderWelcomeScreen();
         do {
-            Configuration configuration = handler.askForConfiguration();
+            Configuration configuration = handler.askConfigurationToUser();
             createGame(configuration);
             gameLoop();
             GameEventManager.getInstance().unsubscribeAll();
@@ -43,7 +43,7 @@ public class GameController implements GameEventListener {
 
     public void gameLoop() {
         while (game.getStatus() == ONGOING) {
-            handler.show(getGameStats(), boardManager.getBoard());
+            handler.renderGameScreen(getGameStats(), boardManager.getBoard());
             Command command = handler.hasNextCommand();
             applyCommand(command);
         }
@@ -57,7 +57,7 @@ public class GameController implements GameEventListener {
         game.end(endStatus);
         handler.exit(endStatus);
         boardManager.openAllCells();
-        handler.show(getGameStats(), boardManager.getBoard());
+        handler.renderGameScreen(getGameStats(), boardManager.getBoard());
     }
 
     public String[] getGameStats() {

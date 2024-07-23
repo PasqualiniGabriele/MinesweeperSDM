@@ -43,11 +43,11 @@ class GameControllerTest {
     @Test
     void testLaunch() {
         when(handler.isNewGameRequested()).thenReturn(false);
-        when(handler.askForConfiguration()).thenReturn(Configuration.EASY);
+        when(handler.askConfigurationToUser()).thenReturn(Configuration.EASY);
         when(handler.hasNextCommand()).thenReturn(new Command(QUIT_ACTION));
         gameController.launch();
-        verify(handler, times(1)).welcome();
-        verify(handler, times(1)).askForConfiguration();
+        verify(handler, times(1)).renderWelcomeScreen();
+        verify(handler, times(1)).askConfigurationToUser();
     }
 
     @Test
