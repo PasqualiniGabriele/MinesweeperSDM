@@ -15,11 +15,11 @@ public abstract class UIHandler {
 
     public abstract Configuration askConfigurationToUser();
 
-    public abstract void welcome();
+    public abstract void renderWelcomeScreen();
 
     public abstract Command hasNextCommand();
 
-    public abstract void show(String[] gameStats, Board board);
+    public abstract void renderGameScreen(String[] gameStats, Board board);
 
     public abstract boolean isNewGameRequested();
 }
