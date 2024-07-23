@@ -19,8 +19,8 @@ public enum Configuration {
      * width, and height.
      *
      * @param numOfBombs The number of bombs in the configuration.
-     * @param width The width of the game board.
-     * @param height The height of the game board.
+     * @param width      The width of the game board.
+     * @param height     The height of the game board.
      */
     Configuration(int numOfBombs, int width, int height) {
         this.numOfBombs = numOfBombs;

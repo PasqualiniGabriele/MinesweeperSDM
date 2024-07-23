@@ -27,9 +27,9 @@ public class DisplayFormatter {
      * @param decis The duration to sleep, specified in deci-seconds.
      * @throws RuntimeException if the sleep operation is interrupted.
      */
-    public static void sleepFor(int decis){
+    public static void sleepFor(int decis) {
         try {
-            sleep(decis*100L);
+            sleep(decis * 100L);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -170,7 +170,7 @@ public class DisplayFormatter {
      *
      * @param message The error message to be displayed.
      */
-    public static void displayErrorMessage(String message){
+    public static void displayErrorMessage(String message) {
         System.out.println(DARK_GREY + "\n--" + RED + "ERROR" + DARK_GREY + " -------------------------------------------------------------------------------");
         System.out.println("\t\t\t" + RESET + message + DARK_GREY);
         System.out.println("---------------------------------------------------------------------------------------" + RESET);
@@ -254,6 +254,3 @@ public class DisplayFormatter {
         sleepFor(10);
     }
 }
-
-
-

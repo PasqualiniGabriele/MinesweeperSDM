@@ -27,7 +27,7 @@ public class Board {
     /**
      * Initializes the board's cells as {@link FreeCell} instances with a value of 0.
      *
-     * @param width The width of the board.
+     * @param width  The width of the board.
      * @param height The height of the board.
      */
     private void initializeCells(int width, int height) {
@@ -89,7 +89,7 @@ public class Board {
     /**
      * Sets the cell at the specified coordinates to the given cell.
      *
-     * @param cell The cell to set at the specified coordinates.
+     * @param cell       The cell to set at the specified coordinates.
      * @param coordinate The coordinates where the cell should be placed.
      */
     public void setCell(Cell cell, Coordinate coordinate) {

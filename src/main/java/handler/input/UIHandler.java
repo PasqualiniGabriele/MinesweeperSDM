@@ -50,7 +50,7 @@ public abstract class UIHandler {
      * Renders the game screen to the user.
      *
      * @param gameStats An array of strings containing the current game statistics.
-     * @param board The current game board to be displayed.
+     * @param board     The current game board to be displayed.
      */
     public abstract void renderGameScreen(String[] gameStats, Board board);
 
