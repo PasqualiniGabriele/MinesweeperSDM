@@ -21,15 +21,17 @@ class BombPlacerTest {
 
     @BeforeEach
     void setUp() {
+        Configuration config = Configuration.EASY;
         mockBoard = mock(Board.class);
-        board = new Board(Configuration.EASY);
-        when(mockBoard.getWidth()).thenReturn(8);
-        when(mockBoard.getHeight()).thenReturn(8);
+        board = new Board(config);
+        when(mockBoard.getWidth()).thenReturn(config.getWidth());
+        when(mockBoard.getHeight()).thenReturn(config.getHeight());
+        when(mockBoard.getNumOfBombs()).thenReturn(config.getNumOfBombs());
     }
 
     @Test
     void testGenerateBombCoordinates_RightNumber() {
-        bombPlacer = new BombPlacer(Configuration.EASY, board);
+        bombPlacer = new BombPlacer(board);
         Coordinate safeZoneCenter = new Coordinate(1, 1);
         bombPlacer.placeBombsAvoiding(safeZoneCenter);
 
@@ -46,7 +48,7 @@ class BombPlacerTest {
 
     @Test
     void testSafeZone() {
-        bombPlacer = new BombPlacer(Configuration.EASY, board);
+        bombPlacer = new BombPlacer(board);
         Random random = new Random();
         int randX = random.nextInt(board.getWidth());
         int randY = random.nextInt(board.getHeight());
@@ -68,7 +70,7 @@ class BombPlacerTest {
 
     @Test
     void testPlaceBombsAvoiding_NumberOfIterations(){
-        bombPlacer = new BombPlacer(Configuration.EASY, mockBoard);
+        bombPlacer = new BombPlacer(mockBoard);
         Coordinate coordinate = new Coordinate(1, 1);
         bombPlacer.placeBombsAvoiding(coordinate);
         verify(mockBoard, times(10)).setCell(any(BombedCell.class), any(Coordinate.class));

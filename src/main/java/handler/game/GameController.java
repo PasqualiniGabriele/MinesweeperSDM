@@ -93,7 +93,7 @@ public class GameController implements GameEventListener {
      */
 
     public void endGame(GameStatus endStatus) {
-        game.end(endStatus);
+        game.setEndStatus(endStatus);
         handler.exit(endStatus);
         boardManager.openAllCells();
         handler.renderGameScreen(getGameStats(), boardManager.getBoard());
@@ -184,7 +184,7 @@ public class GameController implements GameEventListener {
         private void applyMenuCommand(Action action) {
             switch (action) {
                 case QUIT_ACTION:
-                    game.end(QUIT);
+                    game.setEndStatus(QUIT);
                     break;
                 case INFO_ACTION:
                     handler.gameRules();

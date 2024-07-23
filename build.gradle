@@ -34,9 +34,10 @@ java {
 }
 
 jar {
+    jar.enabled = true
     manifest {
-        attributes 'Implementation-Title': 'Gradle Quickstart',
-                'Implementation-Version': version,
+        attributes(
                 'Main-Class': 'main.Minesweeper'
+        )
     }
 }

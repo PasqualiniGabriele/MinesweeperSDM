@@ -1,5 +1,8 @@
 package cli;
 
+/**
+ * This enum representing various ANSI escape codes for console text colors and backgrounds.
+ */
 public enum ConsoleColor {
     RESET("\u001B[0m"),
     GREY("\u001B[37m"),
@@ -16,6 +19,11 @@ public enum ConsoleColor {
 
     private final String code;
 
+    /**
+     * Constructs a ConsoleColor enum with the specified ANSI escape code.
+     *
+     * @param code The ANSI escape code associated with the color.
+     */
     ConsoleColor(String code) {
         this.code = code;
     }
@@ -25,6 +33,12 @@ public enum ConsoleColor {
         return code;
     }
 
+    /**
+     * Removes ANSI escape codes from a given text.
+     *
+     * @param text Text with ANSI codes.
+     * @return Text without ANSI codes.
+     */
     public static String removeAnsiCodes(String text) {
         return text.replaceAll("\\u001B\\[[;\\d]*m", "");
     }
