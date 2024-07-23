@@ -21,7 +21,7 @@ The project is organized into the following directories:
 
 
 ## Prerequisites
-- The project was developed using Java 21. It utilizes features like records, which are only available starting from Java 14. Therefore, versions of Java prior to 14 are not compatible with this project.
+- The project was developed using Java 21.
 
 - **Java Development Kit (JDK)**: You need to have Java 21 installed. You can download it from [Oracle's JDK download page](https://www.oracle.com/java/technologies/javase-downloads.html) or [AdoptOpenJDK](https://adoptopenjdk.net/).
 
@@ -82,11 +82,29 @@ If you prefer to build, test, and run the project from the source code, follow t
 ### Game Over
 - The game ends if you uncover a cell containing a bomb.
 
-
 ### Example Commands
 - To _uncover_ the cell at coordinates (3, 4): `C 3 4`
 - To _flag_ the cell at coordinates (5, 6): `F 5 6`
 - To _unflag_ the cell at coordinates (5, 6): `F 5 6` (same command as flagging)
+
+## Javadoc Documentation
+- This project uses Javadoc for generating documentation for the codebase. You can use the following Gradle commands to manage the Javadoc:
+### **Generate Javadoc**
+- To generate the Javadoc for the project, run the following command:
+
+  
+  ```sh
+    ./gradlew javadoc
+  ```
+  _This command will generate the Javadoc and place it in the `build/docs/javadoc` directory._
+
+### **Clear Javadoc**
+  - To clear or delete the existing Javadoc documentation, use the following command:
+    ```sh
+      ./gradlew clearJavadoc
+      ```
+    _This command will tidy up the `build/docs/javadoc` directory by deleting the previously generated Javadoc files._
+
 
 ## License
 - This project is licensed under the MIT License. See the _license_ file for more details.
