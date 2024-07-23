@@ -124,7 +124,7 @@ class GameControllerTest {
     @Test
     void testOnBombReveal() {
         gameController.onBombReveal();
-        verify(game, times(1)).end(GameStatus.LOST);
+        verify(game, times(1)).setEndStatus(GameStatus.LOST);
         verify(handler, times(1)).exit(GameStatus.LOST);
     }
 
