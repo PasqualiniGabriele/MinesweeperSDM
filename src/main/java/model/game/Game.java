@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public class Game {
 
     /**
-     * This enum representing the various statuses of a game.
+     * This enum represents the various statuses of a game.
      */
     public enum Status {
         WON,
