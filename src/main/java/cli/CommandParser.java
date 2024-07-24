@@ -37,16 +37,20 @@ public class CommandParser {
     public static Command parseCommand(String userInput) throws IllegalArgumentException {
         String[] commandArray = userInput.split(" ");
         String action = commandArray[0].toUpperCase();
-
-        if ((commandArray.length == 1) && (isValidMenuAction(action))) {
-            return new Command(VALID_MENU_ACTIONS.get(action));
+        switch (commandArray.length) {
+            case 1:
+                if (isValidMenuAction(action))
+                    return new Command(VALID_MENU_ACTIONS.get(action));
+                break;
+            case 3:
+                if (isValidGameCommand(action, commandArray)) {
+                    Coordinate coordinate = parseCoordinate(commandArray);
+                    return new GameCommand(VALID_GAME_ACTIONS.get(action), coordinate);
+                }
+                break;
+            default:
+                break;
         }
-
-        if ((commandArray.length == 3) && (isValidGameCommand(action, commandArray))) {
-            Coordinate coordinate = parseCoordinate(commandArray);
-            return new GameCommand(VALID_GAME_ACTIONS.get(action), coordinate);
-        }
-
         throw new IllegalArgumentException();
     }
 

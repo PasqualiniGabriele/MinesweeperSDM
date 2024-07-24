@@ -11,7 +11,7 @@ public class GameCommand extends Command {
     /**
      * Constructs a new {@code GameCommand} instance with the specified action and coordinate.
      *
-     * @param action The action to be performed.
+     * @param action     The action to be performed.
      * @param coordinate The coordinate on the game board.
      */
     public GameCommand(Action action, Coordinate coordinate) {

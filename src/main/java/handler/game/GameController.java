@@ -164,14 +164,14 @@ public class GameController implements GameEventListener {
          */
 
         private void applyGameCommand(Action action, Coordinate coordinate) {
-                switch (action) {
-                    case FLAG_ACTION:
-                        boardManager.applyFlag(coordinate);
-                        break;
-                    case CLICK_ACTION:
-                        boardManager.applyClick(coordinate);
-                        break;
-                }
+            switch (action) {
+                case FLAG_ACTION:
+                    boardManager.applyFlag(coordinate);
+                    break;
+                case CLICK_ACTION:
+                    boardManager.applyClick(coordinate);
+                    break;
+            }
         }
 
         /**

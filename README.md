@@ -1,3 +1,9 @@
+![Static Badge](https://img.shields.io/badge/Java-Java?logo=Oracle&logoColor=%23F80000&color=%23343434)
+![Static Badge](https://img.shields.io/badge/OpenJDK-OpenJDK?logo=OpenJDK&logoColor=white&color=%23437291)
+![Static Badge](https://img.shields.io/badge/gradle-gradle?logo=gradle&color=%2302303A)&nbsp;
+![Static Badge](https://img.shields.io/badge/Apache%20Groovy-groovy?logo=Apache%20Groovy&logoColor=white&color=%234298B8)&nbsp;
+![Static Badge](https://img.shields.io/badge/JUnit5-JUnit5?logo=JUnit5&logoColor=white&color=%2325A162)&nbsp;
+
 # Minesweeper - game
 
 ## Introduction
@@ -10,6 +16,11 @@ The game implemented is the classic Minesweeper.
 
 This project is built using Gradle and programmed in Java.
 
+## Gameplay
+<p align="center">
+<img src="Gameplay.gif" alt="minesweeper screenshot" width="600" align=center>
+</p>
+
 ## Structure
 
 The project is organized into the following directories:
@@ -21,7 +32,7 @@ The project is organized into the following directories:
 
 
 ## Prerequisites
-- The project was developed using Java 21. It utilizes features like records, which are only available starting from Java 14. Therefore, versions of Java prior to 14 are not compatible with this project.
+- The project was developed using Java 21.
 
 - **Java Development Kit (JDK)**: You need to have Java 21 installed. You can download it from [Oracle's JDK download page](https://www.oracle.com/java/technologies/javase-downloads.html) or [AdoptOpenJDK](https://adoptopenjdk.net/).
 
@@ -31,11 +42,11 @@ Follow these steps to set up and run the Minesweeper project:
 
 ### **_1. Running the .jar File_**
 
-- Download the `MinesweeperSDM-1.0-SNAPSHOT.jar` file from the releases page. 
+- Download the `MinesweeperSDM-1.1.jar` file from the releases page. 
 - Run the following command to execute the file:
 
 ```sh
- java -jar MinesweeperSDM-1.0-SNAPSHOT.jar 
+ java -jar MinesweeperSDM-1.1.jar 
  ```
 
 ### **_2. Using Gradle Wrapper_**
@@ -82,11 +93,29 @@ If you prefer to build, test, and run the project from the source code, follow t
 ### Game Over
 - The game ends if you uncover a cell containing a bomb.
 
-
 ### Example Commands
 - To _uncover_ the cell at coordinates (3, 4): `C 3 4`
 - To _flag_ the cell at coordinates (5, 6): `F 5 6`
 - To _unflag_ the cell at coordinates (5, 6): `F 5 6` (same command as flagging)
+
+## Javadoc Documentation
+- This project uses Javadoc for generating documentation for the codebase. You can use the following Gradle commands to manage the Javadoc:
+### **Generate Javadoc**
+- To generate the Javadoc for the project, run the following command:
+
+  
+  ```sh
+    ./gradlew javadoc
+  ```
+  _This command will generate the Javadoc and place it in the `build/docs/javadoc` directory._
+
+### **Clear Javadoc**
+  - To clear or delete the existing Javadoc documentation, use the following command:
+    ```sh
+      ./gradlew clearJavadoc
+      ```
+    _This command will tidy up the `build/docs/javadoc` directory by deleting the previously generated Javadoc files._
+
 
 ## License
 - This project is licensed under the MIT License. See the _license_ file for more details.

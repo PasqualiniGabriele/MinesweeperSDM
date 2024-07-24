@@ -8,24 +8,24 @@ public interface GameEventListener {
     /**
      * Called when a bomb is revealed in the game.
      */
-    default void onBombReveal(){
+    default void onBombReveal() {
     }
 
     /**
      * Called when a cell is unflagged in the game.
      */
-    default void onUnflag(){
+    default void onUnflag() {
     }
 
     /**
      * Called when a cell is flagged in the game.
      */
-    default void onFlag(){
+    default void onFlag() {
     }
 
     /**
      * Called when a free cell is revealed in the game.
      */
-    default void onFreeCellReveal(){
+    default void onFreeCellReveal() {
     }
 }
