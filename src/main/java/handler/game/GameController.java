@@ -139,7 +139,7 @@ public class GameController implements GameEventListener {
      * commands and menu commands.
      */
 
-    public class CommandProcessor {
+    private class CommandProcessor {
 
         /**
          * Processes the given {@code Command}. Determines whether the command is a game-related command or a menu
