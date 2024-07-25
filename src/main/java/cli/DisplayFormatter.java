@@ -181,6 +181,7 @@ public class DisplayFormatter {
      * Displays a win message to the console with ASCII art.
      */
     protected static void displayWinMessage() {
+        clearScreen();
         System.out.println("""
 
                           ░░▒▒▓▓▒                                            ░▒▒▒▒▒░
@@ -220,6 +221,7 @@ public class DisplayFormatter {
      * Displays a lost message to the console with ASCII art.
      */
     protected static void displayLostMessage() {
+        clearScreen();
         System.out.println("""
                          ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
                          ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣴⣶⢶⣦⣤⡾⠋⠑⠁⣀⡙⢷⡤⠖⠲⠶⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
