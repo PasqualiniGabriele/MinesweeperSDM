@@ -16,7 +16,7 @@ public class Command {
         EASTER_EGG_ACTION
     }
 
-    Action action;
+    private final Action action;
 
     /**
      * Constructs a new {@code Command} with the specified action.
