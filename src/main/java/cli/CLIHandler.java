@@ -80,6 +80,7 @@ public class CLIHandler extends UIHandler {
      */
     @Override
     public void renderGameScreen(String[] gameStats, Board board) {
+        clearScreen();
         displayTopMenu(gameStats);
         displayBoard(board);
     }
@@ -94,7 +95,6 @@ public class CLIHandler extends UIHandler {
     public Command hasNextCommand() {
         displayBottomMenu();
         String input = scanner.nextLine();
-        clearScreen();
         try {
             return CommandParser.parseCommand(input);
         } catch (IllegalArgumentException e) {

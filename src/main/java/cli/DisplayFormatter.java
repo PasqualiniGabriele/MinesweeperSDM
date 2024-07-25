@@ -145,6 +145,7 @@ public class DisplayFormatter {
      * @param board The board to be displayed.
      */
     public static void displayBoard(Board board) {
+
         int width = board.getWidth();
         int height = board.getHeight();
 
@@ -212,7 +213,7 @@ public class DisplayFormatter {
                            ██║   ╚██████╔╝╚██████╔╝   ╚███╔███╔╝╚██████╔╝██║ ╚████║  ██╗
                            ╚═╝    ╚═════╝  ╚═════╝     ╚══╝╚══╝  ╚═════╝ ╚═╝  ╚═══╝  ╚═╝
                 """);
-        sleepFor(17);
+        sleepFor(13);
     }
 
     /**
@@ -251,6 +252,6 @@ public class DisplayFormatter {
                          ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⢿⣿⢿⣿⣻⡿⠻⢿⡿⢷⢿⣿⢿⠀⠋⠹⠗⡿⣫⣭⣬⣸⠟⡷⠿⢿⢧⣴⠛⠛⠻⣾⠋⣿⣽⣷⠀⠀⠀⠀⠀⠀⠀⠀
                          ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠁⠈⠁⠈⠀⠁⠀⠀⠈⠁⠀⠈⠻⠟⠳⠄⠀⠀⢧⠉⠹⠋⠘⠀⠀⠀⠀⠘⠁⠀⠀⠀⣿⠶⠟⠃⠙⣷⡦⠀⠀⠀⠀
                 """);
-        sleepFor(17);
+        sleepFor(13);
     }
 }
