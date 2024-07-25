@@ -48,6 +48,7 @@ public class CLIHandler extends UIHandler {
     public Configuration askConfigurationToUser() {
         displayDifficultyMenu();
         String input = scanner.nextLine().trim();
+        clearScreen();
         Configuration configuration = parseConfiguration(input);
         CommandParser.setMaxCoordinate(configuration.getWidth(), configuration.getHeight());
         return configuration;
@@ -79,7 +80,6 @@ public class CLIHandler extends UIHandler {
      */
     @Override
     public void renderGameScreen(String[] gameStats, Board board) {
-        clearScreen();
         displayTopMenu(gameStats);
         displayBoard(board);
     }
